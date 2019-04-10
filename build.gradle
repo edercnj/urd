@@ -1,5 +1,5 @@
 plugins {
-	id 'org.springframework.boot' version '2.2.0.M1'
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
 	id 'java'
 }
 
@@ -11,11 +11,10 @@ sourceCompatibility = '11'
 
 repositories {
 	mavenCentral()
-	maven { url 'https://repo.spring.io/snapshot' }
-	maven { url 'https://repo.spring.io/milestone' }
 }
 
 dependencies {
+	compile "org.flywaydb:flyway-core:5.2.4"
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-jersey'
