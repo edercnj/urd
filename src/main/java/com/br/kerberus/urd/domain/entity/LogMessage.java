@@ -1,4 +1,4 @@
-package com.br.themythical.urd.domain.entities;
+package com.br.kerberus.urd.domain.entity;
 
 import com.google.gson.Gson;
 
