@@ -1,0 +1,21 @@
+server:
+   port: ${port:60000}
+   servlet:
+   contextPath: "/urd"
+
+logging:
+   path: "logs"
+   file: "${logging.path}/urd.log"
+   pattern:
+      console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"
+   level:
+      com.br.kerberus.urd.service: DEBUG
+      org.springframework.web: INFO
+      org.hibernate: ERROR
+
+
+spring:
+   main:
+      banner-mode: "off"
+   profiles:
+      active: "dev"

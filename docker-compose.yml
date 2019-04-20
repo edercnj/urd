@@ -18,7 +18,7 @@ services:
       - db
     volumes:
       # Volume dos dados
-      - logs:/data/logs
+      - logs:/data/logsgit
     networks:
   elasticsearch:
     image: "docker.elastic.co/elasticsearch/elasticsearch:6.7.1"

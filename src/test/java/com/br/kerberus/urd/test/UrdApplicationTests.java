@@ -1,4 +1,4 @@
-package com.br.themythical.urd;
+package com.br.kerberus.urd.test;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

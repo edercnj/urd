@@ -5,7 +5,7 @@ plugins {
 
 apply plugin: 'io.spring.dependency-management'
 
-group = 'com.br.themythical'
+group = 'com.br.kerberus'
 version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
@@ -16,10 +16,14 @@ repositories {
 dependencies {
 	compile "org.flywaydb:flyway-core:5.2.4"
 	compile group: 'com.google.code.gson', name: 'gson', version: '2.8.5'
+	compile 'org.springframework.boot:spring-boot-starter-log4j2'
+	
 	implementation 'org.springframework.boot:spring-boot-starter-data-elasticsearch'
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-jersey'
+	
 	runtimeOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
+	
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
