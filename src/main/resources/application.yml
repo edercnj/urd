@@ -1,5 +1,5 @@
 server:
-   port: ${port:60000}
+   port: ${port:5001}
    servlet:
       contextPath: "/urd"
 
@@ -10,8 +10,9 @@ logging:
       console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"
    level:
       com.br.kerberus.urd.service: DEBUG
-      org.springframework.web: INFO
-      org.hibernate: ERROR
+      com.br.kerberus.urd.controller: DEBUG
+      org.springframework.web: DEBUG
+      org.hibernate: DEBUG
 
 spring:
    main:
