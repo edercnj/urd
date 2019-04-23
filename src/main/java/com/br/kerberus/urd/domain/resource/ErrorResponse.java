@@ -6,8 +6,10 @@ import java.util.Objects;
 import org.springframework.http.HttpStatus;
 
 import com.br.kerberus.urd.exception.DomainException;
-import com.fasterxml.jackson.annotation.JsonIgnoreType;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
+@JsonInclude(value = Include.NON_NULL)
 public class ErrorResponse {
 
     private HttpStatus httpStatus;

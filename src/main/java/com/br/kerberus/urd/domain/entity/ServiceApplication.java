@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.domain.entity;
 
-public class Service {
+public class ServiceApplication {
 
 	private String name;
 	private String logPath;

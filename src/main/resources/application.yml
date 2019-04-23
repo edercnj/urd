@@ -13,9 +13,10 @@ logging:
       org.springframework.web: INFO
       org.hibernate: ERROR
 
-
 spring:
    main:
       banner-mode: "off"
    profiles:
       active: "dev"
+   application:
+      name: "urd"
