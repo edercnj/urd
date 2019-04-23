@@ -1,11 +1,9 @@
 package com.br.kerberus.urd.domain.entity;
 
-import com.google.gson.Gson;
-
 import java.net.URI;
-import java.net.URL;
 import java.util.Date;
-import java.util.Objects;
+
+import com.google.gson.Gson;
 
 public final class LogMessage {
 
@@ -18,8 +16,8 @@ public final class LogMessage {
 	private String userMessage;
 	private URI moreInfo;
 
-	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String developerMessage,
-			String userMessage, URI moreInfo) {
+	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String developerMessage, String userMessage,
+			URI moreInfo) {
 		setServerName(serverName);
 		setServiceName(serviceName);
 		setDateTime(dateTime);
@@ -29,8 +27,7 @@ public final class LogMessage {
 		setMoreInfo(moreInfo);
 	}
 
-	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String developerMessage,
-			String userMessage) {
+	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String developerMessage, String userMessage) {
 		setServerName(serverName);
 		setServiceName(serviceName);
 		setDateTime(dateTime);
@@ -39,61 +36,33 @@ public final class LogMessage {
 		setUserMessage(userMessage);
 	}
 
-	public String getServerName() {
-		return serverName;
-	}
+	public String getServerName() { return serverName; }
 
-	public void setServerName(String serverName) {
-		this.serverName = serverName;
-	}
+	public void setServerName(String serverName) { this.serverName = serverName; }
 
-	public String getServiceName() {
-		return serviceName;
-	}
+	public String getServiceName() { return serviceName; }
 
-	public void setServiceName(String serviceName) {
-		this.serviceName = serviceName;
-	}
+	public void setServiceName(String serviceName) { this.serviceName = serviceName; }
 
-	public Date getDateTime() {
-		return dateTime;
-	}
+	public Date getDateTime() { return dateTime; }
 
-	public void setDateTime(Date dateTime) {
-		this.dateTime = dateTime;
-	}
+	public void setDateTime(Date dateTime) { this.dateTime = dateTime; }
 
-	public int getErrorCord() {
-		return errorCord;
-	}
+	public int getErrorCord() { return errorCord; }
 
-	public void setErrorCord(int errorCord) {
-		this.errorCord = errorCord;
-	}
+	public void setErrorCord(int errorCord) { this.errorCord = errorCord; }
 
-	public String getDeveloperMessage() {
-		return developerMessage;
-	}
+	public String getDeveloperMessage() { return developerMessage; }
 
-	public void setDeveloperMessage(String developerMessage) {
-		this.developerMessage = developerMessage;
-	}
+	public void setDeveloperMessage(String developerMessage) { this.developerMessage = developerMessage; }
 
-	public String getUserMessage() {
-		return userMessage;
-	}
+	public String getUserMessage() { return userMessage; }
 
-	public void setUserMessage(String userMessage) {
-		this.userMessage = userMessage;
-	}
+	public void setUserMessage(String userMessage) { this.userMessage = userMessage; }
 
-	public URI getMoreInfo() {
-		return moreInfo;
-	}
+	public URI getMoreInfo() { return moreInfo; }
 
-	public void setMoreInfo(URI moreInfo) {
-		this.moreInfo = moreInfo;
-	}
+	public void setMoreInfo(URI moreInfo) { this.moreInfo = moreInfo; }
 
 	@Override
 	public int hashCode() {
@@ -155,14 +124,10 @@ public final class LogMessage {
 
 	@Override
 	public String toString() {
-		return String.format(hashCode()
-				+ " | serverName:%s | serviceName:%s1 | dateTime:%s2 | errorCord:%s3 | developerMessage:%s4 | userMessage:%s5 | moreInfo:%s6",
-				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDeveloperMessage(),
-				getUserMessage(), getMoreInfo());
+		return String.format(
+				" | serverName:%s | serviceName:%s1 | dateTime:%s2 | errorCord:%s3 | developerMessage:%s4 | userMessage:%s5 | moreInfo:%s6",
+				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDeveloperMessage(), getUserMessage(), getMoreInfo());
 	}
 
-	public String toJson() {
-		Gson gson = new Gson();
-		return gson.toJson(this);
-	}
+	public String toJson() { Gson gson = new Gson(); return gson.toJson(this); }
 }

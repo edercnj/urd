@@ -45,7 +45,7 @@ public class ServerController {
 		
 	}
 	
-	@GetMapping(value = "/getAll")
+	@GetMapping(value = "/all")
 	public ResponseEntity<List<Server>> getAllServers()
 	{
 		
