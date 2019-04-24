@@ -1,7 +1,6 @@
 package com.br.kerberus.urd.controller;
 
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,48 +15,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.br.kerberus.urd.domain.entity.Server;
 import com.br.kerberus.urd.domain.resource.ServerRequest;
 import com.br.kerberus.urd.domain.resource.ServerResponse;
 import com.br.kerberus.urd.exception.UrdException;
 import com.br.kerberus.urd.service.ServerService;
 
 @RestController
-@RequestMapping(path = { "api/server" })
+@RequestMapping(path = { "/api/server" })
 public class ServerController {
 
 	@Autowired
 	ServerService service;
 
-	@PostMapping(value = "/add")
+	@PostMapping(path = { "/add" })
 	public ResponseEntity<ServerResponse> addServer(@RequestBody @Validated ServerRequest server) {
 
 		return ResponseEntity.status(HttpStatus.CREATED).body(null);
 	}
 
-	@PutMapping(value = { "/{id}" })
-	public ResponseEntity<ServerResponse> updateServer(@RequestBody @Validated ServerRequest server, @PathVariable Long id) {
+	@PutMapping(path = { "/{id}" })
+	public ResponseEntity<ServerResponse> updateServer(@RequestBody @Validated ServerRequest server, @PathVariable(name = "id", required = true) Long id) {
 
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 
 	}
 
-	@DeleteMapping(value = { "/{id}" })
-	public ResponseEntity<ServerResponse> deleteServer(@PathVariable Long id) {
+	@DeleteMapping(path = { "/{id}" })
+	public ResponseEntity<ServerResponse> deleteServer(@PathVariable(name = "id", required = true) Long id) {
 
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 
 	}
 
-	@GetMapping(value = { "/all" })
+	@GetMapping(path = { "/all" })
 	public ResponseEntity<List<ServerResponse>> getAllServers() {
 
 		return ResponseEntity.status(HttpStatus.OK).body(null);
 
 	}
 
-	@GetMapping(value = { "/{id}" })
-	public ResponseEntity<ServerResponse> getServer(@PathVariable Long id) throws UrdException {
+	@GetMapping(path = { "/{id}" })
+	public ResponseEntity<ServerResponse> getServer(@PathVariable(name = "id", required = true) Long id) throws UrdException {
 
 		ServerResponse server = new ServerResponse(service.getServerById(id));
 
