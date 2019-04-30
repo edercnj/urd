@@ -1,26 +1,54 @@
 package com.br.kerberus.urd.domain.entity;
 
-import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
 
-@Table(name = "Server", schema = "kerberus", indexes = { @Index(name = "SERVER_INDEX_ID", columnList = "Id") })
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Index;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "server", indexes = {
+		@Index(name = "server_id_seq", columnList = "id"),
+		@Index(name = "idx_server_hostname", columnList = "hostname") })
 public class Server {
 
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id", updatable = false, nullable = false)
+	@SequenceGenerator(name = "server_id_seq", sequenceName = "server_id_seq", initialValue = 1, allocationSize = 1)
 	private Long id;
 
 	@Column(name = "hostname")
 	private String hostname;
 
-	public String getHostname() { return hostname; }
+	@OneToMany(mappedBy = "server", targetEntity = Application.class, cascade = CascadeType.ALL, orphanRemoval = true)
+	private List<Application> applications;
 
-	public void setHostname(String hostname) { this.hostname = hostname; }
+	@Column(name = "creationDate")
+	private Date creationDate;
 
 	public Long getId() { return id; }
 
 	public void setId(Long id) { this.id = id; }
 
-	public Server(Long id, String hostname) { super(); this.id = id; this.hostname = hostname; }
+	public String getHostname() { return hostname; }
 
-	public Server() { super(); }
+	public void setHostname(String hostname) { this.hostname = hostname; }
+
+	public List<Application> getApplications() { return applications; }
+
+	public void setApplications(List<Application> applications) { this.applications = applications; }
+
+	public Date getCreationDate() { return creationDate; }
+
+	public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
 
 }

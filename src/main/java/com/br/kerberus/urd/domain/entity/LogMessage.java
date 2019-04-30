@@ -2,8 +2,7 @@ package com.br.kerberus.urd.domain.entity;
 
 import java.net.URI;
 import java.util.Date;
-
-import com.google.gson.Gson;
+import java.util.Objects;
 
 public final class LogMessage {
 
@@ -66,16 +65,7 @@ public final class LogMessage {
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + ((dateTime == null) ? 0 : dateTime.hashCode());
-		result = prime * result + ((developerMessage == null) ? 0 : developerMessage.hashCode());
-		result = prime * result + errorCord;
-		result = prime * result + ((moreInfo == null) ? 0 : moreInfo.hashCode());
-		result = prime * result + ((serverName == null) ? 0 : serverName.hashCode());
-		result = prime * result + ((serviceName == null) ? 0 : serviceName.hashCode());
-		result = prime * result + ((userMessage == null) ? 0 : userMessage.hashCode());
-		return result;
+		return Objects.hash(dateTime, developerMessage, errorCord, moreInfo, serverName, serviceName, userMessage);
 	}
 
 	@Override
@@ -87,47 +77,16 @@ public final class LogMessage {
 		if (getClass() != obj.getClass())
 			return false;
 		LogMessage other = (LogMessage) obj;
-		if (dateTime == null) {
-			if (other.dateTime != null)
-				return false;
-		} else if (!dateTime.equals(other.dateTime))
-			return false;
-		if (developerMessage == null) {
-			if (other.developerMessage != null)
-				return false;
-		} else if (!developerMessage.equals(other.developerMessage))
-			return false;
-		if (errorCord != other.errorCord)
-			return false;
-		if (moreInfo == null) {
-			if (other.moreInfo != null)
-				return false;
-		} else if (!moreInfo.equals(other.moreInfo))
-			return false;
-		if (serverName == null) {
-			if (other.serverName != null)
-				return false;
-		} else if (!serverName.equals(other.serverName))
-			return false;
-		if (serviceName == null) {
-			if (other.serviceName != null)
-				return false;
-		} else if (!serviceName.equals(other.serviceName))
-			return false;
-		if (userMessage == null) {
-			if (other.userMessage != null)
-				return false;
-		} else if (!userMessage.equals(other.userMessage))
-			return false;
-		return true;
+		return Objects.equals(dateTime, other.dateTime) && Objects.equals(developerMessage, other.developerMessage) && errorCord == other.errorCord
+				&& Objects.equals(moreInfo, other.moreInfo) && Objects.equals(serverName, other.serverName) && Objects.equals(serviceName,
+						other.serviceName) && Objects.equals(userMessage, other.userMessage);
 	}
 
 	@Override
 	public String toString() {
 		return String.format(
-				" | serverName:%s | serviceName:%s1 | dateTime:%s2 | errorCord:%s3 | developerMessage:%s4 | userMessage:%s5 | moreInfo:%s6",
+				" # serverName:%s # serviceName:%s1 # dateTime:%s2 # errorCord:%s3 # developerMessage:%s4 # userMessage:%s5 # moreInfo:%s6",
 				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDeveloperMessage(), getUserMessage(), getMoreInfo());
 	}
 
-	public String toJson() { Gson gson = new Gson(); return gson.toJson(this); }
 }

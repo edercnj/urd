@@ -13,6 +13,13 @@ buildscript{
 	}
 }
 
+configurations {
+	developmentOnly
+	runtimeClasspath {
+		extendsFrom developmentOnly
+	}
+}
+
 apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'application'
@@ -35,8 +42,14 @@ dependencies {
 	compile('org.flywaydb:flyway-core:5.2.4')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.h2database:h2:1.4.197')
+	compile ('org.postgresql:postgresql:42.2.5')
+	
+	compile ('io.springfox:springfox-swagger2:2.9.2')
+	compile ('io.springfox:springfox-swagger-ui:2.9.2')
+	
 		
 	testCompile('com.h2database:h2:1.4.197')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	
+	developmentOnly("org.springframework.boot:spring-boot-devtools")
+
 }

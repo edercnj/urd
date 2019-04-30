@@ -29,7 +29,7 @@ public class ExceptionControllerAdivice {
 	}
 
 	@ExceptionHandler(value = UrdException.class)
-	public ResponseEntity<ErrorResponse> exceptionHandlerKerberusAuthenticationException(UrdException e) {
+	public ResponseEntity<ErrorResponse> exceptionHandlerUrdException(UrdException e) {
 
 		ErrorResponse responseError = new ErrorResponse(e);
 

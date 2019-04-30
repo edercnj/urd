@@ -7,24 +7,31 @@ logging:
    path: "logs"
    file: "${logging.path}/urd.log"
    pattern:
-      console: "%d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %highlight(%-5level) %logger.%M - %msg%n"
+      console: "%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
+      file: "%black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable"
    level:
       com.br.kerberus.urd.service: DEBUG
       com.br.kerberus.urd.controller: DEBUG
       org.springframework.web: DEBUG
       org.hibernate: DEBUG
 
-spring:     
+spring:
    main:
       banner-mode: "off"
    application:
       name: "urd"
+   h2:
+      console:
+         enabled: true
+         path: "/h2-console"
+         settings:
+            trace: true
+            web-allow-others: false
    datasource:
-      platform: "postgresql"
-      url: "jdbc:postgresql://localhost:5432/urd"
-      driverClassName: "org.postgresql.Driver"
-      username: "urd"
-      password: "urd@139575"
+      url: "jdbc:h2:mem:urd"
+      driverClassName: "org.h2.Driver"
+      username: "sa"
+      password:
    jpa:
       properties:
          hibernate:
@@ -32,4 +39,4 @@ spring:
             format_sql: true
             use_sql_comments: false
             use_query_cache: false
-            dialect: "org.hibernate.dialect.PostgreSQLDialect"
+            dialect: "org.hibernate.dialect.H2Dialect"
