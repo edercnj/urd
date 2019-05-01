@@ -1,6 +1,5 @@
 package com.br.kerberus.urd.domain.entity;
 
-import java.net.URI;
 import java.util.Date;
 import java.util.Objects;
 
@@ -11,27 +10,27 @@ public final class LogMessage {
 	private Date dateTime;
 	private int errorCord;
 
-	private String developerMessage;
+	private String debugMessage;
 	private String userMessage;
-	private URI moreInfo;
+	private String moreInfo;
 
-	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String developerMessage, String userMessage,
-			URI moreInfo) {
+	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String debugMessage, String userMessage,
+					  String moreInfo) {
 		setServerName(serverName);
 		setServiceName(serviceName);
 		setDateTime(dateTime);
 		setErrorCord(errorCord);
-		setDeveloperMessage(developerMessage);
+		setDebugMessage(debugMessage);
 		setUserMessage(userMessage);
 		setMoreInfo(moreInfo);
 	}
 
-	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String developerMessage, String userMessage) {
+	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String debugMessage, String userMessage) {
 		setServerName(serverName);
 		setServiceName(serviceName);
 		setDateTime(dateTime);
 		setErrorCord(errorCord);
-		setDeveloperMessage(developerMessage);
+		setDebugMessage(debugMessage);
 		setUserMessage(userMessage);
 	}
 
@@ -51,21 +50,21 @@ public final class LogMessage {
 
 	public void setErrorCord(int errorCord) { this.errorCord = errorCord; }
 
-	public String getDeveloperMessage() { return developerMessage; }
+	public String getDebugMessage() { return debugMessage; }
 
-	public void setDeveloperMessage(String developerMessage) { this.developerMessage = developerMessage; }
+	public void setDebugMessage(String debugMessage) { this.debugMessage = debugMessage; }
 
 	public String getUserMessage() { return userMessage; }
 
 	public void setUserMessage(String userMessage) { this.userMessage = userMessage; }
 
-	public URI getMoreInfo() { return moreInfo; }
+	public String getMoreInfo() { return moreInfo; }
 
-	public void setMoreInfo(URI moreInfo) { this.moreInfo = moreInfo; }
+	public void setMoreInfo(String moreInfo) { this.moreInfo = moreInfo; }
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(dateTime, developerMessage, errorCord, moreInfo, serverName, serviceName, userMessage);
+		return Objects.hash(dateTime, debugMessage, errorCord, moreInfo, serverName, serviceName, userMessage);
 	}
 
 	@Override
@@ -77,7 +76,7 @@ public final class LogMessage {
 		if (getClass() != obj.getClass())
 			return false;
 		LogMessage other = (LogMessage) obj;
-		return Objects.equals(dateTime, other.dateTime) && Objects.equals(developerMessage, other.developerMessage) && errorCord == other.errorCord
+		return Objects.equals(dateTime, other.dateTime) && Objects.equals(debugMessage, other.debugMessage) && errorCord == other.errorCord
 				&& Objects.equals(moreInfo, other.moreInfo) && Objects.equals(serverName, other.serverName) && Objects.equals(serviceName,
 						other.serviceName) && Objects.equals(userMessage, other.userMessage);
 	}
@@ -85,8 +84,8 @@ public final class LogMessage {
 	@Override
 	public String toString() {
 		return String.format(
-				" # serverName:%s # serviceName:%s1 # dateTime:%s2 # errorCord:%s3 # developerMessage:%s4 # userMessage:%s5 # moreInfo:%s6",
-				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDeveloperMessage(), getUserMessage(), getMoreInfo());
+				" # serverName:%s # serviceName:%s1 # dateTime:%s2 # errorCord:%s3 # debugMessage:%s4 # userMessage:%s5 # moreInfo:%s6",
+				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDebugMessage(), getUserMessage(), getMoreInfo());
 	}
 
 }

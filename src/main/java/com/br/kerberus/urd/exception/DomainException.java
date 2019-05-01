@@ -1,11 +1,9 @@
 package com.br.kerberus.urd.exception;
 
-import java.net.URI;
-import java.util.Objects;
-
+import com.br.kerberus.urd.domain.resource.ErrorResponse;
 import org.springframework.http.HttpStatus;
 
-import com.br.kerberus.urd.domain.resource.ErrorResponse;
+import java.util.Objects;
 
 public abstract class DomainException extends Exception {
 
@@ -13,7 +11,7 @@ public abstract class DomainException extends Exception {
 	private String developerMessage;
 	private String userMessage;
 	private int erroCord;
-	private URI moreInfo;
+	private String moreInfo;
 
 	public DomainException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord) {
 		super("developerMessage");
@@ -23,7 +21,7 @@ public abstract class DomainException extends Exception {
 		this.erroCord = erroCord;
 	}
 
-	public DomainException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord, URI moreInfo) {
+	public DomainException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord, String moreInfo) {
 		super("developerMessage");
 		setHttpStatus(httpStatus);
 		setDeveloperMessage(developerMessage);
@@ -48,9 +46,9 @@ public abstract class DomainException extends Exception {
 
 	private void setErroCord(int erroCord) { this.erroCord = erroCord; }
 
-	public URI getMoreInfo() { return moreInfo; }
+	public String getMoreInfo() { return moreInfo; }
 
-	private void setMoreInfo(URI moreInfo) { this.moreInfo = moreInfo; }
+	private void setMoreInfo(String moreInfo) { this.moreInfo = moreInfo; }
 
 	@Override
 	public boolean equals(Object o) {
@@ -60,7 +58,7 @@ public abstract class DomainException extends Exception {
 			return false;
 		ErrorResponse that = (ErrorResponse) o;
 		return getErroCord() == that.getErroCord() && getHttpStatus() == that.getHttpStatus()
-				&& getDeveloperMessage().equals(that.getDeveloperMessage()) && getUserMessage().equals(that.getUserMessage())
+				&& getDeveloperMessage().equals(that.getDebugMessage()) && getUserMessage().equals(that.getUserMessage())
 				&& Objects.equals(getMoreInfo(), that.getMoreInfo());
 	}
 

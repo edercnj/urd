@@ -1,12 +1,11 @@
 package com.br.kerberus.urd.core;
 
+import org.springframework.beans.factory.annotation.Value;
+
 import java.net.InetAddress;
-import java.net.URI;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Objects;
-
-import org.springframework.beans.factory.annotation.Value;
 
 public final class SystemLog {
 
@@ -15,15 +14,15 @@ public final class SystemLog {
 	private String serviceName;
 	private Date dateTime;
 	private int errorCord;
-	private String developerMessage;
+	private String debugMessage;
 	private String userMessage;
-	private URI moreInfo;
+	private String moreInfo;
 
-	public SystemLog(int errorCord, String developerMessage, String userMessage, URI moreInfo) {
+	public SystemLog(int errorCord, String debugMessage, String userMessage, String moreInfo) {
 		setServerName();
 		setDateTime();
 		this.errorCord = errorCord;
-		this.developerMessage = developerMessage;
+		this.debugMessage = debugMessage;
 		this.userMessage = userMessage;
 		this.moreInfo = moreInfo;
 	}
@@ -46,11 +45,11 @@ public final class SystemLog {
 
 	public int getErrorCord() { return errorCord; }
 
-	public String getDeveloperMessage() { return developerMessage; }
+	public String getDebugMessage() { return debugMessage; }
 
 	public String getUserMessage() { return userMessage; }
 
-	public URI getMoreInfo() { return moreInfo; }
+	public String getMoreInfo() { return moreInfo; }
 
 	@Override
 	public int hashCode() { return Objects.hash(getServerName(), getServiceName(), getDateTime(), getErrorCord()); }
@@ -59,7 +58,7 @@ public final class SystemLog {
 	public String toString() {
 		return String.format(
 				hashCode()
-						+ " | serverName:%s | serviceName:%s1 | dateTime:%s2 | errorCord:%s3 | developerMessage:%s4 | userMessage:%s5 | moreInfo:%s6",
-				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDeveloperMessage(), getUserMessage(), getMoreInfo());
+						+ " | serverName:%s | serviceName:%s1 | dateTime:%s2 | errorCord:%s3 | debugMessage:%s4 | userMessage:%s5 | moreInfo:%s6",
+				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDebugMessage(), getUserMessage(), getMoreInfo());
 	}
 }

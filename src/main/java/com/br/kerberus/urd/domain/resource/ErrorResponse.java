@@ -1,33 +1,31 @@
 package com.br.kerberus.urd.domain.resource;
 
-import java.net.URI;
-import java.util.Objects;
-
-import org.springframework.http.HttpStatus;
-
 import com.br.kerberus.urd.exception.DomainException;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import org.springframework.http.HttpStatus;
+
+import java.util.Objects;
 
 @JsonInclude(value = Include.NON_NULL)
 public class ErrorResponse {
 
     private HttpStatus httpStatus;
-    private String developerMessage;
+    private String debugMessage;
     private String userMessage;
     private int erroCord;
-    private URI moreInfo;
+    private String moreInfo;
 
-    public ErrorResponse(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord) {
+    public ErrorResponse(HttpStatus httpStatus, String debugMessage, String userMessage, int erroCord) {
         this.httpStatus = httpStatus;
-        this.developerMessage = developerMessage;
+        this.debugMessage = debugMessage;
         this.userMessage = userMessage;
         this.erroCord = erroCord;
     }
 
-    public ErrorResponse(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord, URI moreInfo) {
+    public ErrorResponse(HttpStatus httpStatus, String debugMessage, String userMessage, int erroCord, String moreInfo) {
         setHttpStatus(httpStatus);
-        setDeveloperMessage(developerMessage);
+        setDebugMessage(debugMessage);
         setUserMessage(userMessage);
         setErroCord(erroCord);
         setMoreInfo(moreInfo);
@@ -35,7 +33,7 @@ public class ErrorResponse {
 
     public ErrorResponse(DomainException e) {
         setHttpStatus(e.getHttpStatus());
-        setDeveloperMessage(e.getDeveloperMessage());
+        setDebugMessage(e.getDeveloperMessage());
         setUserMessage(e.getDeveloperMessage());
         setErroCord(e.getErroCord());
         setMoreInfo(e.getMoreInfo());
@@ -45,9 +43,9 @@ public class ErrorResponse {
 
     private void setHttpStatus(HttpStatus httpStatus) { this.httpStatus = httpStatus; }
 
-    public String getDeveloperMessage() { return developerMessage; }
+    public String getDebugMessage() { return debugMessage; }
 
-    private void setDeveloperMessage(String developerMessage) { this.developerMessage = developerMessage; }
+    private void setDebugMessage(String debugMessage) { this.debugMessage = debugMessage; }
 
     public String getUserMessage() { return userMessage; }
 
@@ -57,9 +55,9 @@ public class ErrorResponse {
 
     private void setErroCord(int erroCord) { this.erroCord = erroCord; }
 
-    public URI getMoreInfo() { return moreInfo; }
+    public String getMoreInfo() { return moreInfo; }
 
-    private void setMoreInfo(URI moreInfo) { this.moreInfo = moreInfo; }
+    private void setMoreInfo(String moreInfo) { this.moreInfo = moreInfo; }
 
     @Override
     public boolean equals(Object o) {
@@ -68,19 +66,19 @@ public class ErrorResponse {
         ErrorResponse that = (ErrorResponse) o;
         return getErroCord() == that.getErroCord() &&
                 getHttpStatus() == that.getHttpStatus() &&
-                getDeveloperMessage().equals(that.getDeveloperMessage()) &&
+                getDebugMessage().equals(that.getDebugMessage()) &&
                 getUserMessage().equals(that.getUserMessage()) &&
                 Objects.equals(getMoreInfo(), that.getMoreInfo());
     }
 
     @Override
-    public int hashCode() { return Objects.hash(getHttpStatus(), getDeveloperMessage(), getUserMessage(), getErroCord(), getMoreInfo()); }
+    public int hashCode() { return Objects.hash(getHttpStatus(), getDebugMessage(), getUserMessage(), getErroCord(), getMoreInfo()); }
 
     @Override
     public String toString() {
         return "ErrorResponse{" +
                 "httpStatus=" + httpStatus +
-                ", developerMessage='" + developerMessage + '\'' +
+                ", debugMessage='" + debugMessage + '\'' +
                 ", userMessage='" + userMessage + '\'' +
                 ", erroCord=" + erroCord +
                 ", moreInfo=" + moreInfo +

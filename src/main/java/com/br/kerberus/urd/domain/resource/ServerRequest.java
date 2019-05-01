@@ -1,9 +1,8 @@
 package com.br.kerberus.urd.domain.resource;
 
-import org.springframework.lang.NonNull;
-
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import org.springframework.lang.NonNull;
 
 @JsonInclude(value = Include.NON_NULL)
 public class ServerRequest {
