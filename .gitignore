@@ -164,7 +164,7 @@ modules.xml
 
 # Log file
 *.log
-
+logs/
 # BlueJ files
 *.ctxt
 
@@ -250,7 +250,7 @@ nbdist/
 
 ### Gradle ###
 .gradle
-
+gradle/
 # Ignore Gradle GUI config
 gradle-app.setting
 
