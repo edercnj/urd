@@ -1,11 +1,16 @@
 package com.br.kerberus.urd.domain.entity;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Proxy;
+
 import java.util.Date;
 
 @Entity
-@Table(name = "application", indexes = { @Index(name = "SERVICE_APPLICATION_INDEX_ID", columnList = "Id"),
+@Table(name = "application", indexes = {
+		@Index(name = "SERVICE_APPLICATION_INDEX_ID", columnList = "Id"),
 		@Index(name = "idx_application_name", columnList = "name") })
+@Proxy(lazy = false)
 public class Application {
 
 	@Id
@@ -18,11 +23,11 @@ public class Application {
 	@JoinColumn(name = "name")
 	private String name;
 
-	@JoinColumn(name = "logPath")
+	@JoinColumn(name = "log_path")
 	private String logPath;
 
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FK_aplication_server_id")
+	@JoinColumn(name = "server_id", nullable = false, foreignKey = @ForeignKey(name = "FK_aplication_server_id"))
 	private Server server;
 
 	@Column(name = "creation_date")

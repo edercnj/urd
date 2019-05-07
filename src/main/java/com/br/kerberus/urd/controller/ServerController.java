@@ -1,5 +1,6 @@
 package com.br.kerberus.urd.controller;
 
+import com.br.kerberus.urd.domain.entity.Server;
 import com.br.kerberus.urd.domain.resource.ErrorResponse;
 import com.br.kerberus.urd.domain.resource.ServerRequest;
 import com.br.kerberus.urd.domain.resource.ServerResponse;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
 import java.util.List;
 
 @Api(value = "server")
@@ -28,20 +30,25 @@ public class ServerController {
 	@ApiOperation(httpMethod = "POST", value = "This service provide resource to add one server.", response = ServerResponse.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
-			@ApiResponse(code = 500, message = "Internal server error", response = ErrorResponse.class)
-	})
+			@ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class) })
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@PostMapping(path = { "/add" })
-	public ResponseEntity<ServerResponse> addServer(@RequestBody @Validated ServerRequest server) {
+	public ResponseEntity<ServerResponse> addServer(@RequestBody @Validated ServerRequest server) throws UrdException {
 
-		return ResponseEntity.status(HttpStatus.CREATED).body(null);
+		Server srv = new Server();
+		srv.setHostname(server.getHostname());
+		srv.setCreationDate(new Date());
+
+		ServerResponse response = new ServerResponse(service.addServer(srv));
+
+		return ResponseEntity.status(HttpStatus.CREATED).body(response);
 	}
 
 	@ApiOperation(httpMethod = "PUT", value = "This service provide resource to update a server by id.", response = ServerResponse.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
 			@ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
-			@ApiResponse(code = 500, message = "Internal server error", response = ErrorResponse.class)
+			@ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
 	})
 	@ResponseStatus(value = HttpStatus.OK)
 	@PutMapping(path = { "/{id}" })
@@ -56,7 +63,7 @@ public class ServerController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
 			@ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
-			@ApiResponse(code = 500, message = "Internal server error", response = ErrorResponse.class)
+			@ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
 	})
 	@ResponseStatus(value = HttpStatus.OK)
 	@DeleteMapping(path = { "/{id}" })
@@ -66,12 +73,11 @@ public class ServerController {
 
 	}
 
-	
-	@ApiOperation(httpMethod = "GET", value = "Return one server by id.", response = ServerResponse.class)
+	@ApiOperation(httpMethod = "GET", value = "Return all servers.", response = ServerResponse.class)
 	@ApiResponses(value = {
 			@ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
 			@ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
-			@ApiResponse(code = 500, message = "Internal server error", response = ErrorResponse.class)
+			@ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
 	})
 	@ResponseStatus(value = HttpStatus.OK)
 	@GetMapping(path = { "/all" })
@@ -85,15 +91,16 @@ public class ServerController {
 	@ApiResponses(value = {
 			@ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
 			@ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
-			@ApiResponse(code = 500, message = "Internal server error", response = ErrorResponse.class)
+			@ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
 	})
 	@ResponseStatus(value = HttpStatus.OK)
 	@GetMapping(path = { "/{id}" })
 	public ResponseEntity<ServerResponse> getServer(@PathVariable(name = "id", required = true) Long id) throws UrdException {
 
-		ServerResponse server = new ServerResponse(service.getServerById(id));
+		ServerResponse server = new ServerResponse(service.getServerById(id).get());
 
 		return ResponseEntity.status(HttpStatus.OK).body(server);
 
 	}
+
 }

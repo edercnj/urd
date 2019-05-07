@@ -22,7 +22,7 @@ public class ExceptionControllerAdivice {
 	public ResponseEntity<ErrorResponse> exceptionHandlerException(Exception e) {
 
 		ErrorResponse responseError = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getCause().getMessage(),
-				"Bad Request", 666);
+				"Could not make request. Try later.", 666);
 
 		return ResponseEntity.status(responseError.getHttpStatus()).body(responseError);
 	}

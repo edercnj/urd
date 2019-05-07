@@ -1,24 +1,29 @@
 package com.br.kerberus.urd.domain.resource;
 
+import java.util.List;
+
+import javax.validation.constraints.NotEmpty;
+
+import com.br.kerberus.urd.domain.entity.Application;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
-import org.springframework.lang.NonNull;
 
 @JsonInclude(value = Include.NON_NULL)
 public class ServerRequest {
 
-	
-	private Long id;
 
-	@NonNull
+	@NotEmpty
 	private String hostname;
+	
+	private List<Application> applications;
 
 	public String getHostname() { return hostname; }
 
 	public void setHostname(String hostname) { this.hostname = hostname; }
 
-	public Long getId() { return id; }
+	public List<Application> getApplications() { return applications; }
 
-	public void setId(Long id) { this.id = id; }
+	public void setApplications(List<Application> applications) { this.applications = applications; }
 
+	
 }

@@ -3,6 +3,8 @@ package com.br.kerberus.urd.domain.entity;
 import java.util.Date;
 import java.util.Objects;
 
+import com.br.kerberus.urd.core.log.SystemLog;
+
 public final class LogMessage {
 
 	private String serverName;
@@ -14,25 +16,16 @@ public final class LogMessage {
 	private String userMessage;
 	private String moreInfo;
 
-	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String debugMessage, String userMessage,
-					  String moreInfo) {
-		setServerName(serverName);
-		setServiceName(serviceName);
-		setDateTime(dateTime);
-		setErrorCord(errorCord);
-		setDebugMessage(debugMessage);
-		setUserMessage(userMessage);
-		setMoreInfo(moreInfo);
+	public LogMessage(SystemLog log) {
+		setServerName(log.getServerName());
+		setServiceName(log.getServiceName());
+		setDateTime(log.getDateTime());
+		setErrorCord(log.getErrorCord());
+		setDebugMessage(log.getDebugMessage());
+		setUserMessage(log.getUserMessage());
+		setMoreInfo(log.getMoreInfo());
 	}
 
-	public LogMessage(String serverName, String serviceName, Date dateTime, int errorCord, String debugMessage, String userMessage) {
-		setServerName(serverName);
-		setServiceName(serviceName);
-		setDateTime(dateTime);
-		setErrorCord(errorCord);
-		setDebugMessage(debugMessage);
-		setUserMessage(userMessage);
-	}
 
 	public String getServerName() { return serverName; }
 

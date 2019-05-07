@@ -1,6 +1,9 @@
 package com.br.kerberus.urd.domain.entity;
 
 import javax.persistence.*;
+
+import org.hibernate.annotations.Proxy;
+
 import java.util.Date;
 import java.util.List;
 
@@ -8,6 +11,7 @@ import java.util.List;
 @Table(name = "server", indexes = {
 		@Index(name = "server_id_seq", columnList = "id"),
 		@Index(name = "idx_server_hostname", columnList = "hostname") })
+@Proxy(lazy = false)
 public class Server {
 
 	@Id
@@ -19,10 +23,10 @@ public class Server {
 	@Column(name = "hostname")
 	private String hostname;
 
-	@OneToMany(mappedBy = "server", targetEntity = Application.class, cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "server", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
 	private List<Application> applications;
 
-	@Column(name = "creationDate")
+	@Column(name = "creation_date")
 	private Date creationDate;
 
 	public Long getId() { return id; }
@@ -40,5 +44,15 @@ public class Server {
 	public Date getCreationDate() { return creationDate; }
 
 	public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
+
+	public Server(Long id, String hostname, List<Application> applications, Date creationDate) {
+		super();
+		this.id = id;
+		this.hostname = hostname;
+		this.applications = applications;
+		this.creationDate = creationDate;
+	}
+	
+	public Server() {}
 
 }

@@ -42,11 +42,11 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.h2database:h2:1.4.197')
 	compile ('org.postgresql:postgresql:42.2.5')
+    compile('org.springframework.boot:spring-boot-starter-aop')
 	
 	compile ('io.springfox:springfox-swagger2:2.9.2')
 	compile ('io.springfox:springfox-swagger-ui:2.9.2')
 	
 	testCompile('com.h2database:h2:1.4.197')
 	testImplementation('org.springframework.boot:spring-boot-starter-test')
-	developmentOnly("org.springframework.boot:spring-boot-devtools")
-}
+	}

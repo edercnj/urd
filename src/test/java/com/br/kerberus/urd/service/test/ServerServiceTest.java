@@ -20,9 +20,9 @@ public class ServerServiceTest {
 	ServerService service;
 
 	@Test
-	public void serverService_findById_Must_Return_1_elements() throws UrdException
+	public void serverServicefindByIdMustReturnOneElement()throws UrdException
 	{
-		Optional<Server> server = service.getServerById(1L);
+		 Optional<Server> server = service.getServerById(1L);
 		
 		Assert.assertTrue(server.isPresent());
 	}
