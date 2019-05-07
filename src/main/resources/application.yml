@@ -9,10 +9,10 @@ logging:
    pattern:
       console: "%highlight(%-5level) | %d{dd-MM-yyyy HH:mm:ss.SSS} | %magenta([%thread])  | %logger.%M - %msg%n"
    level:
-      com.br.kerberus.urd.service: DEBUG
-      com.br.kerberus.urd.controller: DEBUG
-      org.springframework.web: DEBUG
-      org.hibernate: DEBUG
+      com.br.kerberus.urd.service: INFO
+      com.br.kerberus.urd.controller: INFO
+      org.springframework.web: INFO
+      org.hibernate: INFO
 
 spring:     
    main:

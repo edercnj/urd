@@ -25,11 +25,10 @@ import java.util.List;
 public class ServerController {
 
 	@Autowired
-	ServerService service;
+	private ServerService service;
 
 	@ApiOperation(httpMethod = "POST", value = "This service provide resource to add one server.", response = ServerResponse.class)
-	@ApiResponses(value = {
-			@ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
+	@ApiResponses(value = { @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
 			@ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class) })
 	@ResponseStatus(value = HttpStatus.CREATED)
 	@PostMapping(path = { "/add" })

@@ -20,7 +20,7 @@ CREATE TABLE IF NOT EXISTS application (
     server_id bigint NOT NULL,
     creation_date TIMESTAMP NOT NULL,
     
-    CONSTRAINT FK_aplication_server_id FOREIGN KEY (server_id) REFERENCES server (id) ON UPDATE NO ACTION ON DELETE NO ACTION
+    CONSTRAINT FK_application_server_id FOREIGN KEY (server_id) REFERENCES server (id) ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
 CREATE SEQUENCE IF NOT EXISTS application_id_seq start 1 increment 1;

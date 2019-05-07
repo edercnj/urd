@@ -2,8 +2,6 @@ package com.br.kerberus.urd.exception;
 
 import org.springframework.http.HttpStatus;
 
-import java.net.URI;
-
 public class UrdException extends DomainException {
 
 	public UrdException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord) {
