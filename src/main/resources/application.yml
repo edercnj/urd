@@ -3,24 +3,6 @@ server:
    servlet:
       contextPath: "/urd"
 
-logging:
-   group:
-      urd: com.br.kerberus.urd, com.br.kerberus.urd.service, com.br.kerberus.urd.config, com.br.kerberus.urd.controller, com.br.kerberus.urd.core, com.br.kerberus.urd.repository, com.br.kerberus.urd.exception, com.br.kerberus.urd.core.log
-      sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core
-      web: org.springframework.core.codec, org.springframework.http, org.springframework.web
-   path: "logs"
-   file:
-      file: "${logging.path}/urd.log"
-      max-size: "10MB"
-      max-history: 10
-   pattern:
-      console: "%highlight(%-5level) | %d{dd-MM-yyyy HH:mm:ss.SSS} | %magenta([%thread])  | %logger{0} | %msg%n"
-      file: "%-5level | %d{dd-MM-yyyy HH:mm:ss.SSS} | %thread  | %logger{0} | %msg%n"
-   level:
-      urd: debug
-      web: debug
-      sql: error
-
 spring:
    main:
       banner-mode: "off"
@@ -51,3 +33,19 @@ spring:
       connect-retries: 3
       mixed: true
       baseline-on-migrate: true
+
+logging:
+   group:
+      urd: com.br.kerberus.urd, com.br.kerberus.urd.service, com.br.kerberus.urd.config, com.br.kerberus.urd.controller, com.br.kerberus.urd.core, com.br.kerberus.urd.repository, com.br.kerberus.urd.exception, com.br.kerberus.urd.core.log
+      sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core
+      web: org.springframework.core.codec, org.springframework.http, org.springframework.web
+   path: "logs"
+   file: "${logging.path}/${spring.application.name}.log"
+   pattern:
+      console: "${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} |  %highlight(%-5level) | %magenta([%thread])  | %logger{0} | %msg%n"
+      file: "${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} | %-5level |  %thread  | %logger{0} | %msg%n"
+   level:
+      root: off
+      urd: info
+      web: warn
+      sql: warn
