@@ -1,0 +1,55 @@
+server:
+   port: ${port:5001}
+   servlet:
+      contextPath: "/urd"
+   connection-timeout: 2000
+
+logging:
+   group:
+      urd: com.br.kerberus.urd, com.br.kerberus.urd.service, com.br.kerberus.urd.config, com.br.kerberus.urd.controller, com.br.kerberus.urd.core, com.br.kerberus.urd.repository, com.br.kerberus.urd.exception, com.br.kerberus.urd.core.log
+      sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core
+      web: org.springframework.core.codec, org.springframework.http, org.springframework.web
+   path: "logs"
+   pattern:
+      console: "${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} |  %highlight(%-5level) | %magenta([%thread])  | %logger{0} | %msg%n"
+   level:
+      urd: debug
+      web: debug
+      sql: error
+
+spring:
+   main:
+      banner-mode: "off"
+   application:
+      name: "urd"
+   h2:
+      console:
+         enabled: true
+         path: "/h2-console"
+         settings:
+            trace: true
+            web-allow-others: false
+   datasource:
+      url: "jdbc:h2:mem:urd;MODE=PostgreSQL"
+      driverClassName: "org.h2.Driver"
+      username: "sa"
+      password:
+   jpa:
+      properties:
+         hibernate:
+            show_sql: true
+            format_sql: true
+            use_sql_comments: false
+            use_query_cache: false
+            dialect: "org.hibernate.dialect.H2Dialect"
+      hibernate:
+         ddl-auto: validate
+   flyway:
+      locations: "classpath:db/migration"
+      url: "jdbc:h2:mem:urd;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"
+      user: "sa"
+      password:
+      enabled: true
+      connect-retries: 3
+      mixed: true
+      baseline-on-migrate: true

@@ -10,7 +10,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 
 @JsonInclude(value = Include.NON_NULL)
-public class ServerResponse {
+public class ServerResource {
 
 	private Long id;
 
@@ -37,7 +37,7 @@ public class ServerResponse {
 
 	public void setApplications(List<Application> applications) { this.applications = applications; }
 
-	public ServerResponse(Server server) {
+	public ServerResource(Server server) {
 		
 		setId(server.getId());
 		setHostname(server.getHostname());
@@ -45,14 +45,4 @@ public class ServerResponse {
 		setApplications(server.getApplications());
 	
 	}
-	
-	public ServerResponse(Optional<Server> server) {
-		
-		setId(server.get().getId());
-		setHostname(server.get().getHostname());
-		setCreationDate(new Date());
-		setApplications(server.get().getApplications());
-	
-	}
-
 }
