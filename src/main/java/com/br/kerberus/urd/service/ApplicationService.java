@@ -9,7 +9,7 @@ import com.br.kerberus.urd.domain.entity.Application;
 import com.br.kerberus.urd.repository.ApplicationRepository;
 
 @Service
-public class ServiceApplicationService {
+public class ApplicationService {
 	
 	@Autowired
 	ApplicationRepository repository;
