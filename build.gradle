@@ -1,11 +1,11 @@
-buildscript{
+buildscript {
 	ext { springBootVersion = '2.1.4.RELEASE' }
-	
+
 	repositories {
 		mavenLocal()
 		maven { url 'http://repo1.maven.org/maven2' }
 	}
-	
+
 	dependencies {
 		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
 	}

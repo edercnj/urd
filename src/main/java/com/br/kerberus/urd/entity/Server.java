@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.domain.entity;
+package com.br.kerberus.urd.entity;
 
 import javax.persistence.*;
 

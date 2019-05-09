@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.core.log;
+package com.br.kerberus.urd.log;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.repository;
 
-import com.br.kerberus.urd.domain.entity.Server;
+import com.br.kerberus.urd.entity.Server;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.transaction.annotation.Transactional;
 

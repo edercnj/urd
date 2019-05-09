@@ -1,10 +1,13 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.core.log.LogExecutionTime;
-import com.br.kerberus.urd.domain.entity.Server;
-import com.br.kerberus.urd.domain.resource.ServerResource;
+import com.br.kerberus.urd.entity.Server;
 import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.log.LogDomainsException;
+import com.br.kerberus.urd.log.LogExecutionTime;
+import com.br.kerberus.urd.log.LogMetlhodCall;
+import com.br.kerberus.urd.log.LogMetlhodReturn;
 import com.br.kerberus.urd.repository.ServerRepository;
+import com.br.kerberus.urd.resource.ServerResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +24,10 @@ public class ServerService {
         this.repository = repository;
     }
 
+
+    @LogDomainsException
+    @LogMetlhodCall
+    @LogMetlhodReturn
     @LogExecutionTime
     public Optional<Server> getServerById(Long id) throws UrdException {
         Optional<Server> server = repository.findById(id);
@@ -34,12 +41,20 @@ public class ServerService {
         }
         return server;
     }
-
+    
+    @LogDomainsException
+    @LogMetlhodCall
+    @LogMetlhodReturn
+    @LogExecutionTime
     public List<Server> findAllServers() {
 
         return repository.findAll();
     }
 
+    @LogDomainsException
+    @LogMetlhodCall
+    @LogMetlhodReturn
+    @LogExecutionTime
     public Server addServer(ServerResource server) throws UrdException {
         try {
             Server srv = new Server();

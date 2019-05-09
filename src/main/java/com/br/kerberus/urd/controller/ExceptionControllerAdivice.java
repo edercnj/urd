@@ -1,6 +1,7 @@
 package com.br.kerberus.urd.controller;
 
-import com.br.kerberus.urd.domain.resource.ErrorResponse;
+import com.br.kerberus.urd.log.LogControllerAdvice;
+import com.br.kerberus.urd.resource.ErrorResponse;
 import com.br.kerberus.urd.exception.UrdException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ public class ExceptionControllerAdivice {
 	public ExceptionControllerAdivice() { this.setLog(LoggerFactory.getLogger(ExceptionControllerAdivice.class)); }
 
 	@ExceptionHandler
+	@LogControllerAdvice
 	public ResponseEntity<ErrorResponse> exceptionHandlerException(Exception e) {
 
 		ErrorResponse responseError = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getCause().getMessage(),
@@ -28,6 +30,7 @@ public class ExceptionControllerAdivice {
 	}
 
 	@ExceptionHandler(value = UrdException.class)
+	@LogControllerAdvice
 	public ResponseEntity<ErrorResponse> exceptionHandlerUrdException(UrdException e) {
 
 		ErrorResponse responseError = new ErrorResponse(e);

@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.service.test;
 
-import com.br.kerberus.urd.domain.entity.Server;
+import com.br.kerberus.urd.entity.Server;
 import com.br.kerberus.urd.exception.UrdException;
 import com.br.kerberus.urd.service.ServerService;
 import org.junit.Assert;

@@ -1,9 +1,9 @@
-package com.br.kerberus.urd.domain.entity;
+package com.br.kerberus.urd.entity;
 
 import java.util.Date;
 import java.util.Objects;
 
-import com.br.kerberus.urd.core.log.SystemLog;
+import com.br.kerberus.urd.log.SystemLog;
 
 public final class LogMessage {
 

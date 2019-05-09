@@ -1,11 +1,10 @@
-package com.br.kerberus.urd.domain.resource;
+package com.br.kerberus.urd.resource;
 
 import java.util.Date;
 import java.util.List;
-import java.util.Optional;
 
-import com.br.kerberus.urd.domain.entity.Application;
-import com.br.kerberus.urd.domain.entity.Server;
+import com.br.kerberus.urd.entity.Application;
+import com.br.kerberus.urd.entity.Server;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 

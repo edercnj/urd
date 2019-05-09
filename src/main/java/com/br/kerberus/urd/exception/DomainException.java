@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.exception;
 
-import com.br.kerberus.urd.domain.resource.ErrorResponse;
+import com.br.kerberus.urd.resource.ErrorResponse;
 import org.springframework.http.HttpStatus;
 
 import java.util.Objects;

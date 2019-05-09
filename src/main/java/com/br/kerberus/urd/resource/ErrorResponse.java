@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.domain.resource;
+package com.br.kerberus.urd.resource;
 
 import com.br.kerberus.urd.exception.DomainException;
 import com.fasterxml.jackson.annotation.JsonInclude;

@@ -1,15 +1,14 @@
-package com.br.kerberus.urd.core;
+package com.br.kerberus.urd.log;
 
-import com.br.kerberus.urd.core.log.SystemLog;
 import org.springframework.http.HttpStatus;
 
-public enum LogInfo {
+public enum LogError {
 
 	SERVER_NOT_FOUND(new SystemLog(501, "Server with id {%s} not found", "Server with id {%s} not found. Please enter a valid value for search.", "", HttpStatus.NOT_FOUND));
 
 	private final SystemLog systemLog;
 
-	LogInfo(SystemLog log) {
+	LogError(SystemLog log) {
 
 		this.systemLog = log;
 	}

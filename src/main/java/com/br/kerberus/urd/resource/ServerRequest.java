@@ -1,10 +1,10 @@
-package com.br.kerberus.urd.domain.resource;
+package com.br.kerberus.urd.resource;
 
 import java.util.List;
 
 import javax.validation.constraints.NotEmpty;
 
-import com.br.kerberus.urd.domain.entity.Application;
+import com.br.kerberus.urd.entity.Application;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 

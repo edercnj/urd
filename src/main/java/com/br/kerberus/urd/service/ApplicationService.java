@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.br.kerberus.urd.domain.entity.Application;
+import com.br.kerberus.urd.entity.Application;
 import com.br.kerberus.urd.repository.ApplicationRepository;
 
 @Service

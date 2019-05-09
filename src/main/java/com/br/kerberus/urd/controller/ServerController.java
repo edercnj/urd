@@ -1,7 +1,7 @@
 package com.br.kerberus.urd.controller;
 
-import com.br.kerberus.urd.domain.resource.ErrorResponse;
-import com.br.kerberus.urd.domain.resource.ServerResource;
+import com.br.kerberus.urd.resource.ErrorResponse;
+import com.br.kerberus.urd.resource.ServerResource;
 import com.br.kerberus.urd.exception.UrdException;
 import com.br.kerberus.urd.service.ServerService;
 import io.swagger.annotations.Api;
@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -93,6 +94,7 @@ public class ServerController {
             })
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
+    @Transactional
     public ResponseEntity<ServerResource> getServer(@PathVariable(name = "id", required = true) Long id) throws UrdException {
 
         ServerResource server = new ServerResource(service.getServerById(id).get());

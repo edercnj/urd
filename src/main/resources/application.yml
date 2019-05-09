@@ -47,5 +47,5 @@ logging:
    level:
       root: off
       urd: info
-      web: warn
-      sql: warn
+      web: error
+      sql: error
