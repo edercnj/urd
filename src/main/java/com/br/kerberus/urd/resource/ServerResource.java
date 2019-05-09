@@ -1,18 +1,24 @@
 package com.br.kerberus.urd.resource;
 
-import java.util.Date;
-import java.util.List;
-
 import com.br.kerberus.urd.entity.Application;
 import com.br.kerberus.urd.entity.Server;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.Date;
+import java.util.List;
 
 @JsonInclude(value = Include.NON_NULL)
 public class ServerResource {
 
 	private Long id;
 
+	@NotEmpty
+	@NotBlank
+	@NotNull
 	private String hostname;
 
 	private Date creationDate;
@@ -44,4 +50,5 @@ public class ServerResource {
 		setApplications(server.getApplications());
 	
 	}
+	public ServerResource() {}
 }

@@ -22,8 +22,6 @@ spring:
             use_sql_comments: false
             use_query_cache: false
             dialect: "org.hibernate.dialect.PostgreSQLDialect"
-      hibernate:
-         ddl-auto: validate
    flyway:
       locations: "classpath:db/migration"
       url: "jdbc:postgresql://localhost:5432/urd"

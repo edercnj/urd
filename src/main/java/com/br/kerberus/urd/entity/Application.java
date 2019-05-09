@@ -1,23 +1,21 @@
 package com.br.kerberus.urd.entity;
 
-import javax.persistence.*;
-
 import org.hibernate.annotations.Proxy;
 
+import javax.persistence.*;
 import java.util.Date;
 
 @Entity
 @Table(name = "application", indexes = {
-		@Index(name = "SERVICE_APPLICATION_INDEX_ID", columnList = "Id"),
+		@Index(name = "idx_application_id", columnList = "Id"),
 		@Index(name = "idx_application_name", columnList = "name") })
 @Proxy(lazy = false)
 public class Application {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "id", updatable = false, nullable = false)
-	@SequenceGenerator(name = "application_id_seq", sequenceName = "application_id_seq", initialValue = 1, allocationSize = 1)
-
+	@SequenceGenerator(name = "application_id_seq", sequenceName = "application_id_seq", allocationSize = 1)
 	private Long id;
 
 	@JoinColumn(name = "name")
