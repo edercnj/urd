@@ -95,9 +95,9 @@ public class ServerController {
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
     @Transactional
-    public ResponseEntity<ServerResource> getServer(@PathVariable(name = "id", required = true) Long id) throws UrdException {
+    public ResponseEntity<ServerResource> getServer(@PathVariable(name = "id") Integer id) throws UrdException {
 
-        ServerResource server = new ServerResource(service.getServerById(id).get());
+        ServerResource server = new ServerResource(service.getServerById(id));
 
         return ResponseEntity.status(HttpStatus.OK).body(server);
     }

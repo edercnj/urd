@@ -24,22 +24,22 @@ public class ServerService {
         this.repository = repository;
     }
 
-
     @LogDomainsException
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
-    public Optional<Server> getServerById(Long id) throws UrdException {
-        Optional<Server> server = repository.findById(id);
+    public Server getServerById(Integer id) throws UrdException {
+            Optional<Server> server = repository.findById(id);
 
-        if (server.isEmpty()) {
-            throw new UrdException(
-                    HttpStatus.NOT_FOUND,
-                    String.format("Server with id {%s} not found", id),
-                    String.format("Server with id {%s} not found. Please enter a valid value for search.", id),
-                    501);
-        }
-        return server;
+            if (server.isEmpty()) {
+                throw new UrdException(
+                        HttpStatus.NOT_FOUND,
+                        String.format("Server with id {%s} not found", id),
+                        String.format("Server with id {%s} not found. Please enter a valid value for search.", id),
+                        501);
+            }
+
+            return server.get();
     }
     
     @LogDomainsException

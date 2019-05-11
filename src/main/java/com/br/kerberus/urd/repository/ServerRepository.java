@@ -10,14 +10,13 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 import java.util.Optional;
 
-
-public interface ServerRepository extends JpaRepository<Server, Long>{
+public interface ServerRepository extends JpaRepository<Server, Integer>{
 
     @Override
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
-    Optional<Server> findById(Long aLong);
+    Optional<Server> findById(Integer aLong);
 
     @Override
     @LogMetlhodCall

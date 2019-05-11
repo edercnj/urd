@@ -1,6 +1,5 @@
 package com.br.kerberus.urd.resource;
 
-import com.br.kerberus.urd.entity.Application;
 import com.br.kerberus.urd.entity.Server;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
@@ -14,7 +13,7 @@ import java.util.List;
 @JsonInclude(value = Include.NON_NULL)
 public class ServerResource {
 
-	private Long id;
+	private Integer id;
 
 	@NotEmpty
 	@NotBlank
@@ -23,12 +22,11 @@ public class ServerResource {
 
 	private Date creationDate;
 	
-	private List<Application> applications;
+	private List<ApplicationResource> applications;
 	
-	
-	public Long getId() { return id; }
+	public Integer getId() { return id; }
 
-	public void setId(Long id) { this.id = id; }
+	public void setId(Integer id) { this.id = id; }
 
 	public String getHostname() { return hostname; }
 
@@ -38,16 +36,16 @@ public class ServerResource {
 
 	public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
 
-	public List<Application> getApplications() { return applications; }
+	public List<ApplicationResource> getApplications() { return applications; }
 
-	public void setApplications(List<Application> applications) { this.applications = applications; }
+	public void setApplications(List<ApplicationResource> applications) { this.applications = applications; }
 
 	public ServerResource(Server server) {
 		
 		setId(server.getId());
 		setHostname(server.getHostname());
 		setCreationDate(new Date());
-		setApplications(server.getApplications());
+		//TODO: Ajustar isso setApplications(server.getApplications());
 	
 	}
 	public ServerResource() {}

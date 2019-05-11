@@ -22,20 +22,22 @@ spring:
             use_sql_comments: false
             use_query_cache: false
             dialect: "org.hibernate.dialect.PostgreSQLDialect"
+      hibernate:
+         ddl-auto: validate
    flyway:
       locations: "classpath:db/migration"
       url: "jdbc:postgresql://localhost:5432/urd"
       user: "urd"
       password: "urd@139575"
       enabled: true
-      connect-retries: 3
-      mixed: true
+      table: "migrations"
       baseline-on-migrate: true
+      group: true
 
 logging:
    group:
       urd: com.br.kerberus.urd, com.br.kerberus.urd.service, com.br.kerberus.urd.config, com.br.kerberus.urd.controller, com.br.kerberus.urd.core, com.br.kerberus.urd.repository, com.br.kerberus.urd.exception, com.br.kerberus.urd.core.log
-      sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core
+      sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core, org.hibernate.type
       web: org.springframework.core.codec, org.springframework.http, org.springframework.web
    path: "logs"
    file: "${logging.path}/${spring.application.name}.log"
@@ -44,6 +46,6 @@ logging:
       file: "${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} | %-5level |  %thread  | %logger{0} | %msg%n"
    level:
       root: off
-      urd: info
-      web: error
-      sql: error
+      urd: debug
+      web: debug
+      sql: debug

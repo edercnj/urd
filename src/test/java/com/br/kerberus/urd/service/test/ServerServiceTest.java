@@ -11,8 +11,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Optional;
-
 @RunWith(SpringRunner.class)
 @SpringBootTest
 @ActiveProfiles("test")
@@ -22,11 +20,11 @@ public class ServerServiceTest {
 	ServerService service;
 
 	@Test
-	public void serverServicefindByIdMustReturnOneElement()throws UrdException
+	public void serverServiceFindByIdMustReturnOneElement()throws UrdException
 	{
-		 Optional<Server> server = service.getServerById(1L);
+		 Server server = service.getServerById(1);
 		
-		Assert.assertTrue(server.isPresent());
+		Assert.assertNotNull(server);
 	}
 
 }
