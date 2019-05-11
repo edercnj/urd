@@ -62,7 +62,6 @@ public class AspectLog {
 			log.error(String.format("Method return: {%s} -return {null or void}", joinPoint.getSignature()));
 	}
 
-
 	@AfterReturning(value = "@annotation(com.br.kerberus.urd.log.LogControllerAdvice)", returning = "result")
 	public void logExceptionControllerAdvice(JoinPoint joinPoint, Object result) {
 
