@@ -22,6 +22,9 @@ spring:
             use_sql_comments: false
             use_query_cache: false
             dialect: "org.hibernate.dialect.PostgreSQLDialect"
+            temp:
+               use_jdbc_metadata_defaults: false
+
       hibernate:
          ddl-auto: validate
    flyway:
@@ -46,6 +49,6 @@ logging:
       file: "${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} | %-5level |  %thread  | %logger{0} | %msg%n"
    level:
       root: off
-      urd: debug
-      web: debug
-      sql: debug
+      urd: info
+      web: error
+      sql: error

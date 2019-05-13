@@ -2,7 +2,7 @@ package com.br.kerberus.urd.service;
 
 import com.br.kerberus.urd.entity.Application;
 import com.br.kerberus.urd.exception.UrdException;
-import com.br.kerberus.urd.log.LogDomainsException;
+import com.br.kerberus.urd.log.LogException;
 import com.br.kerberus.urd.log.LogExecutionTime;
 import com.br.kerberus.urd.log.LogMetlhodCall;
 import com.br.kerberus.urd.log.LogMetlhodReturn;
@@ -26,7 +26,7 @@ public class ApplicationService {
         this.serverService = serverService;
     }
 
-    @LogDomainsException
+    @LogException
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
@@ -45,7 +45,7 @@ public class ApplicationService {
         return application.get();
     }
 
-    @LogDomainsException
+    @LogException
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime

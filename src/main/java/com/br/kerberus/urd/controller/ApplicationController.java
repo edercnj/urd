@@ -1,6 +1,8 @@
 package com.br.kerberus.urd.controller;
 
+import com.br.kerberus.urd.entity.Application;
 import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ApplicationResource;
 import com.br.kerberus.urd.resource.ErrorResponse;
 import com.br.kerberus.urd.resource.ServerResource;
@@ -34,6 +36,7 @@ public class ApplicationController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = {"/add"})
     public ResponseEntity<ApplicationResource> addServer(@RequestBody @Validated ApplicationResource application) throws UrdException {
@@ -50,6 +53,7 @@ public class ApplicationController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping(path = {"/{id}"})
     public ResponseEntity<ApplicationResource> updateServer(@RequestBody @Validated ApplicationResource server,
@@ -65,11 +69,14 @@ public class ApplicationController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping(path = {"/{id}"})
-    public ResponseEntity<ApplicationResource> deleteServer(@PathVariable(name = "id") Long id) {
+    public ResponseEntity<Application> deleteServer(@PathVariable(name = "id") Integer id) throws UrdException {
 
-        return ResponseEntity.status(HttpStatus.OK).body(null);
+        Application application = service.getApplicationById(id);
+
+        return ResponseEntity.status(HttpStatus.OK).body(application);
     }
 
     @ApiOperation(httpMethod = "GET", value = "Return all Applications.", response = ServerResource.class)
@@ -79,6 +86,7 @@ public class ApplicationController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/all"})
     public ResponseEntity<List<ApplicationResource>> getAllServers() {
@@ -93,6 +101,7 @@ public class ApplicationController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
     @Transactional

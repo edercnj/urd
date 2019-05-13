@@ -13,15 +13,15 @@ public abstract class DomainException extends Exception {
 	private int erroCord;
 	private String moreInfo;
 
-	public DomainException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord) {
+	DomainException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord) {
 		super("developerMessage");
-		this.httpStatus = httpStatus;
-		this.developerMessage = developerMessage;
-		this.userMessage = userMessage;
-		this.erroCord = erroCord;
+		setHttpStatus(httpStatus);
+		setDeveloperMessage(developerMessage);
+		setUserMessage(userMessage);
+		setErroCord(erroCord);
 	}
 
-	public DomainException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord, String moreInfo) {
+	DomainException(HttpStatus httpStatus, String developerMessage, String userMessage, int erroCord, String moreInfo) {
 		super("developerMessage");
 		setHttpStatus(httpStatus);
 		setDeveloperMessage(developerMessage);

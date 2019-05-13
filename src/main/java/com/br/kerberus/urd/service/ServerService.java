@@ -2,7 +2,7 @@ package com.br.kerberus.urd.service;
 
 import com.br.kerberus.urd.entity.Server;
 import com.br.kerberus.urd.exception.UrdException;
-import com.br.kerberus.urd.log.LogDomainsException;
+import com.br.kerberus.urd.log.LogException;
 import com.br.kerberus.urd.log.LogExecutionTime;
 import com.br.kerberus.urd.log.LogMetlhodCall;
 import com.br.kerberus.urd.log.LogMetlhodReturn;
@@ -24,7 +24,7 @@ public class ServerService {
         this.repository = repository;
     }
 
-    @LogDomainsException
+    @LogException
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
@@ -41,8 +41,26 @@ public class ServerService {
 
             return server.get();
     }
+
+    @LogException
+    @LogMetlhodCall
+    @LogMetlhodReturn
+    @LogExecutionTime
+    public Server getServerByHostname(String name) throws UrdException {
+        Optional<Server> server = repository.findByHostnameIsLike(name);
+
+        if (server.isEmpty()) {
+            throw new UrdException(
+                    HttpStatus.NOT_FOUND,
+                    String.format("Server with name {%s} not found", name),
+                    String.format("Server with name {%s} not found. Please enter a valid value for search.", name),
+                    501);
+        }
+
+        return server.get();
+    }
     
-    @LogDomainsException
+    @LogException
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
@@ -51,7 +69,7 @@ public class ServerService {
         return repository.findAll();
     }
 
-    @LogDomainsException
+    @LogException
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime

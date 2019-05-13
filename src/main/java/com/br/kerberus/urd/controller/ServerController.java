@@ -1,8 +1,9 @@
 package com.br.kerberus.urd.controller;
 
+import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
 import com.br.kerberus.urd.resource.ServerResource;
-import com.br.kerberus.urd.exception.UrdException;
 import com.br.kerberus.urd.service.ServerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -10,7 +11,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +33,7 @@ public class ServerController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = {"/add"})
     public ResponseEntity<ServerResource> addServer(@RequestBody @Validated ServerResource server) throws UrdException {
@@ -49,6 +50,7 @@ public class ServerController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping(path = {"/{id}"})
     public ResponseEntity<ServerResource> updateServer(@RequestBody @Validated ServerResource server,
@@ -64,6 +66,7 @@ public class ServerController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping(path = {"/{id}"})
     public ResponseEntity<ServerResource> deleteServer(@PathVariable(name = "id", required = true) Long id) {
@@ -78,6 +81,7 @@ public class ServerController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/all"})
     public ResponseEntity<List<ServerResource>> getAllServers() {
@@ -92,12 +96,29 @@ public class ServerController {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
+    @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
-    @Transactional
-    public ResponseEntity<ServerResource> getServer(@PathVariable(name = "id") Integer id) throws UrdException {
+    public ResponseEntity<ServerResource> getServerById(@PathVariable(name = "id") Integer id) throws UrdException {
 
         ServerResource server = new ServerResource(service.getServerById(id));
+
+        return ResponseEntity.status(HttpStatus.OK).body(server);
+    }
+
+    @ApiOperation(httpMethod = "GET", value = "Return one server by name.", response = ServerResource.class)
+    @ApiResponses(
+            value = {
+                    @ApiResponse(code = 400, message = "Server not found with name informed", response = ErrorResponse.class),
+                    @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
+                    @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
+            })
+    @LogHttpMessages
+    @ResponseStatus(value = HttpStatus.OK)
+    @GetMapping(path = {"/search/byHostname/{name}"})
+    public ResponseEntity<ServerResource> getServerByHostname(@PathVariable(name = "name") String name) throws UrdException {
+
+        ServerResource server = new ServerResource(service.getServerByHostname(name));
 
         return ResponseEntity.status(HttpStatus.OK).body(server);
     }

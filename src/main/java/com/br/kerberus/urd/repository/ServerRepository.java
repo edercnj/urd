@@ -18,6 +18,11 @@ public interface ServerRepository extends JpaRepository<Server, Integer>{
     @LogExecutionTime
     Optional<Server> findById(Integer aLong);
 
+    @LogMetlhodCall
+    @LogMetlhodReturn
+    @LogExecutionTime
+    Optional<Server> findByHostnameIsLike(String name);
+
     @Override
     @LogMetlhodCall
     @LogMetlhodReturn

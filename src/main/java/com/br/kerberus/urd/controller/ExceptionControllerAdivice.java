@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.controller;
 
-import com.br.kerberus.urd.log.LogControllerAdvice;
+import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
 import com.br.kerberus.urd.exception.UrdException;
 import org.slf4j.Logger;
@@ -20,17 +20,18 @@ public class ExceptionControllerAdivice {
 	public ExceptionControllerAdivice() { this.setLog(LoggerFactory.getLogger(ExceptionControllerAdivice.class)); }
 
 	@ExceptionHandler
-	@LogControllerAdvice
+	@LogHttpMessages
 	public ResponseEntity<ErrorResponse> exceptionHandlerException(Exception e) {
 
-		ErrorResponse responseError = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR, e.getCause().getMessage(),
+		ErrorResponse responseError = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,
+				e.getCause().getMessage() == null ? "null" : e.getCause().getMessage(),
 				"Could not make request. Try later.", 666);
 
 		return ResponseEntity.status(responseError.getHttpStatus()).body(responseError);
 	}
 
 	@ExceptionHandler(value = UrdException.class)
-	@LogControllerAdvice
+	@LogHttpMessages
 	public ResponseEntity<ErrorResponse> exceptionHandlerUrdException(UrdException e) {
 
 		ErrorResponse responseError = new ErrorResponse(e);
