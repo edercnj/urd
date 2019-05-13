@@ -2,6 +2,7 @@ package com.br.kerberus.urd.controller;
 
 import com.br.kerberus.urd.entity.Application;
 import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.log.LogException;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ApplicationResource;
 import com.br.kerberus.urd.resource.ErrorResponse;
@@ -102,12 +103,13 @@ public class ApplicationController {
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
     @LogHttpMessages
+    @LogException
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
     @Transactional
-    public ResponseEntity<ApplicationResource> getServer(@PathVariable(name = "id") Integer id) throws UrdException {
+    public ResponseEntity<Application> getServer(@PathVariable(name = "id") Integer id) throws UrdException {
 
-        ApplicationResource application = new ApplicationResource(service.getApplicationById(id));
+        Application application = service.getApplicationById(id);
 
         return ResponseEntity.status(HttpStatus.OK).body(application);
     }
