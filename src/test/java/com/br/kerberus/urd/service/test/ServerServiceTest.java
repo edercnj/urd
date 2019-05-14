@@ -27,4 +27,9 @@ public class ServerServiceTest {
 		Assert.assertNotNull(server);
 	}
 
+	@Test (expected = UrdException.class)
+	public void serverServiceFindByIdMustUrdExceptionNotFound()throws UrdException
+	{
+			Server server = service.getServerById(4);
+	}
 }

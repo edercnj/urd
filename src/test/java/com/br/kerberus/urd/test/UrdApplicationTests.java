@@ -12,5 +12,4 @@ public class UrdApplicationTests {
 	@Test
 	public void contextLoads() {
 	}
-
 }

@@ -37,24 +37,24 @@ public class AspectLog {
     public void logException(JoinPoint joinPoint, Exception e) {
         if (e instanceof UrdException) {
             UrdException ex = (UrdException) e;
-            log.error(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDeveloperMessage()));
+            log.warn(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDeveloperMessage()));
         } else {
             log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
         }
     }
 
     @Before(value = "@annotation(com.br.kerberus.urd.log.LogMetlhodCall)")
-    public void logMethodCall(JoinPoint joinPoint) throws Exception {
+    public void logMethodCall(JoinPoint joinPoint) {
 
         if (joinPoint.getArgs().length > 0) {
             StringBuilder parameters = new StringBuilder();
             for (int i = 0; i < joinPoint.getArgs().length; i++) {
                 parameters.append(String.format("%s=%s ", joinPoint.getArgs()[i].getClass().getSimpleName(), joinPoint.getArgs()[i].toString()));
             }
-            log.error(String.format("Calling method: {%s} - with parameters: {%s}", joinPoint.getSignature(), parameters));
+            log.info(String.format("Calling method: {%s} - with parameters: {%s}", joinPoint.getSignature(), parameters));
 
         } else {
-            log.error(String.format("Calling method: {%s} - with parameters: {null}", joinPoint.getSignature()));
+            log.info(String.format("Calling method: {%s} - with parameters: {null}", joinPoint.getSignature()));
         }
     }
 
@@ -62,9 +62,9 @@ public class AspectLog {
     public void logMethodReturn(JoinPoint joinPoint, Object result) throws Exception {
         try {
             if (result != null)
-                log.error(String.format("Method Return: {%s} - return {%s}", joinPoint.getSignature(), result.toString()));
+                log.info(String.format("Method Return: {%s} - return {%s}", joinPoint.getSignature(), result.toString()));
             else
-                log.error(String.format("Method Return: {%s} - return {null}", joinPoint.getSignature()));
+                log.info(String.format("Method Return: {%s} - return {null}", joinPoint.getSignature()));
         } catch (Exception e) {
             log.error(String.format("Method {%s} launch exception {%s}", joinPoint.getSignature(), e.getClass().getName()));
             throw new Exception(e.getMessage());

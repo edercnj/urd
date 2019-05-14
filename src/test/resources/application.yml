@@ -52,4 +52,4 @@ logging:
       root: off
       urd: info
       web: error
-      sql: trace
+      sql: error
