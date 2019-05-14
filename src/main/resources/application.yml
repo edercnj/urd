@@ -33,7 +33,7 @@ spring:
       user: "urd"
       password: "urd@139575"
       enabled: true
-      table: "migrations"
+      table: "migration"
       baseline-on-migrate: true
       group: true
 
