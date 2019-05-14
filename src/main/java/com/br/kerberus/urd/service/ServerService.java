@@ -10,6 +10,8 @@ import com.br.kerberus.urd.repository.ServerRepository;
 import com.br.kerberus.urd.resource.ServerResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -28,6 +30,7 @@ public class ServerService {
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server getServerById(Integer id) throws UrdException {
             Optional<Server> server = repository.findById(id);
 
@@ -46,6 +49,7 @@ public class ServerService {
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server getServerByHostname(String name) throws UrdException {
         Optional<Server> server = repository.findByHostnameIsLike(name);
 

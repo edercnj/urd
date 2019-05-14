@@ -92,11 +92,11 @@ public class Application {
     @Override
     public String toString() {
         return "Application{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", logPath='" + logPath + '\'' +
-                ", server=" + server +
-                ", creationDate=" + creationDate +
+                "id:" + id +
+                ", name:'" + name + '\'' +
+                ", logPath:'" + logPath + '\'' +
+                ", server:" + server +
+                ", creationDate:" + creationDate +
                 '}';
     }
 }

@@ -103,10 +103,8 @@ public class ApplicationController {
                     @ApiResponse(code = 500, message = "Could not make request. Try later.", response = ErrorResponse.class)
             })
     @LogHttpMessages
-    @LogException
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
-    @Transactional
     public ResponseEntity<Application> getServer(@PathVariable(name = "id") Integer id) throws UrdException {
 
         Application application = service.getApplicationById(id);

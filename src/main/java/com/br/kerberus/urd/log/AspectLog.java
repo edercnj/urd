@@ -34,13 +34,13 @@ public class AspectLog {
     }
 
     @AfterThrowing(value = "@annotation(com.br.kerberus.urd.log.LogException)", throwing = "e")
-    public void logUrdException(JoinPoint joinPoint, UrdException e) {
-        log.error(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
-    }
-
-    @AfterThrowing(value = "@annotation(com.br.kerberus.urd.log.LogException)", throwing = "e")
     public void logException(JoinPoint joinPoint, Exception e) {
-        log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
+        if (e instanceof UrdException) {
+            UrdException ex = (UrdException) e;
+            log.error(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDeveloperMessage()));
+        } else {
+            log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
+        }
     }
 
     @Before(value = "@annotation(com.br.kerberus.urd.log.LogMetlhodCall)")
