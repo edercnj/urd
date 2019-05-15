@@ -9,3 +9,8 @@ cache:
   directories:
     - $HOME/.gradle/caches/
     - $HOME/.gradle/wrapper/
+deploy:
+  provider: heroku
+  api_key:
+    secure: "fb8d5800-07c6-4947-8a01-60ed7a4fdd64"
+  app: kerberus-urd

@@ -23,6 +23,7 @@ public class ServerServiceTest {
     public void serverServiceFindByIdMustReturnOneElement() throws UrdException {
         Server server = service.getServerById(1);
         Assert.assertNotNull(server);
+
     }
 
     @Test(expected = UrdException.class)
