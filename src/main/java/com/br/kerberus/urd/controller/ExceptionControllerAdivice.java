@@ -1,11 +1,11 @@
 package com.br.kerberus.urd.controller;
 
+import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.log.LogError;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
-import com.br.kerberus.urd.exception.UrdException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -23,9 +23,7 @@ public class ExceptionControllerAdivice {
 	@LogHttpMessages
 	public ResponseEntity<ErrorResponse> exceptionHandlerException(Exception e) {
 
-		ErrorResponse responseError = new ErrorResponse(HttpStatus.INTERNAL_SERVER_ERROR,
-				e.getCause().getMessage() == null ? "null" : e.getCause().getMessage(),
-				"Could not make request. Try later.", 666);
+		ErrorResponse responseError = new ErrorResponse(LogError.INTERNAL_SERVER_ERROR);
 
 		return ResponseEntity.status(responseError.getHttpStatus()).body(responseError);
 	}

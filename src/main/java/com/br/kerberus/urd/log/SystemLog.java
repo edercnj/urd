@@ -1,12 +1,12 @@
 package com.br.kerberus.urd.log;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.Date;
 import java.util.Objects;
-
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 
 public class SystemLog {
 
@@ -79,7 +79,7 @@ public class SystemLog {
 
 	public String getServiceName() { return serviceName; }
 
-	public int getErrorCord() { return errorCord; }
+	public int getErrorCod() { return errorCord; }
 
 	public String getDebugMessage() { return debugMessage; }
 
@@ -94,6 +94,6 @@ public class SystemLog {
 		return String.format(
 				hashCode()
 						+ " | serverName:%s | serviceName:%s1 | dateTime:%s2 | errorCord:%s3 | debugMessage:%s4 | userMessage:%s5 | moreInfo:%s6",
-				getServerName(), getServiceName(), getDateTime(), getErrorCord(), getDebugMessage(), getUserMessage(), getMoreInfo());
+				getServerName(), getServiceName(), getDateTime(), getErrorCod(), getDebugMessage(), getUserMessage(), getMoreInfo());
 	}
 }

@@ -1,5 +1,6 @@
 package com.br.kerberus.urd.controller;
 
+import com.br.kerberus.urd.exception.NoManagedException;
 import com.br.kerberus.urd.exception.UrdException;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
@@ -36,7 +37,7 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = {"/add"})
-    public ResponseEntity<ServerResource> addServer(@RequestBody @Validated ServerResource server) throws UrdException {
+    public ResponseEntity<ServerResource> addServer(@RequestBody @Validated ServerResource server) throws NoManagedException {
 
         ServerResource response = new ServerResource(service.addServer(server));
 

@@ -1,6 +1,7 @@
 package com.br.kerberus.urd.resource;
 
 import com.br.kerberus.urd.exception.DomainException;
+import com.br.kerberus.urd.log.LogError;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import org.springframework.http.HttpStatus;
@@ -13,30 +14,25 @@ public class ErrorResponse {
     private HttpStatus httpStatus;
     private String debugMessage;
     private String userMessage;
-    private int erroCord;
+    private int errorCod;
     private String moreInfo;
 
-    public ErrorResponse(HttpStatus httpStatus, String debugMessage, String userMessage, int erroCord) {
-        this.httpStatus = httpStatus;
-        this.debugMessage = debugMessage;
-        this.userMessage = userMessage;
-        this.erroCord = erroCord;
+    public ErrorResponse(LogError logError)
+    {
+        setHttpStatus(logError.getError().getHttpStatus());
+        setDebugMessage(logError.getError().getDebugMessage());
+        setUserMessage(logError.getError().getUserMessage());
+        setErrorCod(logError.getError().getErrorCod());
+        setMoreInfo(logError.getError().getMoreInfo());
     }
 
-    public ErrorResponse(HttpStatus httpStatus, String debugMessage, String userMessage, int erroCord, String moreInfo) {
-        setHttpStatus(httpStatus);
-        setDebugMessage(debugMessage);
-        setUserMessage(userMessage);
-        setErroCord(erroCord);
-        setMoreInfo(moreInfo);
-    }
-
-    public ErrorResponse(DomainException e) {
-        setHttpStatus(e.getHttpStatus());
-        setDebugMessage(e.getDeveloperMessage());
-        setUserMessage(e.getDeveloperMessage());
-        setErroCord(e.getErroCord());
-        setMoreInfo(e.getMoreInfo());
+    public ErrorResponse(DomainException ex)
+    {
+        setHttpStatus(ex.getHttpStatus());
+        setDebugMessage(ex.getDebugMessage());
+        setUserMessage(ex.getUserMessage());
+        setErrorCod(ex.getErrorCod());
+        setMoreInfo(ex.getMoreInfo());
     }
 
     public HttpStatus getHttpStatus() { return httpStatus; }
@@ -51,9 +47,9 @@ public class ErrorResponse {
 
     private void setUserMessage(String userMessage) { this.userMessage = userMessage; }
 
-    public int getErroCord() { return erroCord; }
+    public int getErrorCod() { return errorCod; }
 
-    private void setErroCord(int erroCord) { this.erroCord = erroCord; }
+    private void setErrorCod(int errorCod) { this.errorCod = errorCod; }
 
     public String getMoreInfo() { return moreInfo; }
 
@@ -64,7 +60,7 @@ public class ErrorResponse {
         if (this == o) return true;
         if (!(o instanceof ErrorResponse)) return false;
         ErrorResponse that = (ErrorResponse) o;
-        return getErroCord() == that.getErroCord() &&
+        return getErrorCod() == that.getErrorCod() &&
                 getHttpStatus() == that.getHttpStatus() &&
                 getDebugMessage().equals(that.getDebugMessage()) &&
                 getUserMessage().equals(that.getUserMessage()) &&
@@ -72,16 +68,16 @@ public class ErrorResponse {
     }
 
     @Override
-    public int hashCode() { return Objects.hash(getHttpStatus(), getDebugMessage(), getUserMessage(), getErroCord(), getMoreInfo()); }
+    public int hashCode() { return Objects.hash(getHttpStatus(), getDebugMessage(), getUserMessage(), getErrorCod(), getMoreInfo()); }
 
     @Override
     public String toString() {
         return "ErrorResponse{" +
-                "httpStatus=" + httpStatus +
-                ", debugMessage='" + debugMessage + '\'' +
-                ", userMessage='" + userMessage + '\'' +
-                ", erroCord=" + erroCord +
-                ", moreInfo=" + moreInfo +
+                "httpStatus:" + httpStatus +
+                ", debugMessage:'" + debugMessage + '\'' +
+                ", userMessage:'" + userMessage + '\'' +
+                ", errorCod:" + errorCod +
+                ", moreInfo:'" + moreInfo + '\'' +
                 '}';
     }
 }

@@ -16,20 +16,17 @@ import org.springframework.test.context.junit4.SpringRunner;
 @ActiveProfiles("test")
 public class ServerServiceTest {
 
-	@Autowired
-	ServerService service;
+    @Autowired
+    ServerService service;
 
-	@Test
-	public void serverServiceFindByIdMustReturnOneElement()throws UrdException
-	{
-		 Server server = service.getServerById(1);
-		
-		Assert.assertNotNull(server);
-	}
+    @Test
+    public void serverServiceFindByIdMustReturnOneElement() throws UrdException {
+        Server server = service.getServerById(1);
+        Assert.assertNotNull(server);
+    }
 
-	@Test (expected = UrdException.class)
-	public void serverServiceFindByIdMustUrdExceptionNotFound()throws UrdException
-	{
-			Server server = service.getServerById(4);
-	}
+    @Test(expected = UrdException.class)
+    public void serverServiceFindByIdMustUrdExceptionNotFound() throws UrdException {
+        service.getServerById(4);
+    }
 }

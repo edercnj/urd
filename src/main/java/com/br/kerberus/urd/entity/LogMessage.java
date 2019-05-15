@@ -20,7 +20,7 @@ public final class LogMessage {
 		setServerName(log.getServerName());
 		setServiceName(log.getServiceName());
 		setDateTime(log.getDateTime());
-		setErrorCord(log.getErrorCord());
+		setErrorCord(log.getErrorCod());
 		setDebugMessage(log.getDebugMessage());
 		setUserMessage(log.getUserMessage());
 		setMoreInfo(log.getMoreInfo());
