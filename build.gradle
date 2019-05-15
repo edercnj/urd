@@ -1,14 +1,15 @@
-buildscript {
-	ext { springBootVersion = '2.1.4.RELEASE' }
 
-	repositories {
-		mavenLocal()
-		maven { url 'http://repo1.maven.org/maven2' }
-	}
+plugins {
+	id 'org.springframework.boot' version '2.1.4.RELEASE'
+	id 'java'
+}
 
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-	}
+group = 'com.br.kerberus'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+repositories {
+	mavenCentral()
 }
 
 configurations {
@@ -16,20 +17,8 @@ configurations {
 	runtimeClasspath { extendsFrom developmentOnly }
 }
 
-apply plugin: 'io.spring.dependency-management'
 apply plugin: 'org.springframework.boot'
-apply plugin: 'application'
 apply plugin: 'java'
-apply plugin: 'eclipse'
-
-group = 'com.br.kerberus'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
-
-repositories {
-	mavenLocal()
-	maven { url 'http://repo1.maven.org/maven2' }
-}
 
 dependencies {
 	compile('com.google.code.gson:gson:2.8.5')
