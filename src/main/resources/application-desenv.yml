@@ -10,10 +10,10 @@ spring:
       name: "urd"
    datasource:
       platform: "postgresql"
-      url: "postgres://mnvivfdseaxufy:6e78c16900d50a9bff8eae226a9739c6e6613aa33912c945f727b65202119bd7@ec2-54-235-90-0.compute-1.amazonaws.com:5432/d8c684p4i0e5g0"
+      url: "jdbc:postgresql://localhost:5432/urd"
       driverClassName: "org.postgresql.Driver"
-      username: "mnvivfdseaxufy"
-      password: "6e78c16900d50a9bff8eae226a9739c6e6613aa33912c945f727b65202119bd7"
+      username: "urd"
+      password: "urd@139575"
    jpa:
       properties:
          hibernate:
@@ -29,9 +29,9 @@ spring:
          ddl-auto: validate
    flyway:
       locations: "classpath:db/migration"
-      url: "postgres://mnvivfdseaxufy:6e78c16900d50a9bff8eae226a9739c6e6613aa33912c945f727b65202119bd7@ec2-54-235-90-0.compute-1.amazonaws.com:5432/d8c684p4i0e5g0"
-      username: "mnvivfdseaxufy"
-      password: "6e78c16900d50a9bff8eae226a9739c6e6613aa33912c945f727b65202119bd7"
+      url: "jdbc:postgresql://localhost:5432/urd"
+      user: "urd"
+      password: "urd@139575"
       enabled: true
       table: "migration"
       baseline-on-migrate: true
