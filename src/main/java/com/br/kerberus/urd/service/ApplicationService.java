@@ -1,7 +1,7 @@
 package com.br.kerberus.urd.service;
 
 import com.br.kerberus.urd.entity.Application;
-import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.log.*;
 import com.br.kerberus.urd.repository.ApplicationRepository;
 import com.br.kerberus.urd.resource.ApplicationResource;
@@ -29,12 +29,12 @@ public class ApplicationService {
     @LogMetlhodReturn
     @LogExecutionTime
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
-    public Application getApplicationById(Integer id) throws UrdException {
+    public Application getApplicationById(Integer id) throws ManagedException {
 
         Optional<Application> application = repository.findById(id);
 
         if (application.isEmpty())
-            throw new UrdException(LogError.APPLICATION_NOT_FOUND);
+            throw new ManagedException(LogError.APPLICATION_NOT_FOUND);
 
         return application.get();
     }
@@ -43,7 +43,7 @@ public class ApplicationService {
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
-    public Application addApplication(ApplicationResource application) throws UrdException {
+    public Application addApplication(ApplicationResource application) throws ManagedException {
 
         Application app = new Application();
         app.setName(application.getName());

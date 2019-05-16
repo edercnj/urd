@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.controller;
 
-import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.log.LogError;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
@@ -28,9 +28,9 @@ public class ExceptionControllerAdivice {
 		return ResponseEntity.status(responseError.getHttpStatus()).body(responseError);
 	}
 
-	@ExceptionHandler(value = UrdException.class)
+	@ExceptionHandler(value = ManagedException.class)
 	@LogHttpMessages
-	public ResponseEntity<ErrorResponse> exceptionHandlerUrdException(UrdException e) {
+	public ResponseEntity<ErrorResponse> exceptionHandlerUrdException(ManagedException e) {
 
 		ErrorResponse responseError = new ErrorResponse(e);
 

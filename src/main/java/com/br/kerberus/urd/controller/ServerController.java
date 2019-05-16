@@ -1,7 +1,7 @@
 package com.br.kerberus.urd.controller;
 
 import com.br.kerberus.urd.exception.NoManagedException;
-import com.br.kerberus.urd.exception.UrdException;
+import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
 import com.br.kerberus.urd.resource.ServerResource;
@@ -100,7 +100,7 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity<ServerResource> getServerById(@PathVariable(name = "id") Integer id) throws UrdException {
+    public ResponseEntity<ServerResource> getServerById(@PathVariable(name = "id") Integer id) throws ManagedException {
 
         ServerResource server = new ServerResource(service.getServerById(id));
 
@@ -117,7 +117,7 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/search/byHostname/{name}"})
-    public ResponseEntity<ServerResource> getServerByHostname(@PathVariable(name = "name") String name) throws UrdException {
+    public ResponseEntity<ServerResource> getServerByHostname(@PathVariable(name = "name") String name) throws ManagedException {
 
         ServerResource server = new ServerResource(service.getServerByHostname(name));
 

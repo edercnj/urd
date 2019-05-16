@@ -1,8 +1,8 @@
 package com.br.kerberus.urd.service;
 
 import com.br.kerberus.urd.entity.Server;
+import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
-import com.br.kerberus.urd.exception.UrdException;
 import com.br.kerberus.urd.log.*;
 import com.br.kerberus.urd.repository.ServerRepository;
 import com.br.kerberus.urd.resource.ServerResource;
@@ -28,11 +28,11 @@ public class ServerService {
     @LogMetlhodReturn
     @LogExecutionTime
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
-    public Server getServerById(Integer id) throws UrdException {
+    public Server getServerById(Integer id) throws ManagedException {
         Optional<Server> server = repository.findById(id);
 
         if (server.isEmpty())
-            throw new UrdException(LogError.SERVER_NOT_FOUND);
+            throw new ManagedException(LogError.SERVER_NOT_FOUND);
 
 
         return server.get();
@@ -43,12 +43,12 @@ public class ServerService {
     @LogMetlhodReturn
     @LogExecutionTime
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
-    public Server getServerByHostname(String name) throws UrdException {
+    public Server getServerByHostname(String name) throws ManagedException {
 
         Optional<Server> server = repository.findByHostnameIsLike(name);
 
         if (server.isEmpty())
-            throw new UrdException(LogError.SERVER_NOT_FOUND);
+            throw new ManagedException(LogError.SERVER_NOT_FOUND);
 
         return server.get();
     }
@@ -57,11 +57,11 @@ public class ServerService {
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
-    public List<Server> findAllServers() throws UrdException {
+    public List<Server> findAllServers() throws ManagedException {
         List<Server> servers = repository.findAll();
 
         if (servers.isEmpty())
-            throw new UrdException(LogError.SERVER_NOT_FOUND);
+            throw new ManagedException(LogError.SERVER_NOT_FOUND);
 
         return servers;
     }

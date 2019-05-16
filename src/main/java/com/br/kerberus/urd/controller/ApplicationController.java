@@ -1,8 +1,7 @@
 package com.br.kerberus.urd.controller;
 
 import com.br.kerberus.urd.entity.Application;
-import com.br.kerberus.urd.exception.UrdException;
-import com.br.kerberus.urd.log.LogException;
+import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ApplicationResource;
 import com.br.kerberus.urd.resource.ErrorResponse;
@@ -14,7 +13,6 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,7 +38,7 @@ public class ApplicationController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = {"/add"})
-    public ResponseEntity<ApplicationResource> addServer(@RequestBody @Validated ApplicationResource application) throws UrdException {
+    public ResponseEntity<ApplicationResource> addServer(@RequestBody @Validated ApplicationResource application) throws ManagedException {
 
         ApplicationResource response = new ApplicationResource(service.addApplication(application));
 
@@ -73,7 +71,7 @@ public class ApplicationController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping(path = {"/{id}"})
-    public ResponseEntity<Application> deleteServer(@PathVariable(name = "id") Integer id) throws UrdException {
+    public ResponseEntity<Application> deleteServer(@PathVariable(name = "id") Integer id) throws ManagedException {
 
         Application application = service.getApplicationById(id);
 
@@ -105,7 +103,7 @@ public class ApplicationController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity<Application> getServer(@PathVariable(name = "id") Integer id) throws UrdException {
+    public ResponseEntity<Application> getServer(@PathVariable(name = "id") Integer id) throws ManagedException {
 
         Application application = service.getApplicationById(id);
 

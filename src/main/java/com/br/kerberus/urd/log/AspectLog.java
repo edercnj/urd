@@ -1,7 +1,7 @@
 package com.br.kerberus.urd.log;
 
+import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
-import com.br.kerberus.urd.exception.UrdException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -36,8 +36,8 @@ public class AspectLog {
 
     @AfterThrowing(value = "@annotation(com.br.kerberus.urd.log.LogException)", throwing = "e")
     public void logException(JoinPoint joinPoint, Exception e) {
-        if (e instanceof UrdException) {
-            UrdException ex = (UrdException) e;
+        if (e instanceof ManagedException) {
+            ManagedException ex = (ManagedException) e;
             log.warn(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDebugMessage()));
         }else if (e instanceof NoManagedException){
             log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage()));
