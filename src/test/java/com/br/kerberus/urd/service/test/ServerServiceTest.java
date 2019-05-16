@@ -23,7 +23,6 @@ public class ServerServiceTest {
     public void serverServiceFindByIdMustReturnOneElement() throws ManagedException {
         Server server = service.getServerById(1);
         Assert.assertNotNull(server);
-
     }
 
     @Test(expected = ManagedException.class)
