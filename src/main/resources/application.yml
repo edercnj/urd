@@ -45,7 +45,7 @@ logging:
    path: "logs"
    file: "${logging.path}/${spring.application.name}.log"
    pattern:
-      console: "# ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} |  %highlight(%-5level) | %magenta([%thread])  | %logger{0} | %msg%n"
+      console: "# ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} |  (%-5level) | ([%thread])  | %logger{0} | %msg%n"
       file: "# ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} | %-5level |  %thread  | %logger{0} | %msg%n"
    level:
       root: off
