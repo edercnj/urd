@@ -14,16 +14,8 @@ public class ServerRequest {
 
 	@NotEmpty
 	private String hostname;
-	
-	private List<Application> applications;
 
 	public String getHostname() { return hostname; }
 
 	public void setHostname(String hostname) { this.hostname = hostname; }
-
-	public List<Application> getApplications() { return applications; }
-
-	public void setApplications(List<Application> applications) { this.applications = applications; }
-
-	
 }

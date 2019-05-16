@@ -4,7 +4,7 @@ import com.br.kerberus.urd.exception.NoManagedException;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
-import com.br.kerberus.urd.resource.ServerResource;
+import com.br.kerberus.urd.resource.ServerResponse;
 import com.br.kerberus.urd.service.ServerService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -28,7 +28,7 @@ public class ServerController {
         this.service = service;
     }
 
-    @ApiOperation(httpMethod = "POST", value = "This service provide resource to add one server.", response = ServerResource.class)
+    @ApiOperation(httpMethod = "POST", value = "This service provide resource to add one server.", response = ServerResponse.class)
     @ApiResponses(
             value = {
                     @ApiResponse(code = 404, message = "Bad Request", response = ErrorResponse.class),
@@ -37,14 +37,14 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = {"/add"})
-    public ResponseEntity<ServerResource> addServer(@RequestBody @Validated ServerResource server) throws NoManagedException {
+    public ResponseEntity<ServerResponse> addServer(@RequestBody @Validated ServerResponse server) throws NoManagedException {
 
-        ServerResource response = new ServerResource(service.addServer(server));
+        ServerResponse response = new ServerResponse(service.addServer(server));
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
 
-    @ApiOperation(httpMethod = "PUT", value = "This service provide resource to update a server by id.", response = ServerResource.class)
+    @ApiOperation(httpMethod = "PUT", value = "This service provide resource to update a server by id.", response = ServerResponse.class)
     @ApiResponses(
             value = {
                     @ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
@@ -54,13 +54,13 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping(path = {"/{id}"})
-    public ResponseEntity<ServerResource> updateServer(@RequestBody @Validated ServerResource server,
+    public ResponseEntity<ServerResponse> updateServer(@RequestBody @Validated ServerResponse server,
                                                        @PathVariable(name = "id", required = true) Long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @ApiOperation(httpMethod = "DELETE", value = "This service provide resource to delete one server by id.", response = ServerResource.class)
+    @ApiOperation(httpMethod = "DELETE", value = "This service provide resource to delete one server by id.", response = ServerResponse.class)
     @ApiResponses(
             value = {
                     @ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
@@ -70,12 +70,12 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping(path = {"/{id}"})
-    public ResponseEntity<ServerResource> deleteServer(@PathVariable(name = "id", required = true) Long id) {
+    public ResponseEntity<ServerResponse> deleteServer(@PathVariable(name = "id", required = true) Long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @ApiOperation(httpMethod = "GET", value = "Return all servers.", response = ServerResource.class)
+    @ApiOperation(httpMethod = "GET", value = "Return all servers.", response = ServerResponse.class)
     @ApiResponses(
             value = {
                     @ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
@@ -85,12 +85,12 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/all"})
-    public ResponseEntity<List<ServerResource>> getAllServers() {
+    public ResponseEntity<List<ServerResponse>> getAllServers() {
 
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @ApiOperation(httpMethod = "GET", value = "Return one server by id.", response = ServerResource.class)
+    @ApiOperation(httpMethod = "GET", value = "Return one server by id.", response = ServerResponse.class)
     @ApiResponses(
             value = {
                     @ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
@@ -100,14 +100,14 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity<ServerResource> getServerById(@PathVariable(name = "id") Integer id) throws ManagedException {
+    public ResponseEntity<ServerResponse> getServerById(@PathVariable(name = "id") Integer id) throws ManagedException {
 
-        ServerResource server = new ServerResource(service.getServerById(id));
+        ServerResponse server = new ServerResponse(service.getServerById(id));
 
         return ResponseEntity.status(HttpStatus.OK).body(server);
     }
 
-    @ApiOperation(httpMethod = "GET", value = "Return one server by name.", response = ServerResource.class)
+    @ApiOperation(httpMethod = "GET", value = "Return one server by name.", response = ServerResponse.class)
     @ApiResponses(
             value = {
                     @ApiResponse(code = 400, message = "Server not found with name informed", response = ErrorResponse.class),
@@ -117,9 +117,9 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/search/byHostname/{name}"})
-    public ResponseEntity<ServerResource> getServerByHostname(@PathVariable(name = "name") String name) throws ManagedException {
+    public ResponseEntity<ServerResponse> getServerByHostname(@PathVariable(name = "name") String name) throws ManagedException {
 
-        ServerResource server = new ServerResource(service.getServerByHostname(name));
+        ServerResponse server = new ServerResponse(service.getServerByHostname(name));
 
         return ResponseEntity.status(HttpStatus.OK).body(server);
     }

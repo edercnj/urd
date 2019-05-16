@@ -10,7 +10,7 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @JsonInclude(value = JsonInclude.Include.NON_NULL)
-public class ApplicationResource {
+public class ApplicationResponse {
 
     private Integer id;
 
@@ -70,7 +70,7 @@ public class ApplicationResource {
         this.creationDate = creationDate;
     }
 
-    public ApplicationResource(Application application) {
+    public ApplicationResponse(Application application) {
 
         this.id = application.getId();
         this.serverId = application.getServer().getId();
@@ -78,5 +78,5 @@ public class ApplicationResource {
         this.logPath = application.getLogPath();
         this.name = application.getName();
     }
-    public ApplicationResource() {}
+    public ApplicationResponse() {}
 }

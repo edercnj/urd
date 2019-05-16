@@ -8,10 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
-import java.util.List;
 
 @JsonInclude(value = Include.NON_NULL)
-public class ServerResource {
+public class ServerResponse {
 
 	private Integer id;
 
@@ -21,8 +20,7 @@ public class ServerResource {
 	private String hostname;
 
 	private Date creationDate;
-	
-	private List<ApplicationResource> applications;
+
 	
 	public Integer getId() { return id; }
 
@@ -36,17 +34,14 @@ public class ServerResource {
 
 	public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
 
-	public List<ApplicationResource> getApplications() { return applications; }
-
-	public void setApplications(List<ApplicationResource> applications) { this.applications = applications; }
-
-	public ServerResource(Server server) {
+	
+	public ServerResponse(Server server) {
 		
 		setId(server.getId());
 		setHostname(server.getHostname());
 		setCreationDate(new Date());
-		//TODO: Ajustar isso setApplications(server.getApplications());
 	
 	}
-	public ServerResource() {}
+
+	public ServerResponse() {}
 }
