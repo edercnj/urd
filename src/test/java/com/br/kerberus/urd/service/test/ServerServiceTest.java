@@ -27,7 +27,7 @@ public class ServerServiceTest {
     }
 
     @Test(expected = ManagedException.class)
-    public void serverServiceFindByIdMustUrdExceptionNotFound() throws ManagedException {
+    public void serverServiceFindByIdMustManagedExceptionNotFound() throws ManagedException {
         service.getServerById(4);
     }
 }
