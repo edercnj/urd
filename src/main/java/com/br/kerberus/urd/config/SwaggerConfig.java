@@ -31,11 +31,11 @@ public class SwaggerConfig  extends WebMvcConfigurationSupport{
 	private ApiInfo apiInfo() {
 	    return new ApiInfo(
 	      "Urd API", 
-	      "distributed log management", 
-	      "API TOS", 
-	      "Terms of service", 
-	      new Contact("John Doe", "www.example.com", "myeaddress@company.com"), 
-	      "License of API", "API license URL", Collections.emptyList());
+	      "Distributed log management",
+	      "1.0",
+	      "https://github.com/edercnj/urd/blob/master/LICENSE",
+	      new Contact("Eder Nunes", "https://github.com/edercnj", "edercnj@gmail.com"),
+	      "License of API", "https://github.com/edercnj/urd/blob/master/LICENSE", Collections.emptyList());
 	}
 	
 	@Override
