@@ -29,4 +29,15 @@ public class ServerServiceTest {
     public void serverServiceFindByIdMustManagedExceptionNotFound() throws ManagedException {
         service.getServerById(4);
     }
+
+    @Test
+    public void serverServiceFindByHostnameMustReturnOneElement() throws ManagedException {
+        Server server = service.getServerByHostname("SERVER 1");
+        Assert.assertNotNull(server);
+    }
+
+    @Test(expected = ManagedException.class)
+    public void serverServiceFindByHostnameMusMustManagedExceptionNotFound() throws ManagedException {
+        service.getServerByHostname("SERVER 18");
+    }
 }
