@@ -23,6 +23,23 @@ public class AspectLog {
         this.setLog(LoggerFactory.getLogger(AspectLog.class));
     }
 
+    @Pointcut("within(@org.springframework.stereotype.Controller *)")
+    public void controller() {
+    }
+
+    @Pointcut("execution(* *.*(..))")
+    protected void allMethod() {
+    }
+
+    @Pointcut("execution(public * *(..))")
+    protected void loggingPublicOperation() {
+    }
+
+    @Pointcut("execution(* *.*(..))")
+    protected void loggingAllOperation() {
+    }
+
+
     @Around("@annotation(com.br.kerberus.urd.log.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
@@ -39,7 +56,7 @@ public class AspectLog {
         if (e instanceof ManagedException) {
             ManagedException ex = (ManagedException) e;
             log.warn(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDebugMessage()));
-        }else if (e instanceof NoManagedException){
+        } else if (e instanceof NoManagedException) {
             log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage()));
         } else {
             log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
