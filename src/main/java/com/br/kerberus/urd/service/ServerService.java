@@ -34,7 +34,6 @@ public class ServerService {
         if (server.isEmpty())
             throw new ManagedException(LogError.SERVER_NOT_FOUND);
 
-
         return server.get();
     }
 
