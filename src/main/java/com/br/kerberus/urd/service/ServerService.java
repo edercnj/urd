@@ -5,7 +5,7 @@ import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
 import com.br.kerberus.urd.log.*;
 import com.br.kerberus.urd.repository.ServerRepository;
-import com.br.kerberus.urd.resource.ServerResponse;
+import com.br.kerberus.urd.resource.ServerRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -70,7 +70,7 @@ public class ServerService {
     @LogMetlhodCall
     @LogMetlhodReturn
     @LogExecutionTime
-    public Server addServer(ServerResponse server) throws NoManagedException {
+    public Server addServer(ServerRequest server) throws NoManagedException {
         try {
             Server srv = new Server();
             srv.setHostname(server.getHostname());
@@ -80,5 +80,21 @@ public class ServerService {
         } catch (Exception e) {
             throw new NoManagedException(e);
         }
+    }
+
+    @LogException
+    @LogMetlhodCall
+    @LogMetlhodReturn
+    @LogExecutionTime
+    @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
+    public Server removeServerById(Integer id) throws ManagedException {
+        Optional<Server> server = repository.findById(id);
+
+        if (server.isEmpty())
+            throw new ManagedException(LogError.SERVER_NOT_FOUND);
+        else
+            repository.delete(server.get());
+
+        return server.get();
     }
 }

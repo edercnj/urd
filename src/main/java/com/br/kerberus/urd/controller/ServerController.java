@@ -4,6 +4,7 @@ import com.br.kerberus.urd.exception.NoManagedException;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
+import com.br.kerberus.urd.resource.ServerRequest;
 import com.br.kerberus.urd.resource.ServerResponse;
 import com.br.kerberus.urd.service.ServerService;
 import io.swagger.annotations.Api;
@@ -37,7 +38,7 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = {"/add"})
-    public ResponseEntity<ServerResponse> addServer(@RequestBody @Validated ServerResponse server) throws NoManagedException {
+    public ResponseEntity<ServerResponse> addServer(@RequestBody @Validated ServerRequest server) throws NoManagedException {
 
         ServerResponse response = new ServerResponse(service.addServer(server));
 
