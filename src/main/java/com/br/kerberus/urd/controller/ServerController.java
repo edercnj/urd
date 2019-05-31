@@ -76,7 +76,7 @@ public class ServerController {
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
 
-    @ApiOperation(httpMethod = "GET", value = "Return all servers.", response = ServerResponse.class)
+    @ApiOperation(httpMethod = "GET", value = "Return all servers. ", response = ServerResponse.class)
     @ApiResponses(
             value = {
                     @ApiResponse(code = 400, message = "Server not found with id informed", response = ErrorResponse.class),
