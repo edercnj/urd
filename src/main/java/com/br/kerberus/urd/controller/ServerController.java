@@ -1,7 +1,7 @@
 package com.br.kerberus.urd.controller;
 
-import com.br.kerberus.urd.exception.NoManagedException;
 import com.br.kerberus.urd.exception.ManagedException;
+import com.br.kerberus.urd.exception.NoManagedException;
 import com.br.kerberus.urd.log.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
 import com.br.kerberus.urd.resource.ServerRequest;
@@ -16,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Api(value = "server")
@@ -38,7 +39,8 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.CREATED)
     @PostMapping(path = {"/add"})
-    public ResponseEntity<ServerResponse> addServer(@RequestBody @Validated ServerRequest server) throws NoManagedException {
+    public ResponseEntity<ServerResponse> addServer(HttpServletRequest request,
+                                                    @RequestBody @Validated ServerRequest server) throws NoManagedException {
 
         ServerResponse response = new ServerResponse(service.addServer(server));
 
@@ -55,7 +57,8 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @PutMapping(path = {"/{id}"})
-    public ResponseEntity<ServerResponse> updateServer(@RequestBody @Validated ServerResponse server,
+    public ResponseEntity<ServerResponse> updateServer(HttpServletRequest request,
+                                                       @RequestBody @Validated ServerResponse server,
                                                        @PathVariable(name = "id", required = true) Long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(null);
@@ -71,7 +74,8 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @DeleteMapping(path = {"/{id}"})
-    public ResponseEntity<ServerResponse> deleteServer(@PathVariable(name = "id", required = true) Long id) {
+    public ResponseEntity<ServerResponse> deleteServer(HttpServletRequest request,
+                                                       @PathVariable(name = "id", required = true) Long id) {
 
         return ResponseEntity.status(HttpStatus.OK).body(null);
     }
@@ -101,7 +105,8 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/{id}"})
-    public ResponseEntity<ServerResponse> getServerById(@PathVariable(name = "id") Integer id) throws ManagedException {
+    public ResponseEntity<ServerResponse> getServerById(HttpServletRequest request,
+                                                        @PathVariable(name = "id") Integer id) throws ManagedException {
 
         ServerResponse server = new ServerResponse(service.getServerById(id));
 
@@ -118,7 +123,9 @@ public class ServerController {
     @LogHttpMessages
     @ResponseStatus(value = HttpStatus.OK)
     @GetMapping(path = {"/search/byHostname/{name}"})
-    public ResponseEntity<ServerResponse> getServerByHostname(@PathVariable(name = "name") String name) throws ManagedException {
+    public ResponseEntity<ServerResponse> getServerByHostname(HttpServletRequest request,
+                                                              @PathVariable(name = "name") String name
+    ) throws ManagedException {
 
         ServerResponse server = new ServerResponse(service.getServerByHostname(name));
 

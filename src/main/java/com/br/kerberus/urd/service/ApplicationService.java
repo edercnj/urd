@@ -25,7 +25,7 @@ public class ApplicationService {
     }
 
     @LogException
-    @LogMetlhodCall
+    @LogMethodCall
     @LogMetlhodReturn
     @LogExecutionTime
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
@@ -40,7 +40,7 @@ public class ApplicationService {
     }
 
     @LogException
-    @LogMetlhodCall
+    @LogMethodCall
     @LogMetlhodReturn
     @LogExecutionTime
     public Application addApplication(ApplicationRequest application) throws ManagedException {

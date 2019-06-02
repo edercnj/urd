@@ -7,7 +7,15 @@ import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
+
+import javax.servlet.http.HttpServletRequest;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 @Aspect
 @Component
@@ -23,29 +31,26 @@ public class AspectLog {
         this.setLog(LoggerFactory.getLogger(AspectLog.class));
     }
 
-    @Pointcut("within(@org.springframework.stereotype.Controller *)")
-    public void controller() {
-    }
-
-    @Pointcut("execution(* *.*(..))")
-    protected void allMethod() {
-    }
-
-    @Pointcut("execution(public * *(..))")
-    protected void loggingPublicOperation() {
-    }
-
-    @Pointcut("execution(* *.*(..))")
-    protected void loggingAllOperation() {
-    }
-
-
     @Around("@annotation(com.br.kerberus.urd.log.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
+
+        String logTypeString = LogType.EXECUTION_TIME.toString();
+
+        for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
+            if (method.getName().equals(joinPoint.getSignature().getName())) {
+                for (Annotation logType : getAnnotationsForLog(method)) {
+                    if (logType instanceof LogExecutionTime) {
+                        logTypeString = ((LogExecutionTime) logType).LogType().toString();
+                        break;
+                    }
+                }
+            }
+        }
 
         long start = System.currentTimeMillis();
         Object proceed = joinPoint.proceed();
         long executionTime = System.currentTimeMillis() - start;
+        MDC.put("operationType", logTypeString);
         log.info(joinPoint.getSignature() + " executed in " + executionTime + "ms");
 
         return proceed;
@@ -53,18 +58,37 @@ public class AspectLog {
 
     @AfterThrowing(value = "@annotation(com.br.kerberus.urd.log.LogException)", throwing = "e")
     public void logException(JoinPoint joinPoint, Exception e) {
+
+        for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
+            if (method.getName().equals(joinPoint.getSignature().getName())) {
+                for (Annotation logType : getAnnotationsForLog(method)) {
+                    if (logType instanceof LogException)
+                        MDC.put("operationType", ((LogException) logType).LogType().toString());
+                }
+            }
+        }
+
         if (e instanceof ManagedException) {
             ManagedException ex = (ManagedException) e;
-            log.warn(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDebugMessage()));
+            log.info(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDebugMessage()));
         } else if (e instanceof NoManagedException) {
-            log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage()));
+            log.warn(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage()));
         } else {
-            log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
+            log.warn(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
         }
     }
 
-    @Before(value = "@annotation(com.br.kerberus.urd.log.LogMetlhodCall)")
+    @Before(value = "@annotation(com.br.kerberus.urd.log.LogMethodCall)")
     public void logMethodCall(JoinPoint joinPoint) {
+
+        for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
+            if (method.getName().equals(joinPoint.getSignature().getName())) {
+                for (Annotation logType : getAnnotationsForLog(method)) {
+                    if (logType instanceof LogMethodCall)
+                        MDC.put("operationType", ((LogMethodCall) logType).LogType().toString());
+                }
+            }
+        }
 
         if (joinPoint.getArgs().length > 0) {
             StringBuilder parameters = new StringBuilder();
@@ -80,6 +104,16 @@ public class AspectLog {
 
     @AfterReturning(value = "@annotation(com.br.kerberus.urd.log.LogMetlhodReturn)", returning = "result")
     public void logMethodReturn(JoinPoint joinPoint, Object result) throws Exception {
+
+        for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
+            if (method.getName().equals(joinPoint.getSignature().getName())) {
+                for (Annotation logType : getAnnotationsForLog(method)) {
+                    if (logType instanceof LogMetlhodReturn)
+                        MDC.put("operationType", ((LogMetlhodReturn) logType).LogType().toString());
+                }
+            }
+        }
+
         try {
             if (result != null)
                 log.info(String.format("Method Return: {%s} - return {%s}", joinPoint.getSignature(), result.toString()));
@@ -89,5 +123,54 @@ public class AspectLog {
             log.error(String.format("Method {%s} launch exception {%s}", joinPoint.getSignature(), e.getClass().getName()));
             throw new Exception(e.getMessage());
         }
+    }
+
+    @Before(value = "@annotation(com.br.kerberus.urd.log.LogHttpMessages)")
+    public void logBefore(JoinPoint joinPoint) {
+
+        if (joinPoint.getArgs().length > 0) {
+            for (int i = 0; i < joinPoint.getArgs().length; i++) {
+                if (joinPoint.getArgs()[i] instanceof HttpServletRequest) {
+
+                    HttpServletRequest request = (HttpServletRequest) joinPoint.getArgs()[i];
+
+                    for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
+                        if (method.getName().equals(joinPoint.getSignature().getName())) {
+                            for (Annotation logType : getAnnotationsForLog(method)) {
+                                if (logType instanceof LogHttpMessages)
+                                    MDC.put("operationType", ((LogHttpMessages) logType).LogType().toString());
+
+                                MDC.put("transactionHash", String.valueOf(request.hashCode() + System.nanoTime()));
+                            }
+                        }
+                    }
+
+                    String requestPath = request.getServletPath();
+                    String method = request.getMethod();
+                    Enumeration headerNames = request.getHeaderNames();
+                    StringBuilder headers = new StringBuilder();
+                    String queryString = request.getQueryString();
+                    while (headerNames.hasMoreElements()) {
+                        String headerName = headerNames.nextElement().toString();
+                        String headerValue = request.getHeader(headerName);
+                        String header = headerName + " : " + headerValue + " ";
+                        headers.append(header);
+                    }
+                    log.info(String.format("Method Type : {%s} - Request Path: {%s} - Headers: {%s} - Query String: {%s}", method, requestPath, headers, queryString));
+                }
+            }
+        }
+    }
+
+    private List<Annotation> getAnnotationsForLog(Method methodWithAnnotations) {
+        List<Annotation> annotationsReturn = new ArrayList<>();
+        Annotation[] annotations = methodWithAnnotations.getAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof LogException || annotation instanceof LogExecutionTime || annotation instanceof LogHttpMessages ||
+                    annotation instanceof LogMethodCall || annotation instanceof LogMetlhodReturn) {
+                annotationsReturn.add(annotation);
+            }
+        }
+        return annotationsReturn;
     }
 }

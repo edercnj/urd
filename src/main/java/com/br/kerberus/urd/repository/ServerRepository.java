@@ -2,7 +2,7 @@ package com.br.kerberus.urd.repository;
 
 import com.br.kerberus.urd.entity.Server;
 import com.br.kerberus.urd.log.LogExecutionTime;
-import com.br.kerberus.urd.log.LogMetlhodCall;
+import com.br.kerberus.urd.log.LogMethodCall;
 import com.br.kerberus.urd.log.LogMetlhodReturn;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -13,30 +13,30 @@ import java.util.Optional;
 public interface ServerRepository extends JpaRepository<Server, Integer>{
 
     @Override
-    @LogMetlhodCall
+    @LogMethodCall
     @LogMetlhodReturn
     @LogExecutionTime
     Optional<Server> findById(Integer aLong);
 
-    @LogMetlhodCall
+    @LogMethodCall
     @LogMetlhodReturn
     @LogExecutionTime
     Optional<Server> findByHostnameIsLike(String name);
 
     @Override
-    @LogMetlhodCall
+    @LogMethodCall
     @LogMetlhodReturn
     @LogExecutionTime
     <S extends Server> S save(S entity);
 
     @Override
-    @LogMetlhodCall
+    @LogMethodCall
     @LogMetlhodReturn
     @LogExecutionTime
     <S extends Server> List<S> findAll(Example<S> example);
 
     @Override
-    @LogMetlhodCall
+    @LogMethodCall
     @LogMetlhodReturn
     @LogExecutionTime
     void delete(Server entity);

@@ -23,10 +23,10 @@ public class ServerService {
         this.repository = repository;
     }
 
-    @LogException
-    @LogMetlhodCall
-    @LogMetlhodReturn
-    @LogExecutionTime
+    @LogException(LogType = LogType.EXCEPTION)
+    @LogMethodCall(LogType = LogType.METHOD)
+    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server getServerById(Integer id) throws ManagedException {
         Optional<Server> server = repository.findById(id);
@@ -37,10 +37,10 @@ public class ServerService {
         return server.get();
     }
 
-    @LogException
-    @LogMetlhodCall
-    @LogMetlhodReturn
-    @LogExecutionTime
+    @LogException(LogType = LogType.EXCEPTION)
+    @LogMethodCall(LogType = LogType.METHOD)
+    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server getServerByHostname(String name) throws ManagedException {
 
@@ -52,10 +52,10 @@ public class ServerService {
         return server.get();
     }
 
-    @LogException
-    @LogMetlhodCall
-    @LogMetlhodReturn
-    @LogExecutionTime
+    @LogException(LogType = LogType.EXCEPTION)
+    @LogMethodCall(LogType = LogType.METHOD)
+    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     public List<Server> findAllServers() throws ManagedException {
         List<Server> servers = repository.findAll();
 
@@ -65,10 +65,10 @@ public class ServerService {
         return servers;
     }
 
-    @LogException
-    @LogMetlhodCall
-    @LogMetlhodReturn
-    @LogExecutionTime
+    @LogException(LogType = LogType.EXCEPTION)
+    @LogMethodCall(LogType = LogType.METHOD)
+    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     public Server addServer(ServerRequest server) throws NoManagedException {
         try {
             Server srv = new Server();
@@ -81,10 +81,10 @@ public class ServerService {
         }
     }
 
-    @LogException
-    @LogMetlhodCall
-    @LogMetlhodReturn
-    @LogExecutionTime
+    @LogException(LogType = LogType.EXCEPTION)
+    @LogMethodCall(LogType = LogType.METHOD)
+    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server removeServerById(Integer id) throws ManagedException {
         Optional<Server> server = repository.findById(id);

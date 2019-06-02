@@ -7,6 +7,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogMetlhodCall {
+public @interface LogMethodCall {
+
+    LogType LogType() default LogType.METHOD;
 
 }

@@ -9,4 +9,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogExecutionTime {
 
+    LogType LogType() default LogType.EXECUTION_TIME;
+
 }

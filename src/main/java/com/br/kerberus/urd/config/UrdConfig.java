@@ -1,5 +1,7 @@
 package com.br.kerberus.urd.config;
 
+import com.br.kerberus.urd.log.LogType;
+import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -14,6 +16,7 @@ public class UrdConfig {
     {
         try {
             System.setProperty("hostname", InetAddress.getLocalHost().getHostName().toUpperCase());
+            MDC.put("operationType", LogType.GENERAL.toString());
 
         } catch (UnknownHostException e) {
 
