@@ -1,5 +1,6 @@
 package com.br.kerberus.urd.log;
 
+import com.br.kerberus.urd.entity.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -11,9 +12,10 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 
-import static com.br.kerberus.urd.log.AspectLog.getAnnotationsForLog;
 
 @Aspect
 @Component
@@ -29,8 +31,20 @@ public class HttpAspectLog {
         this.setLog(LoggerFactory.getLogger(HttpAspectLog.class));
     }
 
+    protected List<Annotation> getAnnotationsForLog(Method methodWithAnnotations) {
+        List<Annotation> annotationsReturn = new ArrayList<>();
+        Annotation[] annotations = methodWithAnnotations.getAnnotations();
+        for (Annotation annotation : annotations) {
+            if (annotation instanceof LogException || annotation instanceof LogExecutionTime || annotation instanceof LogHttpMessages ||
+                    annotation instanceof LogMethodCall || annotation instanceof LogMetlhodReturn || annotation instanceof LogSOAPMessages
+                    || annotation instanceof LogDebug) {
+                annotationsReturn.add(annotation);
+            }
+        }
+        return annotationsReturn;
+    }
 
-    @Before(value = "@annotation(com.br.kerberus.urd.log.LogHttpMessages)")
+    @Before(value = "@annotation(com.br.kerberus.urd.entity.LogHttpMessages)")
     public void logBefore(JoinPoint joinPoint) {
 
         if (joinPoint.getArgs().length > 0) {
@@ -65,10 +79,5 @@ public class HttpAspectLog {
                 }
             }
         }
-    }
-
-    private void getHeaders()
-    {
-
     }
 }

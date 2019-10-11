@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.config;
 
-import com.br.kerberus.urd.log.LogType;
+import com.br.kerberus.urd.entity.LogType;
 import org.slf4j.MDC;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

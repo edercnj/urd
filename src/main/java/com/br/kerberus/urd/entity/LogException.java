@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.log;
+package com.br.kerberus.urd.entity;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,8 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogHttpMessages {
+public @interface LogException {
 
-    LogType LogType() default LogType.HTTP_REQUEST;
-
+    LogType LogType() default LogType.EXCEPTION;
 }

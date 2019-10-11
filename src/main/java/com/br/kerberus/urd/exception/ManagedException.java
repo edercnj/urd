@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.exception;
 
-import com.br.kerberus.urd.log.LogError;
+import com.br.kerberus.urd.entity.LogError;
 
 public class ManagedException extends DomainException {
 

@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.log;
+package com.br.kerberus.urd.entity;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;

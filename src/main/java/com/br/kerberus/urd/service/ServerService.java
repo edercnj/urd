@@ -1,9 +1,8 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.Server;
+import com.br.kerberus.urd.entity.*;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
-import com.br.kerberus.urd.log.*;
 import com.br.kerberus.urd.repository.ServerRepository;
 import com.br.kerberus.urd.resource.ServerRequest;
 import org.springframework.stereotype.Service;
@@ -24,8 +23,8 @@ public class ServerService {
     }
 
     @LogException(LogType = LogType.EXCEPTION)
-    @LogMethodCall(LogType = LogType.METHOD)
-    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogMethodCall(LogType = LogType.METHOD_CALL)
+    @LogMetlhodReturn(LogType = LogType.METHOD_CALL)
     @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server getServerById(Integer id) throws ManagedException {
@@ -38,8 +37,8 @@ public class ServerService {
     }
 
     @LogException(LogType = LogType.EXCEPTION)
-    @LogMethodCall(LogType = LogType.METHOD)
-    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogMethodCall(LogType = LogType.METHOD_CALL)
+    @LogMetlhodReturn(LogType = LogType.METHOD_CALL)
     @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server getServerByHostname(String name) throws ManagedException {
@@ -53,8 +52,8 @@ public class ServerService {
     }
 
     @LogException(LogType = LogType.EXCEPTION)
-    @LogMethodCall(LogType = LogType.METHOD)
-    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogMethodCall(LogType = LogType.METHOD_CALL)
+    @LogMetlhodReturn(LogType = LogType.METHOD_CALL)
     @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     public List<Server> findAllServers() throws ManagedException {
         List<Server> servers = repository.findAll();
@@ -66,8 +65,8 @@ public class ServerService {
     }
 
     @LogException(LogType = LogType.EXCEPTION)
-    @LogMethodCall(LogType = LogType.METHOD)
-    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogMethodCall(LogType = LogType.METHOD_CALL)
+    @LogMetlhodReturn(LogType = LogType.METHOD_CALL)
     @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     public Server addServer(ServerRequest server) throws NoManagedException {
         try {
@@ -82,8 +81,8 @@ public class ServerService {
     }
 
     @LogException(LogType = LogType.EXCEPTION)
-    @LogMethodCall(LogType = LogType.METHOD)
-    @LogMetlhodReturn(LogType = LogType.METHOD)
+    @LogMethodCall(LogType = LogType.METHOD_CALL)
+    @LogMetlhodReturn(LogType = LogType.METHOD_CALL)
     @LogExecutionTime(LogType = LogType.EXECUTION_TIME)
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)
     public Server removeServerById(Integer id) throws ManagedException {

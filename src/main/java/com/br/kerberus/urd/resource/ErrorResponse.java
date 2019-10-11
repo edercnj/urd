@@ -1,7 +1,7 @@
 package com.br.kerberus.urd.resource;
 
 import com.br.kerberus.urd.exception.DomainException;
-import com.br.kerberus.urd.log.LogError;
+import com.br.kerberus.urd.entity.LogError;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import org.springframework.http.HttpStatus;

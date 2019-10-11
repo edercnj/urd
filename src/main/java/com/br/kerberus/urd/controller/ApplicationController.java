@@ -2,7 +2,7 @@ package com.br.kerberus.urd.controller;
 
 import com.br.kerberus.urd.entity.Application;
 import com.br.kerberus.urd.exception.ManagedException;
-import com.br.kerberus.urd.log.LogHttpMessages;
+import com.br.kerberus.urd.entity.LogHttpMessages;
 import com.br.kerberus.urd.resource.ApplicationRequest;
 import com.br.kerberus.urd.resource.ErrorResponse;
 import com.br.kerberus.urd.resource.ServerResponse;

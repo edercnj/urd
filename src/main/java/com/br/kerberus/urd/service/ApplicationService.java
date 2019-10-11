@@ -1,8 +1,7 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.Application;
+import com.br.kerberus.urd.entity.*;
 import com.br.kerberus.urd.exception.ManagedException;
-import com.br.kerberus.urd.log.*;
 import com.br.kerberus.urd.repository.ApplicationRepository;
 import com.br.kerberus.urd.resource.ApplicationRequest;
 import org.springframework.stereotype.Service;

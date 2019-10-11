@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.exception;
 
-import com.br.kerberus.urd.log.LogError;
+import com.br.kerberus.urd.entity.LogError;
 import org.springframework.http.HttpStatus;
 
 public class NoManagedException extends DomainException {
