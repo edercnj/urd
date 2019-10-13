@@ -2,7 +2,7 @@ package com.br.kerberus.urd.controller;
 
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.entity.LogError;
-import com.br.kerberus.urd.entity.LogHttpMessages;
+import com.br.kerberus.urd.entity.core.LogHttpMessages;
 import com.br.kerberus.urd.resource.ErrorResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

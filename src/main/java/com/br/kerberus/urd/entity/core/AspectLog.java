@@ -1,6 +1,6 @@
-package com.br.kerberus.urd.log;
+package com.br.kerberus.urd.entity.core;
 
-import com.br.kerberus.urd.entity.*;
+import com.br.kerberus.urd.entity.core.*;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

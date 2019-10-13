@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity;
+package com.br.kerberus.urd.entity.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogSOAPMessages {
+public @interface LogDebug {
 
-    LogType LogType() default LogType.SOAP_MESSAGES;
+    LogType LogType() default LogType.DEBUG;
 }

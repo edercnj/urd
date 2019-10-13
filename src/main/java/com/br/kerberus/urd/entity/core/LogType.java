@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity;
+package com.br.kerberus.urd.entity.core;
 
 public enum LogType {
 

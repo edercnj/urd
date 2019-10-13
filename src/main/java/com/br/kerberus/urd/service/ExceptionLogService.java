@@ -1,9 +1,9 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.*;
+import com.br.kerberus.urd.entity.core.LogException;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
-import com.br.kerberus.urd.log.AspectLog;
+import com.br.kerberus.urd.entity.core.AspectLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -14,8 +14,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 @Aspect
 @Component
@@ -31,7 +29,7 @@ public class ExceptionLogService extends AspectLog implements LogService {
 
     public ExceptionLogService() {this.setLog(LoggerFactory.getLogger(ExceptionLogService.class)); }
 
-    @AfterThrowing(value = "@annotation(com.br.kerberus.urd.entity.LogException)", throwing = "e")
+    @AfterThrowing(value = "@annotation(com.br.kerberus.urd.entity.core.LogException)", throwing = "e")
     public void logException(JoinPoint joinPoint, Exception e) {
 
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
@@ -42,6 +40,8 @@ public class ExceptionLogService extends AspectLog implements LogService {
                 }
             }
         }
+
+            Annotation[] annotations = e.getClass().getAnnotations();
 
         if (e instanceof ManagedException) {
             ManagedException ex = (ManagedException) e;

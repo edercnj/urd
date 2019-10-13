@@ -1,10 +1,10 @@
 package com.br.kerberus.urd.repository;
 
 import com.br.kerberus.urd.entity.Application;
-import com.br.kerberus.urd.entity.LogException;
-import com.br.kerberus.urd.entity.LogExecutionTime;
-import com.br.kerberus.urd.entity.LogMethodCall;
-import com.br.kerberus.urd.entity.LogMetlhodReturn;
+import com.br.kerberus.urd.entity.core.LogException;
+import com.br.kerberus.urd.entity.core.LogExecutionTime;
+import com.br.kerberus.urd.entity.core.LogMethodCall;
+import com.br.kerberus.urd.entity.core.LogMetlhodReturn;
 import org.springframework.data.domain.Example;
 import org.springframework.data.jpa.repository.JpaRepository;
 

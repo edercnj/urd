@@ -1,8 +1,8 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.LogMethodCall;
-import com.br.kerberus.urd.entity.LogMetlhodReturn;
-import com.br.kerberus.urd.log.AspectLog;
+import com.br.kerberus.urd.entity.core.LogMethodCall;
+import com.br.kerberus.urd.entity.core.LogMetlhodReturn;
+import com.br.kerberus.urd.entity.core.AspectLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -28,7 +28,7 @@ public class MethodLogService extends AspectLog implements LogService {
 
     public MethodLogService() {this.setLog(LoggerFactory.getLogger(MethodLogService.class)); }
 
-    @Before(value = "@annotation(com.br.kerberus.urd.entity.LogMethodCall)")
+    @Before(value = "@annotation(com.br.kerberus.urd.entity.core.LogMethodCall)")
     public void logMethodCall(JoinPoint joinPoint) {
 
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
@@ -52,7 +52,7 @@ public class MethodLogService extends AspectLog implements LogService {
         }
     }
 
-    @AfterReturning(value = "@annotation(com.br.kerberus.urd.entity.LogMetlhodReturn)", returning = "result")
+    @AfterReturning(value = "@annotation(com.br.kerberus.urd.entity.core.LogMetlhodReturn)", returning = "result")
     public void logMethodReturn(JoinPoint joinPoint, Object result) throws Exception {
 
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {

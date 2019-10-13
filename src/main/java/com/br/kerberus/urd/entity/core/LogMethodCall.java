@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity;
+package com.br.kerberus.urd.entity.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

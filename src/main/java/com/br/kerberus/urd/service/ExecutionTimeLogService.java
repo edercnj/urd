@@ -1,7 +1,8 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.*;
-import com.br.kerberus.urd.log.AspectLog;
+import com.br.kerberus.urd.entity.core.LogExecutionTime;
+import com.br.kerberus.urd.entity.core.LogType;
+import com.br.kerberus.urd.entity.core.AspectLog;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -12,8 +13,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.List;
 
 @Aspect
 @Component
@@ -27,7 +26,7 @@ public class ExecutionTimeLogService extends AspectLog implements LogService {
 
     public ExecutionTimeLogService() { this.setLog(LoggerFactory.getLogger(ExecutionTimeLogService.class)); }
 
-    @Around("@annotation(com.br.kerberus.urd.entity.LogExecutionTime)")
+    @Around("@annotation(com.br.kerberus.urd.entity.core.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
         String logTypeString = LogType.EXECUTION_TIME.toString();

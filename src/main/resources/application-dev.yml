@@ -42,6 +42,7 @@ logging:
       urd: com.br.kerberus.urd, com.br.kerberus.urd.service, com.br.kerberus.urd.config, com.br.kerberus.urd.controller, com.br.kerberus.urd.core, com.br.kerberus.urd.repository, com.br.kerberus.urd.exception, com.br.kerberus.urd.core.log
       sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core, org.hibernate.type
       web: org.springframework.core.codec, org.springframework.http, org.springframework.web
+      webMessages: org.springframework.web.filter.CommonsRequestLoggingFilter
    path: "logs"
    file: "${logging.path}/${spring.application.name}.log"
    pattern:

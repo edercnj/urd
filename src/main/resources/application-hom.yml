@@ -42,13 +42,15 @@ logging:
       urd: com.br.kerberus.urd, com.br.kerberus.urd.service, com.br.kerberus.urd.config, com.br.kerberus.urd.controller, com.br.kerberus.urd.core, com.br.kerberus.urd.repository, com.br.kerberus.urd.exception, com.br.kerberus.urd.core.log
       sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core, org.hibernate.type
       web: org.springframework.core.codec, org.springframework.http, org.springframework.web
+      web-request: org.springframework.web.filter.CommonsRequestLoggingFilter
    path: "logs"
    file: "${logging.path}/${spring.application.name}.log"
    pattern:
-      console: "# ${hostname} | ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} | %highlight(%-5level)| %X{operationType} | 0%X{transactionHash} |  %logger{0} | %msg%n"
-      file: "# ${hostname} | ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} | (%-5level)| %X{operationType} | 0%X{transactionHash} | %logger{0} | %msg%n"
+      console: "# ${hostname} | ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} |  (%-5level) | ([%thread])  | %logger{0} | %msg%n"
+      file: "# ${hostname} | ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} | %-5level |  %thread  | %logger{0} | %msg%n"
    level:
       root: off
       urd: info
       web: error
       sql: error
+      web-request: debug
