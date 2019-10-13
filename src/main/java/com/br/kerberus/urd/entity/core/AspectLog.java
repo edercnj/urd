@@ -14,8 +14,7 @@ public abstract class AspectLog {
         Annotation[] annotations = methodWithAnnotations.getAnnotations();
         for (Annotation annotation : annotations) {
             if (annotation instanceof LogException || annotation instanceof LogExecutionTime || annotation instanceof LogHttpMessages ||
-                    annotation instanceof LogMethodCall || annotation instanceof LogMetlhodReturn || annotation instanceof LogSOAPMessages
-                    || annotation instanceof LogDebug) {
+                    annotation instanceof LogMethodCall || annotation instanceof LogMetlhodReturn || annotation instanceof LogSOAPMessages) {
                 annotationsReturn.add(annotation);
             }
         }

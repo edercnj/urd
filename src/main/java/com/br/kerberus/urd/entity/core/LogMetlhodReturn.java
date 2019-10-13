@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface LogMetlhodReturn {
 
     LogType LogType() default LogType.METHOD_RETURN;
+    LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
 }

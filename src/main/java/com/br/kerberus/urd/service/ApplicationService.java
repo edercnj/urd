@@ -1,10 +1,7 @@
 package com.br.kerberus.urd.service;
 
 import com.br.kerberus.urd.entity.*;
-import com.br.kerberus.urd.entity.core.LogException;
-import com.br.kerberus.urd.entity.core.LogExecutionTime;
-import com.br.kerberus.urd.entity.core.LogMethodCall;
-import com.br.kerberus.urd.entity.core.LogMetlhodReturn;
+import com.br.kerberus.urd.entity.core.*;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.repository.ApplicationRepository;
 import com.br.kerberus.urd.resource.ApplicationRequest;
@@ -28,7 +25,7 @@ public class ApplicationService {
     }
 
     @LogException
-    @LogMethodCall
+    @LogMethodCall (LogLevel = {LogLevel.DEBUG,})
     @LogMetlhodReturn
     @LogExecutionTime
     @Transactional(propagation = Propagation.REQUIRED, readOnly = true, noRollbackFor = Exception.class)

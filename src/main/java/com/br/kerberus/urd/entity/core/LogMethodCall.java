@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface LogMethodCall {
 
     LogType LogType() default LogType.METHOD_CALL;
-
+    LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
 }

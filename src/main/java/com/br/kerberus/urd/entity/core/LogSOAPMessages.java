@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface LogSOAPMessages {
 
     LogType LogType() default LogType.SOAP_MESSAGES;
+    LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
 }

@@ -10,4 +10,5 @@ import java.lang.annotation.Target;
 public @interface LogException {
 
     LogType LogType() default LogType.EXCEPTION;
+    LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
 }

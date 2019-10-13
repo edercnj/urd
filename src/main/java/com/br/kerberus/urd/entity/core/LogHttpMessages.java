@@ -10,5 +10,6 @@ import java.lang.annotation.Target;
 public @interface LogHttpMessages {
 
     LogType LogType() default LogType.HTTP_MESSAGES;
+    LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
 
 }
