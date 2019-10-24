@@ -1,11 +1,7 @@
 package com.br.kerberus.urd.exception;
 
-import com.br.kerberus.urd.entity.LogError;
-
 public class ManagedException extends DomainException {
-
-	public ManagedException(LogError logError) {
-		super(logError.getError().getHttpStatus(), logError.getError().getDebugMessage(),
-				logError.getError().getUserMessage(), logError.getError().getErrorCod(), logError.getError().getMoreInfo());
+	public ManagedException(String debugMessage, String userMessage, int errorCod, String moreInfo) {
+		super(debugMessage, userMessage, errorCod, moreInfo);
 	}
 }

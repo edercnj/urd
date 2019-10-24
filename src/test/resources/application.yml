@@ -2,50 +2,14 @@ server:
    port: ${port:5001}
    servlet:
       contextPath: "/urd"
-
 spring:
    main:
       banner-mode: "off"
    application:
       name: "urd"
-   h2:
-      console:
-         enabled: true
-         path: "/h2-console"
-         settings:
-            trace: true
-            web-allow-others: true
-   datasource:
-      url: "jdbc:h2:mem:urd;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"
-      driverClassName: "org.h2.Driver"
-      username: "sa"
-      password:
-   jpa:
-      properties:
-         hibernate:
-            show_sql: true
-            format_sql: true
-            use_sql_comments: false
-            use_query_cache: false
-            dialect: "org.hibernate.dialect.H2Dialect"
-      hibernate:
-         ddl-auto: validate
-   flyway:
-      locations: "classpath:db/migration"
-      url: "jdbc:h2:mem:urd;MODE=PostgreSQL;DB_CLOSE_DELAY=-1"
-      user: "sa"
-      password:
-      table: "migration"
-      baseline-on-migrate: true
-      connect-retries: 3
-      mixed: true
-      group: true
 logging:
    group:
-      urd: com.br.kerberus.urd, com.br.kerberus.urd.service, com.br.kerberus.urd.config, com.br.kerberus.urd.controller, com.br.kerberus.urd.core, com.br.kerberus.urd.repository, com.br.kerberus.urd.exception, com.br.kerberus.urd.core.log
-      sql: org.hibernate, org.hibernate.sql, org.springframework.jdbc.core, org.flywaydb.core, org.flywaydb.core, org.hibernate.type
-      web: org.springframework.core.codec, org.springframework.http, org.springframework.web
-      web-request: org.springframework.web.filter.CommonsRequestLoggingFilter
+      urd: com.br.kerberus.urd, com.br.kerberus.urd.config, com.br.kerberus.urd.entity,  com.br.kerberus.urd.entity.core, com.br.kerberus.urd.exception, com.br.kerberus.urd.service
    path: "logs"
    pattern:
       console: "# ${hostname} | ${spring.application.name} | %d{dd-MM-yyyy HH:mm:ss.SSS} |  %highlight(%-5level) | %X(operationType)  | %logger{0} | %msg%n"
@@ -54,4 +18,3 @@ logging:
       urd: info
       web: error
       sql: error
-      web-request: debug

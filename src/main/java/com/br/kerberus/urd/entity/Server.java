@@ -1,57 +1,43 @@
 package com.br.kerberus.urd.entity;
 
-import org.hibernate.annotations.Proxy;
-
-import javax.persistence.*;
-import java.util.Date;
-import java.util.List;
-
-@Entity
-@Table( name = "server", indexes = {
-		@Index(name = "idx_server_id", columnList = "id"),
-		@Index(name = "idx_server_hostname", columnList = "hostname") })
-@Proxy(lazy = false)
 public class Server {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "server_id_seq")
-	@SequenceGenerator( name = "server_id_seq", sequenceName = "server_id_seq", initialValue = 1, allocationSize = 1)
-	private Integer id;
+    private String hostname;
 
-	@Column(name = "hostname")
-	private String hostname;
+    private String ip;
 
+    public String getHostname()
+	{
+		if (hostname.isBlank() || hostname.isEmpty())
+			return  "Unknown";
+		else
+			return hostname;
+	}
 
-	@Column(name = "creation_date")
-	private Date creationDate;
+    public void setHostname(String hostname) {
+        if (hostname.isBlank() || hostname.isEmpty())
+			this.hostname = "Unknown";
+        else
+            this.hostname = hostname;
+    }
 
-	public Integer getId() { return id; }
+    public String getIp() { return ip; }
 
-	public void setId(Integer id) { this.id = id; }
+    public void setIp(String ip)
+	{
+		if(ip.isEmpty() || ip.isBlank())
+			this.ip = "127.0.0.1";
+		else
+			this.ip = ip;
+	}
 
-	public String getHostname() { return hostname; }
-
-	public void setHostname(String hostname) { this.hostname = hostname; }
-
-	public Date getCreationDate() { return creationDate; }
-
-	public void setCreationDate(Date creationDate) { this.creationDate = creationDate; }
+    public Server(String hostname, String ip) {
+        setHostname(hostname);
+        setIp(ip);
+    }
 
 	@Override
-	public String toString() {
-		return "Server{" +
-				"id:" + id +
-				", hostname:'" + getHostname() + '\'' +
-				", creationDate:" + ((getCreationDate() != null ? getCreationDate() : "null")) +
-				'}';
-	}
-
-	public Server(Integer id, String hostname, Date creationDate) {
-		super();
-		setId(id);
-		setHostname(hostname);
-		setCreationDate(creationDate);
-	}
-
-	public Server() {}
+    public String toString() {
+		return "Server{" + "hostname:'" + hostname + '\'' + ", ip:'" + ip + '\'' + '}';
+    }
 }

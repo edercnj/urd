@@ -41,15 +41,15 @@ public class ExceptionLogService extends AspectLog implements LogService {
             }
         }
 
-            Annotation[] annotations = e.getClass().getAnnotations();
+        Annotation[] annotations = e.getClass().getAnnotations();
 
         if (e instanceof ManagedException) {
             ManagedException ex = (ManagedException) e;
             log.info(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ex.getDebugMessage()));
         } else if (e instanceof NoManagedException) {
-            log.warn(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage()));
+            log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage()));
         } else {
-            log.warn(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
+            log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
         }
     }
 }
