@@ -31,4 +31,13 @@ public abstract class DomainException extends Exception {
 
     private void setMoreInfo(String moreInfo) { this.moreInfo = moreInfo; }
 
+    @Override
+    public String toString() {
+        return "DomainException{" +
+                "debugMessage='" + getDebugMessage() + '\'' +
+                ", userMessage='" + getUserMessage() + '\'' +
+                ", errorCod=" + getErrorCod() +
+                ", moreInfo='" + getMoreInfo() + '\'' +
+                '}';
+    }
 }

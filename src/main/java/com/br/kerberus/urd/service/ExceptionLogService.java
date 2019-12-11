@@ -1,16 +1,15 @@
 package com.br.kerberus.urd.service;
 
+import com.br.kerberus.urd.entity.core.AspectLog;
 import com.br.kerberus.urd.entity.core.LogException;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
-import com.br.kerberus.urd.entity.core.AspectLog;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ import java.lang.reflect.Method;
 
 @Aspect
 @Component
-@Order(0)
+@Order(1)
 public class ExceptionLogService extends AspectLog implements LogService {
 
     private Logger log;
