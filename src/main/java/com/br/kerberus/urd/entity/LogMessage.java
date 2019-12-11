@@ -1,60 +1,73 @@
 package com.br.kerberus.urd.entity;
 
-import org.springframework.beans.factory.annotation.Value;
-
-import java.util.Date;
-import java.util.Objects;
-
 public final class LogMessage {
 
-	@Value("${spring.application.name}")
-	private String applicationName;
-	private Server server;
-	private SystemInformation systemInformation;
-	private String message;
+    private String applicationName;
+    private Server server;
+    private SystemInformation systemInformation;
+    private String message;
 
-	public String getApplicationName() { return applicationName; }
-	public void setApplicationName(String applicationName) { this.applicationName = applicationName; }
-	public Server getServer() { return server; }
-	private void setServer(Server server) { this.server = server; }
-	private SystemInformation getSystemInformation() { return systemInformation; }
-	private void setSystemInformation(SystemInformation systemInformation) { this.systemInformation = systemInformation; }
-	public String getMessage() { return message; }
+    public String getApplicationName() { return applicationName; }
 
-	private void setMessage(String message) {
-		if(message.isBlank() || message.isEmpty())
-			throw new IllegalArgumentException("Invalid message. Message must have not black or empty");
-		this.message = message;
-	}
+    public void setApplicationName(String applicationName) {
+        if (applicationName.isBlank() || applicationName.isEmpty())
+            throw new IllegalArgumentException("Invalid application name. Application name must have not black or empty");
+        this.applicationName = applicationName;
+    }
 
-	@Override
-	public String toString() {
-		if(this.getSystemInformation() == null)
-		{
-			return "LogMessage{" +
-					"applicationName:'" + applicationName + '\'' +
-					", server:" + server +
-					", message:'" + message + '\'' +
-					'}';
-		}
-		else {
-			return "LogMessage{" +
-					"applicationName:'" + applicationName + '\'' +
-					", server:" + server +
-					", systemInformation:" + systemInformation +
-					", message:'" + message + '\'' +
-					'}';
-		}
-	}
+    private void setMessage(String message) {
+        if (message.isBlank() || message.isEmpty())
+            throw new IllegalArgumentException("Invalid message. Message must have not black or empty");
+        this.message = message;
+    }
 
-	public LogMessage(Server server, SystemInformation systemInformation, String message) {
-		this.setServer(server);
-		this.setSystemInformation(systemInformation);
-		this.setMessage(message);
-	}
+    private void setServer(Server server) {
+        if (server == null)
+            throw new IllegalArgumentException("Invalid Server. Server must have not null");
+        this.server = server;
+    }
 
-	public LogMessage(Server server,  String message) {
-		this.setServer(server);
-		this.setMessage(message);
-	}
+    private void setSystemInformation(SystemInformation systemInformation) {
+        if (systemInformation == null)
+            throw new IllegalArgumentException("Invalid System Information. System Information must have not null");
+        this.systemInformation = systemInformation;
+    }
+
+    public Server getServer() { return server; }
+
+    private SystemInformation getSystemInformation() { return systemInformation; }
+
+    public String getMessage() { return message; }
+
+
+    @Override
+    public String toString() {
+        if (this.getSystemInformation() == null) {
+            return "LogMessage{" +
+                    "applicationName:'" + getApplicationName() + '\'' +
+                    ", server:" + getServer() +
+                    ", message:'" + getMessage() + '\'' +
+                    '}';
+        } else {
+            return "LogMessage{" +
+                    "applicationName:'" + getApplicationName() + '\'' +
+                    ", server:" + getServer() +
+                    ", systemInformation:" + getSystemInformation() +
+                    ", message:'" + getMessage() + '\'' +
+                    '}';
+        }
+    }
+
+    public LogMessage(Server server, SystemInformation systemInformation, String messageString, String applicationName) {
+        this.setServer(server);
+        this.setSystemInformation(systemInformation);
+        this.setMessage(message);
+        this.setApplicationName(applicationName);
+    }
+
+    public LogMessage(Server server, String message, String applicationName) {
+        this.setServer(server);
+        this.setMessage(message);
+        this.setApplicationName(applicationName);
+    }
 }

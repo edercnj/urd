@@ -10,6 +10,8 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -17,6 +19,7 @@ import java.lang.reflect.Method;
 
 @Aspect
 @Component
+@Order(0)
 public class ExceptionLogService extends AspectLog implements LogService {
 
     private Logger log;

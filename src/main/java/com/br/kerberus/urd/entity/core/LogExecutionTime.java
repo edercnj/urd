@@ -11,4 +11,5 @@ public @interface LogExecutionTime {
 
     LogType LogType() default LogType.EXECUTION_TIME;
     LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
+    LogTimeType LogTimeType() default LogTimeType.MILLISECONDS;
 }

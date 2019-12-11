@@ -1,9 +1,5 @@
 package com.br.kerberus.urd.exception;
 
-import org.springframework.http.HttpStatus;
-
-import java.util.Objects;
-
 public abstract class DomainException extends Exception {
 
     private String debugMessage;
@@ -11,7 +7,7 @@ public abstract class DomainException extends Exception {
     private int errorCod;
     private String moreInfo;
 
-    DomainException( String debugMessage, String userMessage, int errorCod, String moreInfo) {
+    DomainException(String debugMessage, String userMessage, int errorCod, String moreInfo) {
         super("debugMessage");
         setDebugMessage(debugMessage);
         setUserMessage(userMessage);
