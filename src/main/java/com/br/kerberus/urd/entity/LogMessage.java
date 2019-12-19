@@ -11,13 +11,13 @@ public final class LogMessage {
 
     public void setApplicationName(String applicationName) {
         if (applicationName.isBlank() || applicationName.isEmpty())
-            throw new IllegalArgumentException("Invalid application name. Application name must have not black or empty");
+            throw new IllegalArgumentException("Invalid application name. Application name must have not blank or empty");
         this.applicationName = applicationName;
     }
 
     private void setMessage(String message) {
         if (message.isBlank() || message.isEmpty())
-            throw new IllegalArgumentException("Invalid message. Message must have not black or empty");
+            throw new IllegalArgumentException("Invalid message. Message must have not blank or empty");
         this.message = message;
     }
 

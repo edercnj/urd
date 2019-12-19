@@ -40,7 +40,7 @@ public class ExceptionLogServiceTest {
         }
     }
 
-    @LogException(LogLevel = {LogLevel.DEBUG, LogLevel.INFO, LogLevel.ERROR, LogLevel.WARN}, title = "logException method test")
+    @LogException(logLevel = {LogLevel.DEBUG, LogLevel.INFO, LogLevel.ERROR, LogLevel.WARN}, title = "logException method test")
     private void throwsException() throws Exception {
         throw new Exception("Lancando excecao");
     }

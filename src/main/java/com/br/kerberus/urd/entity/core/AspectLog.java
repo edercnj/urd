@@ -1,6 +1,6 @@
 package com.br.kerberus.urd.entity.core;
 
-import com.br.kerberus.urd.entity.core.*;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -13,8 +13,12 @@ public abstract class AspectLog {
         List<Annotation> annotationsReturn = new ArrayList<>();
         Annotation[] annotations = methodWithAnnotations.getAnnotations();
         for (Annotation annotation : annotations) {
-            if (annotation instanceof LogException || annotation instanceof LogExecutionTime || annotation instanceof LogHttpMessages ||
-                    annotation instanceof LogMethodCall || annotation instanceof LogMetlhodReturn || annotation instanceof LogSOAPMessages) {
+            if (annotation instanceof LogException ||
+                    annotation instanceof LogExecutionTime ||
+                    annotation instanceof LogHttpMessages ||
+                    annotation instanceof LogMethodCall ||
+                    annotation instanceof LogMetlhodReturn ||
+                    annotation instanceof LogSOAPMessages) {
                 annotationsReturn.add(annotation);
             }
         }

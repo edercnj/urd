@@ -11,9 +11,7 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogExecutionTime {
 
-    LogType LogType() default LogType.EXECUTION_TIME;
-
-    LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
-
-    LogTimeType LogTimeType() default LogTimeType.MILLISECONDS;
+    LogType logType() default LogType.EXECUTION_TIME;
+    LogLevel[] logLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
+    LogTimeType logTimeType() default LogTimeType.MILLISECONDS;
 }
