@@ -5,6 +5,7 @@ import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
+import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
@@ -41,31 +42,33 @@ public class MethodLogService extends AspectLog implements LogService {
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
         MDC.put("operationType", getLogTypeString());
 
-        if (joinPoint.getArgs().length > 0) {
+        if (joinPoint.getArgs().length > 0)
             log.info(String.format("Calling method: {%s} - with parameters: {%s}", joinPoint.getSignature(), getMethodParameters(joinPoint)));
-        } else {
-            log.info(String.format("Calling method: {%s} - with parameters: {null}", joinPoint.getSignature()));
-        }
+        else
+            log.info(String.format("Calling method: {%s} - without parameters", joinPoint.getSignature()));
     }
 
     @AfterReturning(value = "@annotation(com.br.kerberus.urd.entity.core.LogMetlhodReturn)", returning = "result")
     public void logMethodReturn(JoinPoint joinPoint, Object result) throws Exception {
-
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
         MDC.put("operationType", getLogTypeString());
 
         try {
-            if (result != null)
-                log.info(String.format("Method Return: {%s} - return {%s}", joinPoint.getSignature(), result.toString()));
-            else
-                log.info(String.format("Method Return: {%s} - return {null}", joinPoint.getSignature()));
+            if(((MethodSignature)joinPoint.getSignature()).getReturnType().getName().equals("void")) {
+                log.info(String.format("Method Return: {%s} - void return.", joinPoint.getSignature()));
+            }else {
+                if (result != null)
+                    log.info(String.format("Method Return: {%s} - return {%s}", joinPoint.getSignature(), result.toString()));
+                else
+                    log.info(String.format("Method Return: {%s} - return {null}", joinPoint.getSignature()));
+            }
         } catch (Exception e) {
             log.error(String.format("Method {%s} launch exception {%s}", joinPoint.getSignature(), e.getClass().getName()));
             throw new Exception(e.getMessage());
         }
     }
 
-    public String getLogTypeFromAnnotation(JoinPoint joinPoint) {
+    private String getLogTypeFromAnnotation(JoinPoint joinPoint) {
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
             if (method.getName().equals(joinPoint.getSignature().getName())) {
                 for (Annotation logType : getAnnotationsForLog(method)) {

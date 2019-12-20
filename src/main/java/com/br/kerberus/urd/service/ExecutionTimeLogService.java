@@ -72,20 +72,19 @@ public class ExecutionTimeLogService extends AspectLog implements LogService {
         return false;
     }
 
-    public String getLogTypeFromAnnotation(ProceedingJoinPoint joinPoint) {
+    private String getLogTypeFromAnnotation(ProceedingJoinPoint joinPoint) {
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
             if (method.getName().equals(joinPoint.getSignature().getName())) {
                 for (Annotation logType : getAnnotationsForLog(method)) {
-                    if (logType instanceof LogExecutionTime) {
+                    if (logType instanceof LogExecutionTime)
                         return ((LogExecutionTime) logType).logType().toString();
-                    }
                 }
             }
         }
         return LogType.GENERAL.toString();
     }
 
-    public LogTimeType getLogTimeTypeFromAnnotation(ProceedingJoinPoint joinPoint) {
+    private LogTimeType getLogTimeTypeFromAnnotation(ProceedingJoinPoint joinPoint) {
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
             if (method.getName().equals(joinPoint.getSignature().getName())) {
                 for (Annotation logType : getAnnotationsForLog(method)) {

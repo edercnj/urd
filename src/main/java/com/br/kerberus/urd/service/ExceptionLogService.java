@@ -57,7 +57,7 @@ public class ExceptionLogService extends AspectLog implements LogService {
         return false;
     }
 
-    public String getLogTypeFromAnnotation(JoinPoint joinPoint) {
+    private String getLogTypeFromAnnotation(JoinPoint joinPoint) {
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
             if (method.getName().equals(joinPoint.getSignature().getName())) {
                 for (Annotation logType : getAnnotationsForLog(method)) {
