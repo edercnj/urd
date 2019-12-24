@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
 
 @Aspect
 @Component
+@Order(0)
 public class ExecutionTimeLogService extends AspectLog implements LogService {
 
     private Logger log;

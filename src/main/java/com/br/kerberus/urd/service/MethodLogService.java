@@ -17,6 +17,7 @@ import java.lang.reflect.Method;
 
 @Aspect
 @Component
+@Order(20)
 public class MethodLogService extends AspectLog implements LogService {
     private Logger log;
     private String logTypeString;
