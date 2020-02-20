@@ -1,7 +1,5 @@
 package com.br.kerberus.urd.entity.core;
 
-import org.aspectj.lang.ProceedingJoinPoint;
-
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.ArrayList;

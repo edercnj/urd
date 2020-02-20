@@ -1,7 +1,10 @@
 package com.br.kerberus.urd.entity;
 
+import org.springframework.beans.factory.annotation.Value;
+
 public final class LogMessage {
 
+    @Value("${spring.application.name}")
     private String applicationName;
     private Server server;
     private SystemInformation systemInformation;
@@ -15,19 +18,19 @@ public final class LogMessage {
         this.applicationName = applicationName;
     }
 
-    private void setMessage(String message) {
+    public void setMessage(String message) {
         if (message.isBlank() || message.isEmpty())
             throw new IllegalArgumentException("Invalid message. Message must have not blank or empty");
         this.message = message;
     }
 
-    private void setServer(Server server) {
+    public void setServer(Server server) {
         if (server == null)
             throw new IllegalArgumentException("Invalid Server. Server must have not null");
         this.server = server;
     }
 
-    private void setSystemInformation(SystemInformation systemInformation) {
+    public void setSystemInformation(SystemInformation systemInformation) {
         if (systemInformation == null)
             throw new IllegalArgumentException("Invalid System Information. System Information must have not null");
         this.systemInformation = systemInformation;
@@ -69,5 +72,12 @@ public final class LogMessage {
         this.setServer(server);
         this.setMessage(message);
         this.setApplicationName(applicationName);
+    }
+
+    public LogMessage(String message) {
+        this.setServer(new Server());
+        this.setMessage(message);
+        this.setApplicationName(applicationName);
+        this.setApplicationName(getApplicationName());
     }
 }

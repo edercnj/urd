@@ -1,47 +1,34 @@
 package com.br.kerberus.urd.service.test;
 
-import com.br.kerberus.urd.entity.core.LogException;
 import com.br.kerberus.urd.entity.core.LogLevel;
+import com.br.kerberus.urd.entity.core.LogMethodCall;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.context.annotation.Profile;
 
-
+@Profile("test")
 public class ExceptionLogServiceTest {
 
     @Before
-    public void setUp() throws Exception {
-    }
+    public void setUp() throws Exception { }
 
     @After
-    public void tearDown() throws Exception {
-    }
+    public void tearDown() throws Exception { }
 
     @Test
-    public void getLog() {
-    }
+    public void getLog() { }
 
     @Test
-    public void setLog() {
-    }
+    public void setLog() { }
 
     @Test
     public void logException() {
-
-        try {
-            throwsException();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        methodMustReturnLogMessage();
     }
 
-    @LogException(logLevel = {LogLevel.DEBUG, LogLevel.INFO, LogLevel.ERROR, LogLevel.WARN}, title = "logException method test")
-    private void throwsException() throws Exception {
-        throw new Exception("Lancando excecao");
+    @LogMethodCall(logLevel = {LogLevel.DEBUG, LogLevel.INFO, LogLevel.ERROR, LogLevel.WARN})
+    private void methodMustReturnLogMessage() {
+        System.out.println(String.format("Log message to save: %s", "parameter for log"));
     }
 }

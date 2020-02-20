@@ -1,6 +1,9 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.core.*;
+import com.br.kerberus.urd.entity.core.AspectLog;
+import com.br.kerberus.urd.entity.core.LogMethodCall;
+import com.br.kerberus.urd.entity.core.LogMetlhodReturn;
+import com.br.kerberus.urd.entity.core.LogType;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -9,7 +12,6 @@ import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -17,7 +19,6 @@ import java.lang.reflect.Method;
 
 @Aspect
 @Component
-@Order(20)
 public class MethodLogService extends AspectLog implements LogService {
     private Logger log;
     private String logTypeString;
@@ -56,7 +57,7 @@ public class MethodLogService extends AspectLog implements LogService {
 
         try {
             if(((MethodSignature)joinPoint.getSignature()).getReturnType().getName().equals("void")) {
-                log.info(String.format("Method Return: {%s} - void return.", joinPoint.getSignature()));
+                log.info(String.format("Method Return: {%s} - void.", joinPoint.getSignature()));
             }else {
                 if (result != null)
                     log.info(String.format("Method Return: {%s} - return {%s}", joinPoint.getSignature(), result.toString()));

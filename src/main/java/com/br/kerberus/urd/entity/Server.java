@@ -1,5 +1,8 @@
 package com.br.kerberus.urd.entity;
 
+import java.net.InetAddress;
+import java.net.UnknownHostException;
+
 public class Server {
 
     private String hostname;
@@ -32,6 +35,18 @@ public class Server {
     public Server(String hostname, String ip) {
         setHostname(hostname);
         setIp(ip);
+    }
+
+    public Server() {
+        try {
+            InetAddress inetAddress = InetAddress.getLocalHost();
+            setIp(inetAddress.getHostAddress());
+            setHostname(inetAddress.getHostName());
+        }catch (Exception ex)
+        {
+            setIp("Unknown");
+            setHostname("127.0.0.1");
+        }
     }
 
     @Override
