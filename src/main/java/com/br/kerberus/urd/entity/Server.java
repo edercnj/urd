@@ -1,56 +1,68 @@
 package com.br.kerberus.urd.entity;
 
+import java.net.Inet4Address;
 import java.net.InetAddress;
-import java.net.UnknownHostException;
+import java.net.NetworkInterface;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
 
 public class Server {
 
     private String hostname;
 
-    private String ip;
+    private List<String> ips;
 
-    public String getHostname() {
-        if (hostname.isBlank() || hostname.isEmpty())
-            return "Unknown";
-        else
-            return hostname;
-    }
+    public String getHostname() { return hostname; }
 
-    public void setHostname(String hostname) {
-        if (hostname.isBlank() || hostname.isEmpty())
-            this.hostname = "Unknown";
-        else
-            this.hostname = hostname;
-    }
+    private void setHostname(String hostname) { this.hostname = hostname; }
 
-    public String getIp() { return ip; }
+    public List<String> getIps() { return ips; }
 
-    public void setIp(String ip) {
-        if (ip.isEmpty() || ip.isBlank())
-            this.ip = "127.0.0.1";
-        else
-            this.ip = ip;
-    }
-
-    public Server(String hostname, String ip) {
-        setHostname(hostname);
-        setIp(ip);
-    }
+    private void setIps(List<String> ips) { this.ips = ips; }
 
     public Server() {
-        try {
-            InetAddress inetAddress = InetAddress.getLocalHost();
-            setIp(inetAddress.getHostAddress());
-            setHostname(inetAddress.getHostName());
-        }catch (Exception ex)
-        {
-            setIp("Unknown");
-            setHostname("127.0.0.1");
-        }
+        setHostname(getHostnameServer());
+        setIps(getAllIpAddress());
     }
 
     @Override
     public String toString() {
-        return "Server{" + "hostname:'" + hostname + '\'' + ", ip:'" + ip + '\'' + '}';
+        return "{" +
+                "hostname:'" + getHostname() + '\'' +
+                ", IP:" + getIps() +
+                '}';
+    }
+
+    private List<String> getAllIpAddress() {
+        List<String> ip = new ArrayList<>();
+        try {
+            Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
+            while (e.hasMoreElements()) {
+                NetworkInterface n = (NetworkInterface) e.nextElement();
+                Enumeration<InetAddress> inetAddress = n.getInetAddresses();
+                while (inetAddress.hasMoreElements()) {
+                    InetAddress i = (InetAddress) inetAddress.nextElement();
+                    if (i instanceof Inet4Address) {
+                        if (!i.getHostAddress().equals("127.0.0.1"))
+                            ip.add(i.getHostAddress());
+                    }
+                }
+            }
+            setIps(ip);
+        } catch (Exception ex) {
+            ip.add("127.0.0.1");
+            setIps(ip);
+        }
+        return ip;
+    }
+
+    private String getHostnameServer() {
+        try {
+            InetAddress hostname = InetAddress.getLocalHost();
+            return hostname.getHostName();
+        } catch (Exception ex) {
+            return "localhost";
+        }
     }
 }

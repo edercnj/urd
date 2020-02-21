@@ -1,7 +1,11 @@
 package com.br.kerberus.urd.service.test;
 
+import com.br.kerberus.urd.entity.LogMessage;
+import com.br.kerberus.urd.entity.Server;
+import com.br.kerberus.urd.entity.SystemInformation;
 import com.br.kerberus.urd.entity.core.LogLevel;
 import com.br.kerberus.urd.entity.core.LogMethodCall;
+import org.apache.commons.logging.Log;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +33,7 @@ public class ExceptionLogServiceTest {
 
     @LogMethodCall(logLevel = {LogLevel.DEBUG, LogLevel.INFO, LogLevel.ERROR, LogLevel.WARN})
     private void methodMustReturnLogMessage() {
-        System.out.println(String.format("Log message to save: %s", "parameter for log"));
+        LogMessage logMessage = new LogMessage(new Server(), new SystemInformation(), "test message", "urd");
+        System.out.println(logMessage.toString());
     }
 }

@@ -7,7 +7,6 @@ import com.br.kerberus.urd.entity.core.LogType;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
 import org.aspectj.lang.JoinPoint;
-import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
@@ -39,10 +38,6 @@ public class ExceptionLogService extends AspectLog implements LogService {
 
     public ExceptionLogService() {this.setLog(LoggerFactory.getLogger(ExceptionLogService.class)); }
 
-    /**
-     * @param joinPoint
-     * @param e
-     */
     @AfterThrowing(value = "@annotation(com.br.kerberus.urd.entity.core.LogException)", throwing = "e")
     public void logException(JoinPoint joinPoint, Exception e) {
 
@@ -50,16 +45,12 @@ public class ExceptionLogService extends AspectLog implements LogService {
         MDC.put("operationType", getLogTypeString());
 
         if (e instanceof ManagedException) {
-            log.info( new LogMessage(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((ManagedException)e).getDebugMessage())).toString());
+            log.info(String.format("Launch Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((ManagedException)e).getDebugMessage()));
         } else if (e instanceof NoManagedException) {
-            log.warn( new LogMessage(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage())).toString());
+            log.warn(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), ((NoManagedException) e).getDebugMessage()));
         } else {
-            log.error( new LogMessage(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage())).toString());
+            log.error(String.format("Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}", e.getClass().getName(), joinPoint.getSignature(), e.getCause().getMessage()));
         }
-    }
-
-    public boolean enableLog(ProceedingJoinPoint joinPoint) {
-        return false;
     }
 
     private String getLogTypeFromAnnotation(JoinPoint joinPoint) {

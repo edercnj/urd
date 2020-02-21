@@ -70,10 +70,6 @@ public class ExecutionTimeLogService extends AspectLog implements LogService {
         }
     }
 
-    public boolean enableLog(ProceedingJoinPoint joinPoint) {
-        return false;
-    }
-
     private String getLogTypeFromAnnotation(ProceedingJoinPoint joinPoint) {
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
             if (method.getName().equals(joinPoint.getSignature().getName())) {

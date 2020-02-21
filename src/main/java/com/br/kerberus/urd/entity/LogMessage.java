@@ -46,22 +46,22 @@ public final class LogMessage {
     @Override
     public String toString() {
         if (this.getSystemInformation() == null) {
-            return "LogMessage{" +
+            return "{" +
                     "applicationName:'" + getApplicationName() + '\'' +
-                    ", server:" + getServer() +
+                    ", server:" + getServer().toString() +
                     ", message:'" + getMessage() + '\'' +
                     '}';
         } else {
-            return "LogMessage{" +
+            return "{" +
                     "applicationName:'" + getApplicationName() + '\'' +
-                    ", server:" + getServer() +
-                    ", systemInformation:" + getSystemInformation() +
+                    ", server:" + getServer().toString() +
+                    ", systemInformation:" + getSystemInformation().toString() +
                     ", message:'" + getMessage() + '\'' +
                     '}';
         }
     }
 
-    public LogMessage(Server server, SystemInformation systemInformation, String messageString, String applicationName) {
+    public LogMessage(Server server, SystemInformation systemInformation, String message, String applicationName) {
         this.setServer(server);
         this.setSystemInformation(systemInformation);
         this.setMessage(message);
@@ -77,7 +77,6 @@ public final class LogMessage {
     public LogMessage(String message) {
         this.setServer(new Server());
         this.setMessage(message);
-        this.setApplicationName(applicationName);
         this.setApplicationName(getApplicationName());
     }
 }
