@@ -59,7 +59,7 @@ public class SystemInformation {
                 "availableProcessorsJVM:" + getAvailableProcessorsJVM() +
                 ", freeMemoryJVM:" + getFreeMemoryJVM() + "MB" +
                 ", maximumMemoryJVM:" + getMaximumMemoryJVM() + "MB" +
-                ", otalMemoryAvailableJVM:" + getTotalMemoryAvailableJVM() + "MB" +
+                ", totalMemoryAvailableJVM:" + getTotalMemoryAvailableJVM() + "MB" +
                 ", osName:'" + getOsName() + '\'' +
                 ", osVersion:'" + getOsVersion() + '\'' +
                 ", osArchitecture:'" + getOsArchitecture() + '\'' +
