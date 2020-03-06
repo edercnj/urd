@@ -1,9 +1,6 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.core.AspectLog;
-import com.br.kerberus.urd.entity.core.LogExecutionTime;
-import com.br.kerberus.urd.entity.core.LogTimeType;
-import com.br.kerberus.urd.entity.core.LogType;
+import com.br.kerberus.urd.core.*;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -42,10 +39,10 @@ public class ExecutionTimeLogService extends AspectLog implements LogService {
 
     public ExecutionTimeLogService() { this.setLog(LoggerFactory.getLogger(ExecutionTimeLogService.class)); }
 
-    @Around("@annotation(com.br.kerberus.urd.entity.core.LogExecutionTime)")
+    @Around("@annotation(com.br.kerberus.urd.core.LogExecutionTime)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        setLogTypeString(getLogTypeFromAnnotation(joinPoint) != null ? getLogTypeFromAnnotation(joinPoint) :LogType.EXECUTION_TIME.toString());
+        setLogTypeString(getLogTypeFromAnnotation(joinPoint) != null ? getLogTypeFromAnnotation(joinPoint) : LogType.EXECUTION_TIME.toString());
         setLogTimeType(getLogTimeTypeFromAnnotation(joinPoint) != null ? getLogTimeTypeFromAnnotation(joinPoint) : LogTimeType.MILLISECONDS);
 
         long start = System.currentTimeMillis();
@@ -53,7 +50,11 @@ public class ExecutionTimeLogService extends AspectLog implements LogService {
         long end = System.currentTimeMillis();
         setExecutionTime(totalExecutionTime(getLogTimeType(), start, end));
         MDC.put("operationType", getLogTypeString());
-        log.info(joinPoint.getSignature() + " executed in " + getExecutionTime() + getLogTimeType().toString());
+
+        if(getLogLevel().equals(LogLevel.DEBUG))
+            log.debug(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
+
+        log.info(String.format("%s | %s executed in %s %s",getLogTypeString(), joinPoint.getSignature() , getExecutionTime(), getLogTimeType().toString()));
 
         return proceed;
     }

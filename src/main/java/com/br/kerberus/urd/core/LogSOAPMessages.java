@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity.core;
+package com.br.kerberus.urd.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,5 +10,5 @@ import java.lang.annotation.Target;
 public @interface LogSOAPMessages {
 
     LogType LogType() default LogType.SOAP_MESSAGES;
-    LogLevel[] LogLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
+    String preExecuteMessage() default "";
 }

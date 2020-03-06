@@ -4,7 +4,7 @@ import org.slf4j.Logger;
 
 public interface LogService {
 
-    public Logger getLog();
+    Logger getLog();
 
-    public void setLog(Logger log);
+    void setLog(Logger log);
 }

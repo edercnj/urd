@@ -1,4 +1,6 @@
-package com.br.kerberus.urd.entity.core;
+package com.br.kerberus.urd.core;
+
+import org.springframework.beans.factory.annotation.Value;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
@@ -6,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AspectLog {
+
+    @Value("${logging.level.urd}")
+    private LogLevel logLevel;
 
     protected List<Annotation> getAnnotationsForLog(Method methodWithAnnotations) {
         List<Annotation> annotationsReturn = new ArrayList<>();
@@ -15,11 +20,12 @@ public abstract class AspectLog {
                     annotation instanceof LogExecutionTime ||
                     annotation instanceof LogHttpMessages ||
                     annotation instanceof LogMethodCall ||
-                    annotation instanceof LogMetlhodReturn ||
+                    annotation instanceof LogMethodReturn ||
                     annotation instanceof LogSOAPMessages) {
                 annotationsReturn.add(annotation);
             }
         }
         return annotationsReturn;
     }
+    public LogLevel getLogLevel() { return logLevel; }
 }

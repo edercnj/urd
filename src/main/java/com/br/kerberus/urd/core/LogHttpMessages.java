@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity.core;
+package com.br.kerberus.urd.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,7 +10,7 @@ import java.lang.annotation.Target;
 public @interface LogHttpMessages {
 
     LogType logType() default LogType.HTTP_MESSAGES;
-    LogLevel[] logLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
     HttpMethods[] httpMethods() default {HttpMethods.GET, HttpMethods.DELETE, HttpMethods.PUT, HttpMethods.POST, HttpMethods.PATCH};
+    String preExecuteMessage() default "";
 
 }

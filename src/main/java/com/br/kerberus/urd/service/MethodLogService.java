@@ -1,9 +1,6 @@
 package com.br.kerberus.urd.service;
 
-import com.br.kerberus.urd.entity.core.AspectLog;
-import com.br.kerberus.urd.entity.core.LogMethodCall;
-import com.br.kerberus.urd.entity.core.LogMetlhodReturn;
-import com.br.kerberus.urd.entity.core.LogType;
+import com.br.kerberus.urd.core.*;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -11,7 +8,6 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.slf4j.MDC;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -38,34 +34,38 @@ public class MethodLogService extends AspectLog implements LogService {
 
     public MethodLogService() {this.setLog(LoggerFactory.getLogger(MethodLogService.class)); }
 
-    @Before(value = "@annotation(com.br.kerberus.urd.entity.core.LogMethodCall)")
+    @Before(value = "@annotation(com.br.kerberus.urd.core.LogMethodCall)")
     public void logMethodCall(JoinPoint joinPoint) {
 
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
-        MDC.put("operationType", getLogTypeString());
+
+        if(getLogLevel().equals(LogLevel.DEBUG))
+            log.debug(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
 
         if (joinPoint.getArgs().length > 0)
-            log.info(String.format("Calling method: {%s} - with parameters: {%s}", joinPoint.getSignature(), getMethodParameters(joinPoint)));
+            log.info(String.format("%s | Calling method: {%s} - with parameters: {%s}",getLogTypeString(), joinPoint.getSignature(), getMethodParameters(joinPoint)));
         else
-            log.info(String.format("Calling method: {%s} - without parameters", joinPoint.getSignature()));
+            log.info(String.format("%s | Calling method: {%s} - without parameters", getLogTypeString(), joinPoint.getSignature()));
     }
 
-    @AfterReturning(value = "@annotation(com.br.kerberus.urd.entity.core.LogMetlhodReturn)", returning = "result")
+    @AfterReturning(value = "@annotation(com.br.kerberus.urd.core.LogMethodReturn)", returning = "result")
     public void logMethodReturn(JoinPoint joinPoint, Object result) throws Exception {
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
-        MDC.put("operationType", getLogTypeString());
 
         try {
+            if(getLogLevel().equals(LogLevel.DEBUG))
+                log.debug(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
+
             if(((MethodSignature)joinPoint.getSignature()).getReturnType().getName().equals("void")) {
-                log.info(String.format("Method Return: {%s} - void.", joinPoint.getSignature()));
+                log.info(String.format("%s | Method Return: {%s} - void.", getLogTypeString(), joinPoint.getSignature()));
             }else {
                 if (result != null)
-                    log.info(String.format("Method Return: {%s} - return {%s}", joinPoint.getSignature(), result.toString()));
+                    log.info(String.format("%s | Method Return: {%s} - return {%s}", getLogTypeString(), joinPoint.getSignature(), result.toString()));
                 else
-                    log.info(String.format("Method Return: {%s} - return {null}", joinPoint.getSignature()));
+                    log.info(String.format("%s | Method Return: {%s} - return {null}", getLogTypeString(), joinPoint.getSignature()));
             }
         } catch (Exception e) {
-            log.error(String.format("Method {%s} launch exception {%s}", joinPoint.getSignature(), e.getClass().getName()));
+            log.error(String.format("%s | Method {%s} launch exception {%s}",getLogTypeString(), joinPoint.getSignature(), e.getClass().getName()));
             throw new Exception(e.getMessage());
         }
     }
@@ -74,8 +74,8 @@ public class MethodLogService extends AspectLog implements LogService {
         for (Method method : joinPoint.getSignature().getDeclaringType().getMethods()) {
             if (method.getName().equals(joinPoint.getSignature().getName())) {
                 for (Annotation logType : getAnnotationsForLog(method)) {
-                    if (logType instanceof LogMetlhodReturn)
-                        return ((LogMetlhodReturn) logType).logType().toString();
+                    if (logType instanceof LogMethodReturn)
+                        return ((LogMethodReturn) logType).logType().toString();
                     if (logType instanceof LogMethodCall)
                         return ((LogMethodCall) logType).logType().toString();
                 }

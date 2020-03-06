@@ -16,5 +16,3 @@ logging:
    level:
       root: debug
       urd: info
-      web: error
-      sql: error

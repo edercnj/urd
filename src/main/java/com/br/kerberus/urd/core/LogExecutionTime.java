@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity.core;
+package com.br.kerberus.urd.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +10,6 @@ import java.lang.annotation.Target;
 public @interface LogExecutionTime {
 
     LogType logType() default LogType.EXECUTION_TIME;
-    LogLevel[] logLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
     LogTimeType logTimeType() default LogTimeType.MILLISECONDS;
+    String preExecuteMessage() default "";
 }

@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity.core;
+package com.br.kerberus.urd.core;
 
 public enum LogLevel {
 

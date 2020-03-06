@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity.core;
+package com.br.kerberus.urd.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,8 +7,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogMetlhodReturn {
+public @interface LogMethodCall {
 
-    LogType logType() default LogType.METHOD_RETURN;
-    LogLevel[] logLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
+    LogType logType() default LogType.METHOD_CALL;
+    String preExecuteMessage() default "";
 }

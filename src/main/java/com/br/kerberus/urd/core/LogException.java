@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity.core;
+package com.br.kerberus.urd.core;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -10,6 +10,5 @@ import java.lang.annotation.Target;
 public @interface LogException {
 
     LogType logType() default LogType.EXCEPTION;
-    LogLevel[] logLevel() default {LogLevel.INFO, LogLevel.WARN, LogLevel.ERROR, LogLevel.DEBUG};
-    String title() default "";
+    String preExecuteMessage() default "";
 }

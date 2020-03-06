@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity;
+package com.br.kerberus.urd.core;
 
 public class SystemInformation {
     private int availableProcessorsJVM;

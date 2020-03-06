@@ -1,4 +1,4 @@
-package com.br.kerberus.urd.entity;
+package com.br.kerberus.urd.core;
 
 import org.springframework.beans.factory.annotation.Value;
 
@@ -41,7 +41,6 @@ public final class LogMessage {
     private SystemInformation getSystemInformation() { return systemInformation; }
 
     public String getMessage() { return message; }
-
 
     @Override
     public String toString() {
