@@ -2,9 +2,9 @@ package com.br.kerberus.urd.service;
 
 import com.br.kerberus.urd.core.SystemInformation;
 import com.br.kerberus.urd.core.AspectLog;
-import com.br.kerberus.urd.core.LogException;
-import com.br.kerberus.urd.core.LogLevel;
-import com.br.kerberus.urd.core.LogType;
+import com.br.kerberus.urd.annotation.LogException;
+import com.br.kerberus.urd.core.enumeration.LogLevel;
+import com.br.kerberus.urd.core.enumeration.LogType;
 import com.br.kerberus.urd.exception.ManagedException;
 import com.br.kerberus.urd.exception.NoManagedException;
 import org.aspectj.lang.JoinPoint;
@@ -38,7 +38,7 @@ public class ExceptionLogService extends AspectLog implements LogService {
 
     public ExceptionLogService() {this.setLog(LoggerFactory.getLogger(ExceptionLogService.class)); }
 
-    @AfterThrowing(value = "@annotation(com.br.kerberus.urd.core.LogException)", throwing = "e")
+    @AfterThrowing(value = "@annotation(com.br.kerberus.urd.annotation.LogException)", throwing = "e")
     public void logException(JoinPoint joinPoint, Exception e) {
 
         setLogTypeString(getLogTypeFromAnnotation(joinPoint) != null ? getLogTypeFromAnnotation(joinPoint) :LogType.EXECUTION_TIME.toString());

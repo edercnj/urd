@@ -1,4 +1,7 @@
-package com.br.kerberus.urd.core;
+package com.br.kerberus.urd.annotation;
+
+import com.br.kerberus.urd.core.enumeration.LogTimeType;
+import com.br.kerberus.urd.core.enumeration.LogType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

@@ -1,4 +1,6 @@
-package com.br.kerberus.urd.core;
+package com.br.kerberus.urd.annotation;
+
+import com.br.kerberus.urd.core.enumeration.LogType;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -7,10 +9,8 @@ import java.lang.annotation.Target;
 
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
-public @interface LogHttpMessages {
+public @interface LogSOAPMessages {
 
-    LogType logType() default LogType.HTTP_MESSAGES;
-    HttpMethods[] httpMethods() default {HttpMethods.GET, HttpMethods.DELETE, HttpMethods.PUT, HttpMethods.POST, HttpMethods.PATCH};
+    LogType LogType() default LogType.SOAP_MESSAGES;
     String preExecuteMessage() default "";
-
 }

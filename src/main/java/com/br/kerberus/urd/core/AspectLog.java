@@ -1,5 +1,7 @@
 package com.br.kerberus.urd.core;
 
+import com.br.kerberus.urd.annotation.*;
+import com.br.kerberus.urd.core.enumeration.LogLevel;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.lang.annotation.Annotation;
@@ -18,7 +20,7 @@ public abstract class AspectLog {
         for (Annotation annotation : annotations) {
             if (annotation instanceof LogException ||
                     annotation instanceof LogExecutionTime ||
-                    annotation instanceof LogHttpMessages ||
+                    annotation instanceof LogRestMessage ||
                     annotation instanceof LogMethodCall ||
                     annotation instanceof LogMethodReturn ||
                     annotation instanceof LogSOAPMessages) {
@@ -27,5 +29,6 @@ public abstract class AspectLog {
         }
         return annotationsReturn;
     }
+
     public LogLevel getLogLevel() { return logLevel; }
 }

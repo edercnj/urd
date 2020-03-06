@@ -3,7 +3,7 @@ package com.br.kerberus.urd.service.test;
 import com.br.kerberus.urd.core.LogMessage;
 import com.br.kerberus.urd.core.Server;
 import com.br.kerberus.urd.core.SystemInformation;
-import com.br.kerberus.urd.core.LogMethodCall;
+import com.br.kerberus.urd.annotation.LogMethodCall;
 import org.junit.Test;
 import org.springframework.context.annotation.Profile;
 
