@@ -39,13 +39,12 @@ public class Server {
         try {
             Enumeration<NetworkInterface> e = NetworkInterface.getNetworkInterfaces();
             while (e.hasMoreElements()) {
-                NetworkInterface n = (NetworkInterface) e.nextElement();
+                NetworkInterface n = e.nextElement();
                 Enumeration<InetAddress> inetAddress = n.getInetAddresses();
                 while (inetAddress.hasMoreElements()) {
-                    InetAddress i = (InetAddress) inetAddress.nextElement();
-                    if (i instanceof Inet4Address) {
-                        if (!i.getHostAddress().equals("127.0.0.1"))
-                            ip.add(i.getHostAddress());
+                    InetAddress i = inetAddress.nextElement();
+                    if (i instanceof Inet4Address && !i.getHostAddress().equals("127.0.0.1")) {
+                        ip.add(i.getHostAddress());
                     }
                 }
             }
