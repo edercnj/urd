@@ -11,6 +11,6 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface LogSOAPMessages {
 
-    LogType LogType() default LogType.SOAP_MESSAGES;
+    LogType LogType() default LogType.SOAP_MESSAGE;
     String preExecuteMessage() default "";
 }

@@ -55,24 +55,19 @@ public class MethodLogService extends AspectLog implements LogService {
     }
 
     @AfterReturning(value = "@annotation(com.br.kerberus.urd.annotation.LogMethodReturn)", returning = "result")
-    public void logMethodReturn(JoinPoint joinPoint, Object result) throws Exception {
+    public void logMethodReturn(JoinPoint joinPoint, Object result) {
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
 
-        try {
-            if(getLogLevel().equals(LogLevel.DEBUG))
-                log.debug(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
+        if(getLogLevel().equals(LogLevel.DEBUG))
+            log.debug(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
 
-            if(((MethodSignature)joinPoint.getSignature()).getReturnType().getName().equals("void")) {
-                log.info(String.format("%s | Method Return: {%s} - void.", getLogTypeString(), joinPoint.getSignature()));
-            }else {
-                if (result != null)
-                    log.info(String.format("%s | Method Return: {%s} - return {%s}", getLogTypeString(), joinPoint.getSignature(), result.toString()));
-                else
-                    log.info(String.format("%s | Method Return: {%s} - return {null}", getLogTypeString(), joinPoint.getSignature()));
-            }
-        } catch (Exception e) {
-            log.error(String.format("%s | Method {%s} launch exception {%s}",getLogTypeString(), joinPoint.getSignature(), e.getClass().getName()));
-            throw new Exception(e.getMessage());
+        if(((MethodSignature)joinPoint.getSignature()).getReturnType().getName().equals("void")) {
+            log.info(String.format("%s | Method Return: {%s} - void.", getLogTypeString(), joinPoint.getSignature()));
+        }else {
+            if (result != null)
+                log.info(String.format("%s | Method Return: {%s} - return {%s}", getLogTypeString(), joinPoint.getSignature(), result.toString()));
+            else
+                log.info(String.format("%s | Method Return: {%s} - return {null}", getLogTypeString(), joinPoint.getSignature()));
         }
     }
 

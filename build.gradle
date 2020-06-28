@@ -3,7 +3,7 @@ apply plugin: 'maven'
 
 group = 'com.br.kerberus'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+sourceCompatibility = '14'
 archivesBaseName = 'urd-logger'
 
 repositories {
@@ -38,8 +38,4 @@ dependencies {
 	testCompile ('org.springframework.boot:spring-boot-starter-test:1.5.14.RELEASE')
 	testCompile('org.springframework.boot:spring-boot-starter-web:1.5.14.RELEASE')
 	testCompile('org.springframework.boot:spring-boot-starter-security:1.5.14.RELEASE')
-}
-
-test {
-	useJUnitPlatform()
 }
