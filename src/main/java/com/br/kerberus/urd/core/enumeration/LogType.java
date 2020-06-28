@@ -9,7 +9,5 @@ public enum LogType {
     REMOTE_CLIENT,
     EXECUTION_TIME,
     EXCEPTION,
-    GENERAL,
-    DEBUG
-
+    GENERAL
 }
