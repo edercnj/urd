@@ -25,11 +25,11 @@ public class StartupApplicationLogService extends AspectLog implements LogServic
 
     @Before(value = "@annotation(com.br.valhalla.urd.annotation.LogStartupApplication)")
     public void logStartupInformation() {
-
-        log.info("--------------------------------------------------------------------------------------------------");
-        log.info(String.format("Starting Application %s", "app"));
-        log.info(String.format("Information Application %s", new Application()));
-        log.info(String.format("System Information: %s", new SystemInformation().toString()));
-        log.info("--------------------------------------------------------------------------------------------------");
+        log.info("------------------------------Starting Application------------------------------");
+        log.info("                            <<Application Information>>                         ");
+        log.info(String.format("<< %s >>", new Application().toString()));
+        log.info("                            <<System Information>>                              ");
+        log.info(String.format("<< %s >>", new SystemInformation().toString()));
+        log.info("--------------------------------------------------------------------------------");
     }
 }

@@ -3,6 +3,7 @@ spring:
       banner-mode: "off"
    application:
       name: "urd"
+
 logging:
    group:
       urd: com.br.kerberus.urd, com.br.kerberus.urd.config, com.br.kerberus.urd.entity,  com.br.kerberus.urd.entity.core, com.br.kerberus.urd.exception, com.br.kerberus.urd.service
