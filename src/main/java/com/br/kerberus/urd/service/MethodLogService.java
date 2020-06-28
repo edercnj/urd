@@ -27,7 +27,7 @@ public class MethodLogService extends AspectLog implements LogService {
     @Override
     public Logger getLog() { return log; }
 
-    public String getLogTypeString() {
+        public String getLogTypeString() {
         return logTypeString;
     }
 
@@ -57,9 +57,6 @@ public class MethodLogService extends AspectLog implements LogService {
     @AfterReturning(value = "@annotation(com.br.kerberus.urd.annotation.LogMethodReturn)", returning = "result")
     public void logMethodReturn(JoinPoint joinPoint, Object result) {
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
-
-        if(getLogLevel().equals(LogLevel.DEBUG))
-            log.debug(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
 
         if(((MethodSignature)joinPoint.getSignature()).getReturnType().getName().equals("void")) {
             log.info(String.format("%s | Method Return: {%s} - void.", getLogTypeString(), joinPoint.getSignature()));
