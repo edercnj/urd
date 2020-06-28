@@ -1,5 +1,6 @@
 package com.br.kerberus.urd.service;
 
+import com.br.kerberus.urd.core.Application;
 import com.br.kerberus.urd.core.AspectLog;
 import com.br.kerberus.urd.core.SystemInformation;
 import org.aspectj.lang.JoinPoint;
@@ -14,18 +15,9 @@ import org.springframework.stereotype.Component;
 public class StartupApplicationLogService extends AspectLog implements LogService {
 
     private Logger log;
-    private String logTypeString;
 
     @Override
     public Logger getLog() { return log; }
-
-    public String getLogTypeString() {
-        return logTypeString;
-    }
-
-    public void setLogTypeString(String logTypeString) {
-        this.logTypeString = logTypeString;
-    }
 
     @Override
     public void setLog(Logger log) {this.log = log;}
@@ -35,7 +27,9 @@ public class StartupApplicationLogService extends AspectLog implements LogServic
     @Before(value = "@annotation(com.br.kerberus.urd.annotation.LogMethodCall)")
     public void logMethodCall(JoinPoint joinPoint) {
 
+        log.info("--------------------------------------------------------------------------------------------------");
         log.info(String.format("Starting Application %s", "app"));
-        log.info(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
+        log.info(String.format("Information Application %s", new Application()));
+        log.info(String.format("System Information: %s", new SystemInformation().toString()));
     }
 }
