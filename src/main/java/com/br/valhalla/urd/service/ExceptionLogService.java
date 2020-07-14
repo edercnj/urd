@@ -1,8 +1,8 @@
 package com.br.valhalla.urd.service;
 
-import com.br.valhalla.urd.core.SystemInformation;
-import com.br.valhalla.urd.core.AspectLog;
 import com.br.valhalla.urd.annotation.LogException;
+import com.br.valhalla.urd.core.AspectLog;
+import com.br.valhalla.urd.core.SystemInformation;
 import com.br.valhalla.urd.core.enumeration.LogLevel;
 import com.br.valhalla.urd.core.enumeration.LogType;
 import com.br.valhalla.urd.exception.ManagedException;
