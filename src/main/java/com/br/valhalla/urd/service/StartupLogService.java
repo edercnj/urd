@@ -2,6 +2,7 @@ package com.br.valhalla.urd.service;
 
 import com.br.valhalla.urd.core.Application;
 import com.br.valhalla.urd.core.AspectLog;
+import com.br.valhalla.urd.core.Server;
 import com.br.valhalla.urd.core.SystemInformation;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
@@ -30,6 +31,8 @@ public class StartupApplicationLogService extends AspectLog implements LogServic
         log.info(String.format("<< %s >>", new Application().toString()));
         log.info("                            <<System Information>>                              ");
         log.info(String.format("<< %s >>", new SystemInformation().toString()));
+        log.info("                            <<Server Information>>                              ");
+        log.info(String.format("<< %s >>", new Server().toString()));
         log.info("--------------------------------------------------------------------------------");
     }
 }
