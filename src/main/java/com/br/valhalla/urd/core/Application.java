@@ -12,19 +12,17 @@ public class Application {
 
     public long getPid() { return pid; }
 
-    public void setPid(long pid) { this.pid = pid; }
+    private void setPid(long pid) { this.pid = pid; }
 
     public String getName() { return name; }
 
-    public void setName(String name) { this.name = name; }
-
     public String getUser() { return user; }
 
-    public void setUser(String user) { this.user = user; }
+    private void setUser(String user) { this.user = user; }
 
     public String getCommandLine() { return commandLine; }
 
-    public void setCommandLine(String commandLine) { this.commandLine = commandLine; }
+    private void setCommandLine(String commandLine) { this.commandLine = commandLine; }
 
     public Application() {
         setPid(ProcessHandle.current().pid());
@@ -38,12 +36,11 @@ public class Application {
 
     @Override
     public String toString() {
-        return "Application{" +
-                "pid=" + getPid() +
-                ", name='" + getName() + '\'' +
-                ", user='" + getUser() + '\'' +
-                ", commandLine='" + getCommandLine() + '\'' +
+        return "{" +
+                "pid:" + pid +
+                ", name:'" + name + '\'' +
+                ", user:'" + user + '\'' +
+                ", commandLine:'" + commandLine + '\'' +
                 '}';
     }
 }
-

@@ -2,7 +2,6 @@ package com.br.valhalla.urd.core;
 
 import com.br.valhalla.urd.annotation.*;
 import com.br.valhalla.urd.core.enumeration.LogLevel;
-import com.br.valhalla.urd.annotation.*;
 import org.springframework.beans.factory.annotation.Value;
 
 import java.lang.annotation.Annotation;

@@ -28,10 +28,7 @@ public class Server {
 
     @Override
     public String toString() {
-        return "{" +
-                "hostname:'" + getHostname() + '\'' +
-                ", IP:" + getIps() +
-                '}';
+        return "{" + "hostname:'" + getHostname() + '\'' + ", IP:" + getIps() + '}';
     }
 
     private List<String> getAllIpAddress() {

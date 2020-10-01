@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
-public class StartupApplicationLogService extends AspectLog implements LogService {
+public class StartupLogService extends AspectLog implements LogService {
 
     private Logger log;
 
@@ -22,7 +22,7 @@ public class StartupApplicationLogService extends AspectLog implements LogServic
     @Override
     public void setLog(Logger log) {this.log = log;}
 
-    public StartupApplicationLogService() {this.setLog(LoggerFactory.getLogger(StartupApplicationLogService.class)); }
+    public StartupLogService() {this.setLog(LoggerFactory.getLogger(StartupLogService.class)); }
 
     @Before(value = "@annotation(com.br.valhalla.urd.annotation.LogStartupApplication)")
     public void logStartupInformation() {

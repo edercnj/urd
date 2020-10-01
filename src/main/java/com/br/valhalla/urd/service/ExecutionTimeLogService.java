@@ -23,8 +23,8 @@ import java.lang.reflect.Method;
 public class ExecutionTimeLogService extends AspectLog implements LogService {
 
     private Logger log;
-    private String logTypeString = LogType.EXECUTION_TIME.toString();
-    private LogTimeType logTimeType = LogTimeType.MILLISECONDS;
+    private String logTypeString;
+    private LogTimeType logTimeType;
     private long executionTime = 0L;
 
     public Logger getLog() { return log; }

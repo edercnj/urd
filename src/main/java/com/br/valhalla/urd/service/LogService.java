@@ -7,4 +7,5 @@ public interface LogService {
     Logger getLog();
 
     void setLog(Logger log);
+
 }
