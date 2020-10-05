@@ -1,7 +1,6 @@
 package com.br.valhalla.urd.service;
 
 import com.br.valhalla.urd.annotation.LogExecutionTime;
-import com.br.valhalla.urd.core.*;
 import com.br.valhalla.urd.core.AspectLog;
 import com.br.valhalla.urd.core.SystemInformation;
 import com.br.valhalla.urd.core.enumeration.LogLevel;
@@ -13,6 +12,7 @@ import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -20,6 +20,7 @@ import java.lang.reflect.Method;
 
 @Aspect
 @Component
+@Order(2)
 public class ExecutionTimeLogService extends AspectLog implements LogService {
 
     private Logger log;

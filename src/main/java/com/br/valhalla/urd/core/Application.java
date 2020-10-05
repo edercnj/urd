@@ -9,6 +9,7 @@ public class Application {
     private String name;
     private String user;
     private String commandLine;
+    private String version;
 
     public long getPid() { return pid; }
 
@@ -24,6 +25,10 @@ public class Application {
 
     private void setCommandLine(String commandLine) { this.commandLine = commandLine; }
 
+    public String getVersion() { return version; }
+
+    private void setVersion(String version) { this.version = version; }
+
     public Application() {
         setPid(ProcessHandle.current().pid());
         if (ProcessHandle.current().info().user().isPresent()) {
@@ -37,10 +42,11 @@ public class Application {
     @Override
     public String toString() {
         return "{" +
-                "pid:" + pid +
-                ", name:'" + name + '\'' +
-                ", user:'" + user + '\'' +
-                ", commandLine:'" + commandLine + '\'' +
+                "pid:" + getPid() +
+                ", name:'" + getName() + '\'' +
+                ", user:'" + getUser() + '\'' +
+                ", version:'" + getVersion() + '\'' +
+                ", commandLine:'" + getCommandLine() + '\'' +
                 '}';
     }
 }

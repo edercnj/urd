@@ -8,10 +8,12 @@ import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 @Aspect
 @Component
+@Order(3)
 public class StartupLogService extends AspectLog implements LogService {
 
     private Logger log;
@@ -33,6 +35,6 @@ public class StartupLogService extends AspectLog implements LogService {
         log.info(String.format("<< %s >>", new SystemInformation().toString()));
         log.info("                            <<Server Information>>                              ");
         log.info(String.format("<< %s >>", new Server().toString()));
-        log.info("--------------------------------------------------------------------------------");
+        log.info("-----------------------------Application started--------------------------------");
     }
 }

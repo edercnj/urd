@@ -11,6 +11,7 @@ import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.reflect.MethodSignature;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -18,6 +19,7 @@ import java.lang.reflect.Method;
 
 @Aspect
 @Component
+@Order(1)
 public class MethodLogService extends AspectLog implements LogService {
 
     private Logger log;

@@ -2,6 +2,10 @@ package com.br.valhalla.urd.service.test;
 
 import com.br.valhalla.urd.annotation.LogMethodCall;
 import com.br.valhalla.urd.annotation.LogStartupApplication;
+import com.br.valhalla.urd.core.Application;
+import com.br.valhalla.urd.core.Server;
+import com.br.valhalla.urd.core.SystemInformation;
+import com.br.valhalla.urd.core.enumeration.LogLevel;
 import com.br.valhalla.urd.service.ExecutionTimeLogService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +22,7 @@ public class ExceptionLogServiceTest {
 
     private final Logger log;
 
-    public ExceptionLogServiceTest() { this.log = (LoggerFactory.getLogger(ExecutionTimeLogService.class)); }
+    public ExceptionLogServiceTest() { this.log = (LoggerFactory.getLogger(ExceptionLogServiceTest.class)); }
 
     @Test
     public void logException() {
@@ -28,6 +32,14 @@ public class ExceptionLogServiceTest {
     @LogMethodCall
     @LogStartupApplication
     private void methodMustReturnLogMessage(String message) {
+        log.info("------------------------------Starting Application------------------------------");
+        log.info("                            <<Application Information>>                         ");
+        log.info(String.format("<< %s >>", new Application().toString()));
+        log.info("                            <<System Information>>                              ");
+        log.info(String.format("<< %s >>", new SystemInformation().toString()));
+        log.info("                            <<Server Information>>                              ");
+        log.info(String.format("<< %s >>", new Server().toString()));
+        log.info("--------------------------------------------------------------------------------");
         log.info(message);
     }
 }

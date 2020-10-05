@@ -12,6 +12,7 @@ import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
@@ -21,6 +22,7 @@ import static java.lang.String.format;
 
 @Aspect
 @Component
+@Order(0)
 public class ExceptionLogService extends AspectLog implements LogService {
 
     private Logger log;
@@ -45,7 +47,7 @@ public class ExceptionLogService extends AspectLog implements LogService {
     @AfterThrowing(value = "@annotation(com.br.valhalla.urd.annotation.LogException)", throwing = "e")
     public void logException(JoinPoint joinPoint, Exception e) {
 
-        setLogTypeString(getLogTypeFromAnnotation(joinPoint) != null ? getLogTypeFromAnnotation(joinPoint) : LogType.EXECUTION_TIME.toString());
+        setLogTypeString(getLogTypeFromAnnotation(joinPoint) != null ? getLogTypeFromAnnotation(joinPoint) : LogType.EXCEPTION.toString());
 
         if (getLogLevel().equals(LogLevel.DEBUG)) {
             log.debug(format("System Information: %s", new SystemInformation().toString()));

@@ -11,7 +11,7 @@ import java.util.List;
 
 public abstract class AspectLog {
 
-    @Value("${logging.level.urd}")
+    @Value("${logging.level}")
     private LogLevel logLevel;
 
     protected List<Annotation> getAnnotationsForLog(Method methodWithAnnotations) {
