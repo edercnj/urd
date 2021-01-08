@@ -7,7 +7,7 @@ public abstract class DomainException extends Exception {
     private final int errorCod;
     private final String moreInfo;
 
-    public DomainException(String message, String debugMessage, String userMessage, int errorCod, String moreInfo) {
+    protected DomainException(String message, String debugMessage, String userMessage, int errorCod, String moreInfo) {
         super(message);
         this.debugMessage = debugMessage;
         this.userMessage = userMessage;

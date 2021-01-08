@@ -6,7 +6,6 @@ import com.br.valhalla.urd.core.SystemInformation;
 import com.br.valhalla.urd.core.enumeration.LogLevel;
 import com.br.valhalla.urd.core.enumeration.LogType;
 import com.br.valhalla.urd.exception.ManagedException;
-import com.br.valhalla.urd.exception.NoManagedException;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterThrowing;
 import org.aspectj.lang.annotation.Aspect;
@@ -17,8 +16,6 @@ import org.springframework.stereotype.Component;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-
-import static java.lang.String.format;
 
 @Aspect
 @Component
@@ -50,27 +47,21 @@ public class ExceptionLogService extends AspectLog implements LogService {
         setLogTypeString(getLogTypeFromAnnotation(joinPoint) != null ? getLogTypeFromAnnotation(joinPoint) : LogType.EXCEPTION.toString());
 
         if (getLogLevel().equals(LogLevel.DEBUG)) {
-            log.debug(format("System Information: %s", new SystemInformation().toString()));
+            log.debug("System Information: {}", new SystemInformation());
         }
 
-        if (e instanceof ManagedException)
-            log.info(format("%s | Launch Managed Exception: {%s} - method: {%s} - message: {%s}",
+        if (e instanceof ManagedException){
+            log.info("{} | Launch Managed Exception: {} - method: {} - message: {}",
                     getLogTypeString(),
                     e.getClass().getName(),
                     joinPoint.getSignature(),
-                    ((ManagedException) e).getDebugMessage()));
-        else if (e instanceof NoManagedException) {
-            log.warn(format("%s | Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}",
-                    getLogTypeString(),
-                    e.getClass().getName(),
-                    joinPoint.getSignature(),
-                    ((NoManagedException) e).getDebugMessage()));
+                    ((ManagedException) e).getDebugMessage());
         } else {
-            log.error(format("%s | Launch NO Managed Exception: {%s} - method: {%s} - message: {%s}",
+            log.error("{} | Launch NO Managed Exception: {} - method: {} - message: {}",
                     getLogTypeString(),
                     e.getClass().getName(),
                     joinPoint.getSignature(),
-                    e.getCause().getMessage()));
+                    e.getCause().getMessage());
         }
     }
 

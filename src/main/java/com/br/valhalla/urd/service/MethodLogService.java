@@ -47,9 +47,9 @@ public class MethodLogService extends AspectLog implements LogService {
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
 
         if (joinPoint.getArgs().length > 0)
-            log.info(String.format("%s | Calling method: {%s} - with parameters: {%s}", getLogTypeString(), joinPoint.getSignature(), getMethodParameters(joinPoint)));
+            log.info("{} | Calling method: {} - with parameters: {}", getLogTypeString(), joinPoint.getSignature(), getMethodParameters(joinPoint));
         else
-            log.info(String.format("%s | Calling method: {%s} - without parameters", getLogTypeString(), joinPoint.getSignature()));
+            log.info("{} | Calling method: {} - without parameters", getLogTypeString(), joinPoint.getSignature());
     }
 
     @AfterReturning(value = "@annotation(com.br.valhalla.urd.annotation.LogMethodReturn)", returning = "result")
@@ -58,12 +58,12 @@ public class MethodLogService extends AspectLog implements LogService {
         setLogTypeString(getLogTypeFromAnnotation(joinPoint));
 
         if (((MethodSignature) joinPoint.getSignature()).getReturnType().getName().equals("void")) {
-            log.info(String.format("%s | Method Return: {%s} - void.", getLogTypeString(), joinPoint.getSignature()));
+            log.info("{} | Method Return: {} - void.", getLogTypeString(), joinPoint.getSignature());
         } else {
             if (result != null)
-                log.info(String.format("%s | Method Return: {%s} - return {%s}", getLogTypeString(), joinPoint.getSignature(), result.toString()));
+                log.info("{} | Method Return: {} - return {}", getLogTypeString(), joinPoint.getSignature(), result);
             else
-                log.info(String.format("%s | Method Return: {%s} - return {null}", getLogTypeString(), joinPoint.getSignature()));
+                log.info("{} | Method Return: {} - return {null}", getLogTypeString(), joinPoint.getSignature());
         }
     }
 

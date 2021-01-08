@@ -59,23 +59,19 @@ public class ExecutionTimeLogService extends AspectLog implements LogService {
         MDC.put("operationType", getLogTypeString());
 
         if(getLogLevel().equals(LogLevel.DEBUG))
-            log.debug(String.format("%s | System Information: %s", getLogTypeString(), new SystemInformation().toString()));
+            log.debug("{} | System Information: {}", getLogTypeString(), new SystemInformation());
 
-        log.info(String.format("%s | %s executed in %s %s",getLogTypeString(), joinPoint.getSignature() , getExecutionTime(), getLogTimeType().toString()));
+        log.info("{} | {} executed in {} {}",getLogTypeString(), joinPoint.getSignature() , getExecutionTime(), getLogTimeType());
 
         return proceed;
     }
 
     private long totalExecutionTime(LogTimeType logTimeType, long start, long executionTime) {
-        switch (logTimeType) {
-            case SECONDS:
-                return (executionTime - start) / 1000;
-            case MINUTES:
-                return ((executionTime - start) / 1000) / 60;
-            case MILLISECONDS:
-            default:
-                return executionTime - start;
-        }
+        return switch (logTimeType) {
+            case SECONDS -> (executionTime - start) / 1000;
+            case MINUTES -> ((executionTime - start) / 1000) / 60;
+            default -> executionTime - start;
+        };
     }
 
     private String getLogTypeFromAnnotation(ProceedingJoinPoint joinPoint) {
