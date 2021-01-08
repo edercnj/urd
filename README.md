@@ -1,3 +1,4 @@
-[![Build Status](https://travis-ci.org/edercnj/urd.svg?branch=master)](https://travis-ci.org/edercnj/urd)
+[![Build Status](https://travis-ci.com/edercnj/urd.svg?branch=master)](https://travis-ci.com/edercnj/urd)
 # Urd
-Project for distributed log management
+
+Library for AspectJ java Log.
